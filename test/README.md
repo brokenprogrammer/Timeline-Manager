@@ -1,0 +1,2 @@
+#Timeline-Manager Tests
+Within this directory for the tests of the application. We will be using JUnit 4 to implement our tests and there will later on be supplied documentation within this README of how to use JUnit and write good tests.
