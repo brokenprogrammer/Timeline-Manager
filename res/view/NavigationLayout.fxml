@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="menuItem_navigationBar_container" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="navigation.view.NavigationLayoutController">
+   <children>
+      <MenuBar id="menu_navigationBar" fx:id="navigationMenu" prefHeight="32.0" prefWidth="1180.0">
+         <menus>
+            <Menu id="menuItem_file" mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem id="menuItem_new" mnemonicParsing="false" text="New" />
+                  <MenuItem id="menuItem_open" mnemonicParsing="false" text="Open" />
+                  <MenuItem id="menuItem_save" mnemonicParsing="false" text="Save" />
+                  <MenuItem id="menuItem_saveAs" mnemonicParsing="false" text="Save as" />
+                  <MenuItem id="menuItem_close" mnemonicParsing="false" text="Close" />
+                  <MenuItem id="menuItem_exit" mnemonicParsing="false" text="Exit" />
+               </items>
+            </Menu>
+            <Menu id="menuItem_edit" mnemonicParsing="false" text="Edit">
+               <items>
+                  <MenuItem id="menuItem_timeline" mnemonicParsing="false" text="Timeline" />
+                  <MenuItem id="menuItem_event" mnemonicParsing="false" text="Event" />
+               </items>
+            </Menu>
+            <Menu id="menuItem_help" mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem id="menuItem_about" mnemonicParsing="false" text="About" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+</VBox>

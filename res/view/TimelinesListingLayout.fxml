@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<VBox id="timelinelistings_VBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="753.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="navigation.view.navigationLayoutController">
+   <children>
+      <ScrollPane id="timelinesListing_scrollpane" fx:id="timelineHolder" layoutX="14.0" layoutY="42.0" prefHeight="753.0" prefWidth="200.0">
+        <content>
+          <AnchorPane id="timelineListing_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="171.0">
+               <children>
+                  <Label id="Timelines_Headline_text" opacity="0.72" prefHeight="30.0" prefWidth="145.0" text="Timelines">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </Label>
+                  <Line id="Line_separator" endX="100.0" layoutX="101.0" layoutY="30.0" startX="-100.0" />
+                  <Pane id="ColoredPane_behind_unique_timeline" layoutY="30.0" prefHeight="22.0" prefWidth="187.0" style="-fx-background-color: oldlace;">
+                     <children>
+                        <Label layoutY="1.0" prefHeight="21.0" prefWidth="140.0" text="Example timeline 1">
+                           <font>
+                              <Font name="Calibri Light" size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+   </children>
+</VBox>
