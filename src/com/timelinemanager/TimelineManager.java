@@ -1,8 +1,6 @@
 package com.timelinemanager;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -20,12 +18,8 @@ public class TimelineManager extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		//Boiler-plate code for Java-FX application.
-		primaryStage.setTitle("Hello World!");
-		
-		StackPane root = new StackPane();
-		primaryStage.setScene(new Scene(root, 300, 200));
-		primaryStage.show();
+		StageManager sm = new StageManager();
+		sm.showTimelineManager(primaryStage);
 	}
 
 }
