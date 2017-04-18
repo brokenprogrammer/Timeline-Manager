@@ -40,7 +40,13 @@ public class NavigationController {
 
 	}
 	
-	
+	/**
+	 * /**
+	 * Initializes the TimelineModel which this class will get data from when a
+	 * new timeline is created or updated.
+	 * 
+	 * @param timelineModel - timelineModel object to send and recieve data from.
+	 */
 	public void initTimelineModel(TimelineModel timelineModel) {
 		if (this.timelineModel != null) {
 			throw new IllegalStateException("Model can only be initiated once");
