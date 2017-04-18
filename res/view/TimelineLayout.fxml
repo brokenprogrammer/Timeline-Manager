@@ -12,11 +12,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="timelineLayout_container" prefHeight="699.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="timelineLayout_container" prefHeight="699.0" prefWidth="972.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.TimelineController">
    <children>
       <HBox id="addImage_search_HBox_container" prefHeight="22.0" prefWidth="983.0">
          <children>
-            <Button id="addImage_button" mnemonicParsing="false" prefHeight="55.0" prefWidth="134.0" scaleY="0.9" text="        Add image" translateX="300.0" translateY="2.0">
+            <Button fx:id="addImage_button" mnemonicParsing="false" prefHeight="55.0" prefWidth="134.0" scaleY="0.9" text="        Add image" translateX="300.0" translateY="2.0">
                <font>
                   <Font name="Calibri Light" size="15.0" />
                </font></Button>
@@ -25,8 +25,8 @@
                   <Image url="@img/Add%20Image-48.png" />
                </image>
             </ImageView>
-            <TextField id="SearchContainer" scaleY="0.9" translateX="580.0" translateY="2.0" />
-            <Button id="SearchButton" mnemonicParsing="false" prefHeight="0.0" prefWidth="31.0" scaleX="0.9" scaleY="0.9" translateX="585.0" translateY="2.0" />
+            <TextField fx:id="SearchContainer" scaleY="0.9" translateX="580.0" translateY="2.0" />
+            <Button fx:id="SearchButton" mnemonicParsing="false" prefHeight="0.0" prefWidth="31.0" scaleX="0.9" scaleY="0.9" translateX="585.0" translateY="2.0" />
             <Label id="search_watermark" opacity="0.37" prefHeight="28.0" prefWidth="74.0" text="Search" translateX="400.0" translateY="2.0">
                <font>
                   <Font name="Calibri Light Italic" size="18.0" />
@@ -44,11 +44,11 @@
             </ImageView>
          </children>
       </HBox>
-      <AnchorPane id="timeline_anchorpane_container" prefHeight="627.0" prefWidth="1006.0" />
+      <AnchorPane fx:id="timeline_anchorpane_container" prefHeight="627.0" prefWidth="1006.0" />
       <HBox id="addEvent_container" prefHeight="40.0" prefWidth="983.0">
          <children>
             <Label id="addEventWatermark" opacity="0.37" prefHeight="21.0" prefWidth="72.0" text="Add event" translateX="855.0" translateY="7.0" />
-            <Button id="add_event_button" mnemonicParsing="false" prefHeight="31.0" prefWidth="32.0" scaleX="0.9" scaleY="0.9" translateX="861.5" translateY="2.0" />
+            <Button fx:id="add_event_button" mnemonicParsing="false" prefHeight="31.0" prefWidth="32.0" scaleX="0.9" scaleY="0.9" translateX="861.5" translateY="2.0" />
             <ImageView id="addEvent_button_image" fitHeight="31.0" fitWidth="65.0" pickOnBounds="true" preserveRatio="true" scaleX="0.9" scaleY="0.9" translateX="830.0" translateY="2.0">
                <image>
                   <Image url="@img/Plus-40.png" />

@@ -8,13 +8,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="timelinelistings_VBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="753.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="timelinelistings_VBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="753.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.TimelineListingController">
    <children>
       <ScrollPane id="timelinesListing_scrollpane" fx:id="timelineHolder" layoutX="14.0" layoutY="42.0" prefHeight="753.0" prefWidth="200.0">
         <content>
-          <AnchorPane id="timelineListing_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="171.0">
+          <AnchorPane fx:id="timelineListing_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="768.0" prefWidth="171.0">
                <children>
-                  <Label id="Timelines_Headline_text" opacity="0.72" prefHeight="30.0" prefWidth="145.0" text="Timelines">
+                  <Label fx:id="Timelines_Headline_text" opacity="0.72" prefHeight="30.0" prefWidth="145.0" text="Timelines">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font>
