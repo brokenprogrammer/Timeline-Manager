@@ -41,7 +41,6 @@ public class NavigationController {
 	}
 	
 	/**
-	 * /**
 	 * Initializes the TimelineModel which this class will get data from when a
 	 * new timeline is created or updated.
 	 * 
