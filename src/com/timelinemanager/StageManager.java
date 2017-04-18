@@ -2,6 +2,11 @@ package com.timelinemanager;
 
 import java.io.IOException;
 
+import com.timelinemanager.controller.NavigationController;
+import com.timelinemanager.controller.TimelineController;
+import com.timelinemanager.controller.TimelineListingController;
+import com.timelinemanager.model.TimelineModel;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,12 +28,14 @@ public class StageManager {
 	private final String TIMELINE_LAYOUT = "/view/TimelineLayout.fxml";
 	private final String TIMELINES_LISTING_LAYOUT = "/view/TimelinesListingLayout.fxml";
 	
-	
+	private TimelineModel timelineModel;
 	private Stage mainStage;
 	
 	public void showTimelineManager(Stage primaryStage) throws IOException {
 		mainStage = primaryStage;
 		mainStage.setTitle("TimelineManager");
+		
+		timelineModel = new TimelineModel();
 		
 		//TODO: Inside fxml files add fx:controller back
 		//TODO: Fix size on elements in fxml
@@ -62,9 +69,22 @@ public class StageManager {
 		
 		loader.setLocation(getClass().getResource(layout));
 		Parent nodeLayout = loader.load();
-		
 		//Store controller of target layout
 		//controllers.put(layout, loader.getController());
+		
+		//Initialize the same timeline model into every controller.
+		if(loader.getController() != null) {
+			if(loader.getController().getClass() == NavigationController.class) {
+				NavigationController n = (NavigationController) loader.getController();
+				n.initTimelineModel(this.timelineModel);
+			} else if (loader.getController().getClass() == TimelineController.class) {
+				TimelineController n = (TimelineController) loader.getController();
+				n.initTimelineModel(this.timelineModel);
+			} else if (loader.getController().getClass() == TimelineListingController.class) {
+				TimelineListingController n = (TimelineListingController) loader.getController();
+				n.initTimelineModel(this.timelineModel);
+			}
+		}
 		
 		return nodeLayout;
 	}
