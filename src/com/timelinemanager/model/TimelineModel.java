@@ -9,5 +9,5 @@ package com.timelinemanager.model;
  * @name TimelineModel.java
  */
 public class TimelineModel {
-	
+	//TODO: ASAP, implement TimelineModel and connect it with IO classes.
 }
