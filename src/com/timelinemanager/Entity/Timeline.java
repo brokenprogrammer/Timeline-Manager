@@ -1,24 +1,28 @@
-package com.timelinemanager.model;
+package com.timelinemanager.Entity;
 
-import java.time.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 
-public class Event {
+/**
+ * Entity class to represent the Timeline object in the
+ * application.
+ * 
+ * @author 
+ * @version 0.00.00
+ * @name Timeline.java
+ */
+public class Timeline {
+	
 	private String title;
 	private String description;
 	private String picture ;
 	private LocalDate startDate, endDate;
 	private LocalTime startTime, endTime;
 	
-	public Event (String ti , String des , LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime){
-		title = ti;
-		description = des ;
-		startDate = inStartDate ;
-		endDate = inEndDate ;
-		startTime = inStartTime ;
-		endTime = inEndTime ;
-	}
+	private ArrayList<Event> arr = new ArrayList<Event>();
 	
-	public Event (String ti , String des , String pic , LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime){
+	public Timeline (String ti , String des , String pic, LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime){
 		title = ti;
 		description = des ;
 		startDate = inStartDate ;
@@ -27,16 +31,14 @@ public class Event {
 		endTime = inEndTime ;
 		picture = pic ;
 	}
-
-	public Event (String ti , String des , String pic){
-		title = ti;
-		description = des ;
-		picture = pic ;
-	}
 	
-	public Event (String ti , String des ){
+	public Timeline (String ti , String des , LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime){
 		title = ti;
 		description = des ;
+		startDate = inStartDate ;
+		endDate = inEndDate ;
+		startTime = inStartTime ;
+		endTime = inEndTime ;
 	}
 	
 	
@@ -93,13 +95,21 @@ public class Event {
 	}
 	
 	
+	
 	public String getPic (){
 		return picture ;
+	}
+	
+	public void addEvent (Event in){
+		arr.add(in);
+	}
+	
+	public void deleteEvent (Event in){
+		arr.remove(in);
 	}
 	
 	public String toString(){
 		return title ;
 	}
-
 	
 }

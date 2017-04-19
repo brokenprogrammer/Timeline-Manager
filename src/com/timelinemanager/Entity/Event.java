@@ -1,11 +1,16 @@
-package com.timelinemanager.model;
+package com.timelinemanager.Entity;
 
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.time.*;
 
-public class TimeLine {
+/**
+ * Entity class to represent the Event object in the
+ * application.
+ * 
+ * @author 
+ * @version 0.00.00
+ * @name Event.java
+ */
+public class Event {
 	
 	private String title;
 	private String description;
@@ -13,9 +18,16 @@ public class TimeLine {
 	private LocalDate startDate, endDate;
 	private LocalTime startTime, endTime;
 	
-	private ArrayList<Event> arr = new ArrayList<Event>();
+	public Event (String ti , String des , LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime){
+		title = ti;
+		description = des ;
+		startDate = inStartDate ;
+		endDate = inEndDate ;
+		startTime = inStartTime ;
+		endTime = inEndTime ;
+	}
 	
-	public TimeLine (String ti , String des , String pic, LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime){
+	public Event (String ti , String des , String pic , LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime){
 		title = ti;
 		description = des ;
 		startDate = inStartDate ;
@@ -24,14 +36,16 @@ public class TimeLine {
 		endTime = inEndTime ;
 		picture = pic ;
 	}
-	
-	public TimeLine (String ti , String des , LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime){
+
+	public Event (String ti , String des , String pic){
 		title = ti;
 		description = des ;
-		startDate = inStartDate ;
-		endDate = inEndDate ;
-		startTime = inStartTime ;
-		endTime = inEndTime ;
+		picture = pic ;
+	}
+	
+	public Event (String ti , String des ){
+		title = ti;
+		description = des ;
 	}
 	
 	
@@ -88,21 +102,13 @@ public class TimeLine {
 	}
 	
 	
-	
 	public String getPic (){
 		return picture ;
-	}
-	
-	public void addEvent (Event in){
-		arr.add(in);
-	}
-	
-	public void deleteEvent (Event in){
-		arr.remove(in);
 	}
 	
 	public String toString(){
 		return title ;
 	}
+
 	
 }
