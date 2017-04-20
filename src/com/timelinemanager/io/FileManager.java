@@ -15,19 +15,19 @@ import java.util.Scanner;
  */
 public class FileManager {
 	
-	private ArrayList<String> events;
-	private PrintStream p;
+	private static ArrayList<String> events;
+	private static PrintStream p;
 	
-	public FileManager(){}
+	private FileManager(){}
 	
 	/**
 	 * Loads a timeline file from the system returning its
 	 * string content.
-	 * TODO: change return type to String.
+	 * TODO: change return type to String & implement it.
 	 * 
 	 * @param pathname - Path to the timeline file to load.
 	 */
-	public void load(String pathname){
+	public static String load(String pathname){
 		try {
 			File file = new File(pathname);
 			Scanner scan = new Scanner(file);
@@ -40,16 +40,18 @@ public class FileManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return new String("");
 	}
 	
 	/**
 	 * Saves the target file to the fiesystem.
-	 * TODO: Change parameters..
+	 * TODO: Change parameters & implement the method.
 	 * 
 	 * @param pathname
 	 * 
 	 */
-	public void save(String pathname){
+	public static void save(String pathname){
 		FileOutputStream out;
 		try {
 			out = new FileOutputStream(pathname);
@@ -61,9 +63,5 @@ public class FileManager {
 		} catch (Exception e) {
 			System.err.println("Error writing to file");
 		}
-	}
-
-	public void clear() {
-		events.clear();
 	}
 }

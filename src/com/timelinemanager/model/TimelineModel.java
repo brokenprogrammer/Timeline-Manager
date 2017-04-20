@@ -1,11 +1,11 @@
 package com.timelinemanager.model;
 
 import com.timelinemanager.Entity.Timeline;
+import com.timelinemanager.io.FileManager;
+import com.timelinemanager.io.TimelineConverter;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  * Timeline model that allows the application to share
@@ -18,7 +18,6 @@ import javafx.collections.ObservableList;
 public class TimelineModel {
 	//TODO: Connect with IO classes.
 	private ObjectProperty<Timeline> activeTimeline = new SimpleObjectProperty<>();
-	private final ObservableList<Timeline> loadedTimelineList = FXCollections.observableArrayList();
 	
 	/**
 	 * Gets the ObjectProperty of the currently active timeline.
@@ -44,13 +43,13 @@ public class TimelineModel {
 	 * @param path - Path to the timeline file to load.
 	 */
 	public void loadTimeline(String path) {
-		
+		this.activeTimeline.set(TimelineConverter.convert(FileManager.load(path)));
 	}
 	
 	/**
 	 * Saves the currently active timeline to the filesystem.
 	 */
 	public void saveTimeline() {
-		//Saves the active timeline
+		FileManager.save(TimelineConverter.convert(this.activeTimeline.getValue()));
 	}
 }

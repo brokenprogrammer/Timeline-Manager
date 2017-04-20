@@ -45,7 +45,6 @@ public class Timeline {
 		endTime = inEndTime ;
 	}
 	
-	
 	public void setTitle(String in){
 		title = in ;
 	}
@@ -98,8 +97,6 @@ public class Timeline {
 		return endTime ;
 	}
 	
-	
-	
 	public String getPic (){
 		return picture ;
 	}
@@ -112,8 +109,8 @@ public class Timeline {
 		arr.remove(in);
 	}
 	
+	@Override
 	public String toString(){
 		return title ;
 	}
-	
 }
