@@ -20,6 +20,13 @@ public class FileManager {
 	
 	public FileManager(){}
 	
+	/**
+	 * Loads a timeline file from the system returning its
+	 * string content.
+	 * TODO: change return type to String.
+	 * 
+	 * @param pathname - Path to the timeline file to load.
+	 */
 	public void load(String pathname){
 		try {
 			File file = new File(pathname);
@@ -35,6 +42,13 @@ public class FileManager {
 		}
 	}
 	
+	/**
+	 * Saves the target file to the fiesystem.
+	 * TODO: Change parameters..
+	 * 
+	 * @param pathname
+	 * 
+	 */
 	public void save(String pathname){
 		FileOutputStream out;
 		try {
@@ -52,5 +66,4 @@ public class FileManager {
 	public void clear() {
 		events.clear();
 	}
-
 }

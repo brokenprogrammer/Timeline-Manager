@@ -22,6 +22,10 @@ public class Timeline {
 	
 	private ArrayList<Event> arr = new ArrayList<Event>();
 	
+	public Timeline () {
+		
+	}
+	
 	public Timeline (String ti , String des , String pic, LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime){
 		title = ti;
 		description = des ;
