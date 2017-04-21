@@ -1,8 +1,8 @@
 package com.timelinemanager.io;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -16,7 +16,6 @@ import java.util.Scanner;
 public class FileManager {
 	
 	private static ArrayList<String> events;
-	private static PrintStream p;
 	
 	private FileManager(){}
 	
@@ -46,22 +45,19 @@ public class FileManager {
 	
 	/**
 	 * Saves the target file to the fiesystem.
-	 * TODO: Change parameters & implement the method.
 	 * 
-	 * @param pathname
-	 * 
+	 * @param content - Content to save into the file.
+	 * @param pathname - Path and name of the file to save.
 	 */
-	public static void save(String pathname){
-		FileOutputStream out;
+	public static void save(String content, String pathname){
+		PrintWriter out;
 		try {
-			out = new FileOutputStream(pathname);
-			p = new PrintStream(out);
-			for (String s : events) {
-				p.append(s);
-				p.append("\n");
-			}
-		} catch (Exception e) {
-			System.err.println("Error writing to file");
+			out = new PrintWriter(pathname);
+			out.write(content);
+			out.flush();
+			out.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
 	}
 }

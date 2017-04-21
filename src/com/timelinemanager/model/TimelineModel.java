@@ -8,17 +8,18 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 /**
- * Timeline model that allows the application to share
- * timeline data across the application.
+ * Timeline model that allows the application to share timeline data across the
+ * application.
  * 
  * @author Oskar Mendel
  * @version 0.00.00
  * @name TimelineModel.java
  */
 public class TimelineModel {
-	//TODO: Connect with IO classes.
 	private ObjectProperty<Timeline> activeTimeline = new SimpleObjectProperty<>();
-	
+
+	private final String savePath = "";
+
 	/**
 	 * Gets the ObjectProperty of the currently active timeline.
 	 * 
@@ -27,7 +28,7 @@ public class TimelineModel {
 	public ObjectProperty<Timeline> getTimeline() {
 		return activeTimeline;
 	}
-	
+
 	/**
 	 * Sets the currently active timeline.
 	 * 
@@ -36,7 +37,7 @@ public class TimelineModel {
 	public void setTimeline(Timeline t) {
 		this.activeTimeline.set(t);
 	}
-	
+
 	/**
 	 * Loads target timeline located at the specified path.
 	 * 
@@ -45,11 +46,12 @@ public class TimelineModel {
 	public void loadTimeline(String path) {
 		this.activeTimeline.set(TimelineConverter.convert(FileManager.load(path)));
 	}
-	
+
 	/**
 	 * Saves the currently active timeline to the filesystem.
 	 */
 	public void saveTimeline() {
-		FileManager.save(TimelineConverter.convert(this.activeTimeline.getValue()));
+		FileManager.save(TimelineConverter.convert(this.activeTimeline.getValue()),
+				savePath + this.activeTimeline.getValue().getTitle() + ".txt");
 	}
 }
