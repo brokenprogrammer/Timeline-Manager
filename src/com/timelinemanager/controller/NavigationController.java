@@ -77,21 +77,6 @@ public class NavigationController {
 	
 	@FXML
 	public void initialize() {
-
-	}
-	
-	/**
-	 * Initializes the TimelineModel which this class will get data from when a
-	 * new timeline is created or updated.
-	 * 
-	 * @param timelineModel - timelineModel object to send and receive data from.
-	 */
-	public void initTimelineModel(TimelineModel timelineModel) {
-		if (this.timelineModel != null) {
-			throw new IllegalStateException("Model can only be initiated once");
-		}
-		
-		this.timelineModel = timelineModel;
 		/*
 		 * Set actions to each UI element.
 		 */
@@ -101,7 +86,7 @@ public class NavigationController {
 			
 			try {
 				
-				FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/createNewTimeline.fxml"));
+			    FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/createNewTimeline.fxml"));
 			    Parent root = (Parent)fxmlLoader.load();
 			  
 			    Scene mainScene = new Scene(root);
@@ -123,12 +108,26 @@ public class NavigationController {
 			    stage.showAndWait(); 	
 		       
 		    } catch (IOException e) {
-		        Logger logger = Logger.getLogger(getClass().getName());
-		        logger.log(Level.SEVERE, "Failed to open the 'Create a new timeline' window.", e);
+		        e.printStackTrace();
 		    }
 		});
 		
-		menuItem_exit.setOnAction(actionEvent -> System.exit(0));   
+		menuItem_exit.setOnAction(actionEvent -> System.exit(0)); 
+	}
+	
+	/**
+	 * Initializes the TimelineModel which this class will get data from when a
+	 * new timeline is created or updated.
+	 * 
+	 * @param timelineModel - timelineModel object to send and receive data from.
+	 */
+	public void initTimelineModel(TimelineModel timelineModel) {
+		if (this.timelineModel != null) {
+			throw new IllegalStateException("Model can only be initiated once");
+		}
+		
+		this.timelineModel = timelineModel;
+		  
 		//TODO: Add potential listeners here
 		
 	}
