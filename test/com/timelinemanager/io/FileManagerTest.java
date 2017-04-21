@@ -5,6 +5,11 @@ package com.timelinemanager.io;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +35,6 @@ public class FileManagerTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		//Remove created file when testing save & load.
 	}
 
 	/**
@@ -38,7 +42,20 @@ public class FileManagerTest {
 	 */
 	@Test
 	public final void testLoad() {
-		fail("Not yet implemented"); // TODO
+		String s = "Dummy String adsad \nTesting    ";
+		FileManager.save(s, "testingString.txt");
+		
+		//Test so the read content form the saved file is what we saved.
+		assertEquals("The saved file content matches with the read.", s, FileManager.load("testingString.txt"));
+		
+		//Delete the created text file again.
+		try {
+			File f = new File("testingString.txt");
+			
+			f.delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -46,7 +63,33 @@ public class FileManagerTest {
 	 */
 	@Test
 	public final void testSave() {
-		fail("Not yet implemented"); // TODO
+		String s = "Dummy String adsad \nTesting    ";
+		FileManager.save(s, "myDummyString.txt");
+		
+		BufferedReader in;
+		String read = "";
+		
+		try {
+			in = new BufferedReader(new FileReader("myDummyString.txt"));
+			int c = 0;
+			while ((c = in.read()) != -1) {
+				read += (char) c;
+			}
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//Test so the read content form the saved file is what we saved.
+		assertEquals("The saved file content matches with the read.", s, read);
+		
+		//Delete the created text file again.
+		try {
+			File f = new File("myDummyString.txt");
+			
+			f.delete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
 }

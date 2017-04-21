@@ -1,10 +1,10 @@
 package com.timelinemanager.io;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * FileManager class handle saving and loading timeline files.
@@ -15,32 +15,30 @@ import java.util.Scanner;
  */
 public class FileManager {
 	
-	private static ArrayList<String> events;
-	
 	private FileManager(){}
 	
 	/**
 	 * Loads a timeline file from the system returning its
 	 * string content.
-	 * TODO: change return type to String & implement it.
 	 * 
 	 * @param pathname - Path to the timeline file to load.
 	 */
 	public static String load(String pathname){
+		BufferedReader in;
+		String read = "";
+		
 		try {
-			File file = new File(pathname);
-			Scanner scan = new Scanner(file);
-			String newI;
-			while (scan.hasNext()) {
-				newI = scan.next();
-				events.add(newI);
+			in = new BufferedReader(new FileReader(pathname));
+			int c = 0;
+			while ((c = in.read()) != -1) {
+				read += (char) c;
 			}
-			scan.close();
-		} catch (Exception e) {
+			in.close();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return new String("");
+		return read;
 	}
 	
 	/**
