@@ -10,6 +10,8 @@ import com.timelinemanager.model.TimelineModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -40,8 +42,8 @@ public class StageManager {
 		//TODO: Inside fxml files add fx:controller back
 		//TODO: Fix size on elements in fxml
 		VBox navigationLayout = (VBox) loadLayout(NAVIGATION_LAYOUT);
-		VBox timelinesListingLayout = (VBox) loadLayout(TIMELINES_LISTING_LAYOUT);
-		VBox timelineLayout = (VBox) loadLayout(TIMELINE_LAYOUT);
+		AnchorPane timelinesListingLayout = (AnchorPane) loadLayout(TIMELINES_LISTING_LAYOUT);
+		AnchorPane timelineLayout = (AnchorPane) loadLayout(TIMELINE_LAYOUT); 
 		BorderPane rootLayout = (BorderPane) loadLayout(ROOT_LAYOUT);
 		
 		rootLayout.setTop(navigationLayout);
