@@ -10,7 +10,6 @@ import com.timelinemanager.model.TimelineModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -53,8 +52,8 @@ public class StageManager {
 		Scene mainScene = new Scene(rootLayout);
 		
 		mainStage.setScene(mainScene);
-		mainStage.setMinWidth(1080);
-		mainStage.setMinHeight(900);
+		mainStage.setMinWidth(800);
+		mainStage.setMinHeight(600);
         mainStage.show();
 	}
 	
