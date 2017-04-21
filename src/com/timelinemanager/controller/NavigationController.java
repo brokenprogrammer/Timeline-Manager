@@ -2,8 +2,6 @@ package com.timelinemanager.controller;
 
 import java.awt.TextField;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.timelinemanager.model.TimelineModel;
 
@@ -77,15 +75,11 @@ public class NavigationController {
 	
 	@FXML
 	public void initialize() {
-		/*
-		 * Set actions to each UI element.
-		 */
-		
-		//Opens new window which allows the user to create a new timeline
+		//ActionEvent for new timeline button.
+		//Opens new window which allows the user to create a new timeline.
 		menuItem_newTimeline.setOnAction(actionEvent ->  {   
 			
 			try {
-				
 			    FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/createNewTimeline.fxml"));
 			    Parent root = (Parent)fxmlLoader.load();
 			  
@@ -112,6 +106,7 @@ public class NavigationController {
 		    }
 		});
 		
+		//ActionEvent for the exit button.
 		menuItem_exit.setOnAction(actionEvent -> System.exit(0)); 
 	}
 	
