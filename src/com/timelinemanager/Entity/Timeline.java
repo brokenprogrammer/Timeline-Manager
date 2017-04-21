@@ -22,6 +22,10 @@ public class Timeline {
 	
 	private ArrayList<Event> arr = new ArrayList<Event>();
 	
+	public Timeline () {
+		
+	}
+	
 	public Timeline (String ti , String des , String pic, LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime){
 		title = ti;
 		description = des ;
@@ -40,7 +44,6 @@ public class Timeline {
 		startTime = inStartTime ;
 		endTime = inEndTime ;
 	}
-	
 	
 	public void setTitle(String in){
 		title = in ;
@@ -94,8 +97,6 @@ public class Timeline {
 		return endTime ;
 	}
 	
-	
-	
 	public String getPic (){
 		return picture ;
 	}
@@ -108,8 +109,8 @@ public class Timeline {
 		arr.remove(in);
 	}
 	
+	@Override
 	public String toString(){
 		return title ;
 	}
-	
 }

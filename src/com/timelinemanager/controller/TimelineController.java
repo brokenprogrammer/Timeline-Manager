@@ -1,7 +1,9 @@
 package com.timelinemanager.controller;
 
+import com.timelinemanager.Entity.Timeline;
 import com.timelinemanager.model.TimelineModel;
 
+import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -31,7 +33,7 @@ public class TimelineController {
 	
 	@FXML
 	public void initialize() {
-
+		//timeline_anchorpane_container.getChildren().add(myTimeline);
 	}
 	
 	/**
@@ -47,7 +49,9 @@ public class TimelineController {
 		
 		this.timelineModel = timelineModel;
 		
-		//TODO: Add potential listeners here
-		
+		//Code for when timeline was changed.
+		timelineModel.getTimeline().addListener((ChangeListener<Timeline>) (observable, oldValue, newValue) -> {
+			
+		});
 	}
 }

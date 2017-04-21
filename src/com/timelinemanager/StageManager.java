@@ -57,12 +57,11 @@ public class StageManager {
 	}
 	
 	/**
+	 * Loads a FXML layout and returns its parent node.
 	 * 
 	 * @param layout The *.fxml file to be loaded.
-	 * 
 	 * @return The {@link Parent} object that is in the layout.
-	 * 
-	 * @throws IOException thrown if the *.fxxml file was not found.
+	 * @throws IOException thrown if the *.fxml file was not found.
 	 */
 	private Parent loadLayout(String layout) throws IOException{
 		FXMLLoader loader = new FXMLLoader();

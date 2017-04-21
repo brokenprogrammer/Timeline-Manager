@@ -1,7 +1,5 @@
 package com.timelinemanager.io;
 
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import com.timelinemanager.Entity.Timeline;
@@ -18,9 +16,29 @@ import com.timelinemanager.Entity.Timeline;
 public class TimelineConverter {
 	
 	private ArrayList<String> events;
-	private PrintStream p;
 	
-	public TimelineConverter(){}
+	/**
+	 * Converts a timeline to string format suitable for saving 
+	 * to a text file.
+	 * 
+	 * @param t - Timeline object to be converted to a string.
+	 * @return A string representing a timeline object.
+	 */
+	public static String convert(Timeline t) {
+		return t.toString();
+	}
+	
+	/**
+	 * Converts a string into a timeline object.
+	 * 
+	 * @param s - String to be converted.
+	 * @return A timeline populated with data from the string.
+	 */
+	public static Timeline convert(String s) {
+		Timeline t = new Timeline();
+		//TODO: Populate timeline depending on content of String s.
+		return t;
+	}
 
 	public TimelineConverter(Timeline t) {
 		events.add(t.getTitle());
@@ -33,24 +51,4 @@ public class TimelineConverter {
 		events.add("\n");
 		//events.addAll(t.outputdata());
 	}
-	
-	public void save(String pathname ){
-		FileOutputStream out;
-		
-		try{
-			out = new FileOutputStream(pathname);
-			p = new PrintStream(out);
-			for(String s:events){
-				p.append(s);
-				p.append("\n");
-			}
-		}catch(Exception e){System.err.println ("Error writing to file");}
-	}
-	
-	public void clear(){
-		events.clear();
-	}
-	
-	
-
 }

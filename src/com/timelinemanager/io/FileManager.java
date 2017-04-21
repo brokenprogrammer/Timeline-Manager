@@ -1,10 +1,10 @@
 package com.timelinemanager.io;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * FileManager class handle saving and loading timeline files.
@@ -15,42 +15,47 @@ import java.util.Scanner;
  */
 public class FileManager {
 	
-	private ArrayList<String> events;
-	private PrintStream p;
+	private FileManager(){}
 	
-	public FileManager(){}
-	
-	public void load(String pathname){
+	/**
+	 * Loads a timeline file from the system returning its
+	 * string content.
+	 * 
+	 * @param pathname - Path to the timeline file to load.
+	 */
+	public static String load(String pathname){
+		BufferedReader in;
+		String read = "";
+		
 		try {
-			File file = new File(pathname);
-			Scanner scan = new Scanner(file);
-			String newI;
-			while (scan.hasNext()) {
-				newI = scan.next();
-				events.add(newI);
+			in = new BufferedReader(new FileReader(pathname));
+			int c = 0;
+			while ((c = in.read()) != -1) {
+				read += (char) c;
 			}
-			scan.close();
-		} catch (Exception e) {
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return read;
+	}
+	
+	/**
+	 * Saves the target file to the fiesystem.
+	 * 
+	 * @param content - Content to save into the file.
+	 * @param pathname - Path and name of the file to save.
+	 */
+	public static void save(String content, String pathname){
+		PrintWriter out;
+		try {
+			out = new PrintWriter(pathname);
+			out.write(content);
+			out.flush();
+			out.close();
+		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
-	
-	public void save(String pathname){
-		FileOutputStream out;
-		try {
-			out = new FileOutputStream(pathname);
-			p = new PrintStream(out);
-			for (String s : events) {
-				p.append(s);
-				p.append("\n");
-			}
-		} catch (Exception e) {
-			System.err.println("Error writing to file");
-		}
-	}
-
-	public void clear() {
-		events.clear();
-	}
-
 }

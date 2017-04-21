@@ -106,9 +106,8 @@ public class Event {
 		return picture ;
 	}
 	
+	@Override
 	public String toString(){
 		return title ;
 	}
-
-	
 }
