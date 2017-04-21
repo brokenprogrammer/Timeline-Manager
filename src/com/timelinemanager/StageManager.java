@@ -45,15 +45,12 @@ public class StageManager {
 		AnchorPane timelinesListingLayout = (AnchorPane) loadLayout(TIMELINES_LISTING_LAYOUT);
 		AnchorPane timelineLayout = (AnchorPane) loadLayout(TIMELINE_LAYOUT); 
 		BorderPane rootLayout = (BorderPane) loadLayout(ROOT_LAYOUT);
-
+		
 		rootLayout.setTop(navigationLayout);
 		rootLayout.setLeft(timelinesListingLayout);
 		rootLayout.setCenter(timelineLayout);
 		
 		Scene mainScene = new Scene(rootLayout);
-		
-	
-		
 		
 		mainStage.setScene(mainScene);
 		mainStage.setMinWidth(1080);
