@@ -20,6 +20,13 @@ public class Event {
 	private LocalTime startTime, endTime;
 	
 	/**
+	 * Create an empty event
+	 */
+	public Event () {
+		
+	}
+	
+	/**
 	 *  Create an event with duration and without picture
 	 *   
 	 * @param ti Title

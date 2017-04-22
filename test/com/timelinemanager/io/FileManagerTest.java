@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.timelinemanager.io;
 
 import static org.junit.Assert.*;
