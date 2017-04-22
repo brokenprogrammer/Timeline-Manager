@@ -2,6 +2,9 @@ package com.timelinemanager.Entity;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,19 +33,25 @@ public class TimelineTest {
 	}
 
 	/**
-	 * Test method for {@link com.timelinemanager.Entity.Timeline#Timeline()}.
-	 */
-	@Test
-	public final void testTimeline() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
 	 * Test method for {@link com.timelinemanager.Entity.Timeline#Timeline(java.lang.String, java.lang.String, java.lang.String, java.time.LocalDate, java.time.LocalDate, java.time.LocalTime, java.time.LocalTime)}.
 	 */
 	@Test
 	public final void testTimelineStringStringStringLocalDateLocalDateLocalTimeLocalTime() {
-		fail("Not yet implemented"); // TODO
+		LocalDate currentDate = LocalDate.now();
+		LocalDate tomorrow = currentDate.plusDays(1);
+		LocalTime currentTime = LocalTime.now();
+		LocalTime nextHour = currentTime.plusHours(1);
+		
+		Timeline t = new Timeline("Title", "Description", "/path/to/picture", currentDate, tomorrow,
+				currentTime, nextHour);
+		
+		assertEquals("Timelines title was set accordingly", "Title", t.getTitle());
+		assertEquals("Timelines description was set accordingly", "Description", t.getDescription());
+		assertEquals("Timelines image path was set accordingly", "/path/to/picture", t.getPic());
+		assertEquals("Timelines start date was set accordingly", currentDate, t.getStartDate());
+		assertEquals("Timelines end date was set accordingly", tomorrow, t.getEndDate());
+		assertEquals("Timelines start time was set accordingly", currentTime, t.getStartTime());
+		assertEquals("Timelines end time was set accordingly", nextHour, t.getEndTime());
 	}
 
 	/**
@@ -50,7 +59,21 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testTimelineStringStringLocalDateLocalDateLocalTimeLocalTime() {
-		fail("Not yet implemented"); // TODO
+		LocalDate currentDate = LocalDate.now();
+		LocalDate tomorrow = currentDate.plusDays(1);
+		LocalTime currentTime = LocalTime.now();
+		LocalTime nextHour = currentTime.plusHours(1);
+		
+		Timeline t = new Timeline("Title", "Description", currentDate, tomorrow,
+				currentTime, nextHour);
+		
+		assertEquals("Timelines title was set accordingly", "Title", t.getTitle());
+		assertEquals("Timelines description was set accordingly", "Description", t.getDescription());
+		assertEquals("Timelines image path was set accordingly", null, t.getPic());
+		assertEquals("Timelines start date was set accordingly", currentDate, t.getStartDate());
+		assertEquals("Timelines end date was set accordingly", tomorrow, t.getEndDate());
+		assertEquals("Timelines start time was set accordingly", currentTime, t.getStartTime());
+		assertEquals("Timelines end time was set accordingly", nextHour, t.getEndTime());
 	}
 
 	/**
@@ -58,7 +81,16 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testSetTitle() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		t.setTitle("myTimeline");
+		assertEquals("Timelines title was set accordingly", "myTimeline", t.getTitle());
+		t.setTitle("  MyT1!mL^ne");
+		assertEquals("Timelines title was set accordingly", "  MyT1!mL^ne", t.getTitle());
+		
+		//TODO: Should not be allowed.
+		//t.setTitle("\n\n\n\n\n\n\n\n\nTTTT!$#%");
+		//assertEquals("Timelines title was set accordingly", "\n\n\n\n\n\n\n\n\nTTTT!$#%", t.getTitle());
 	}
 
 	/**
@@ -66,7 +98,13 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testSetDescription() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		t.setDescription("My own description");
+		assertEquals("Timelines description was set accordingly", "My own description", t.getDescription());
+		t.setDescription("    Descriptions contains newlines and spaces ! Desscription \n Test");
+		assertEquals("Timelines description was set accordingly", 
+				"    Descriptions contains newlines and spaces ! Desscription \n Test", t.getDescription());
 	}
 
 	/**
@@ -74,7 +112,24 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testSetStartDate() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		LocalDate currentDate = LocalDate.now();
+		LocalDate tomorrow = currentDate.plusDays(1);
+		
+		t.setStartDate(currentDate);
+		assertEquals("Timelines start date set", currentDate, t.getStartDate());
+		t.setStartDate(tomorrow);
+		assertEquals("Timelines start date set", tomorrow, t.getStartDate());
+		
+		//Start date cannot be after the end date
+		LocalDate myLaterStartDate = tomorrow.plusDays(365);
+		
+		t.setStartDate(currentDate);
+		t.setEndDate(tomorrow);
+		
+		//TODO: Throw error since start date cannot be later than end date.
+		t.setStartDate(myLaterStartDate);
 	}
 
 	/**
@@ -82,7 +137,24 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testSetEndDate() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		LocalDate currentDate = LocalDate.now();
+		LocalDate tomorrow = currentDate.plusDays(1);
+		
+		t.setEndDate(currentDate);
+		assertEquals("Timelines end date set", currentDate, t.getEndDate());
+		t.setEndDate(tomorrow);
+		assertEquals("Timelines end date set", tomorrow, t.getEndDate());
+		
+		//Start date cannot be after the end date
+		LocalDate mySoonerEndDate = tomorrow.minusDays(365);
+		
+		t.setStartDate(currentDate);
+		t.setEndDate(tomorrow);
+		
+		//TODO: Throw error since end date cannot be sooner than start date.
+		t.setEndDate(mySoonerEndDate);
 	}
 
 	/**
@@ -90,7 +162,24 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testSetStartTime() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		LocalTime currentTime = LocalTime.now();
+		LocalTime nextHour = currentTime.plusHours(1);
+		
+		t.setStartTime(currentTime);
+		assertEquals("Timelines start time set", currentTime, t.getStartTime());
+		t.setStartTime(nextHour);
+		assertEquals("Timelines start time set", nextHour, t.getStartTime());
+		
+		//Start date cannot be after the end date
+		LocalTime myLaterStartTime = nextHour.plusHours(365);
+		
+		t.setStartTime(currentTime);
+		t.setEndTime(nextHour);
+		
+		//TODO: Throw error since start time cannot be later than end time.
+		t.setStartTime(myLaterStartTime);
 	}
 
 	/**
@@ -98,7 +187,24 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testSetEndTime() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		LocalTime currentTime = LocalTime.now();
+		LocalTime nextHour = currentTime.plusHours(1);
+		
+		t.setEndTime(currentTime);
+		assertEquals("Timelines end time set", currentTime, t.getEndTime());
+		t.setEndTime(nextHour);
+		assertEquals("Timelines end time set", nextHour, t.getEndTime());
+		
+		//End time cannot be sooner than start time
+		LocalTime mySoonerEndTime = nextHour.minusHours(365);
+		
+		t.setStartTime(currentTime);
+		t.setEndTime(nextHour);
+		
+		//TODO: Throw error since end date cannot be sooner than start date.
+		t.setEndTime(mySoonerEndTime);
 	}
 
 	/**
@@ -106,7 +212,12 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testSetPic() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		t.setPic("/path/to/pic");
+		assertEquals("Timelines picture was set accordingly", "/path/to/pic", t.getPic());
+		t.setPic("new/path/to/pic");
+		assertEquals("Timelines picture was set accordingly", "new/path/to/pic", t.getPic());
 	}
 
 	/**
@@ -114,7 +225,12 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testGetTitle() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		t.setTitle("myTimeline");
+		assertEquals("Timelines title was set accordingly", "myTimeline", t.getTitle());
+		t.setTitle("  MyT1!mL^ne");
+		assertEquals("Timelines title was set accordingly", "  MyT1!mL^ne", t.getTitle());
 	}
 
 	/**
@@ -122,7 +238,13 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testGetDescription() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		t.setDescription("My own description");
+		assertEquals("Timelines description was set accordingly", "My own description", t.getDescription());
+		t.setDescription("    Descriptions contains newlines and spaces ! Desscription \n Test");
+		assertEquals("Timelines description was set accordingly", 
+				"    Descriptions contains newlines and spaces ! Desscription \n Test", t.getDescription());
 	}
 
 	/**
@@ -130,7 +252,24 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testGetStartDate() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		LocalDate currentDate = LocalDate.now();
+		LocalDate tomorrow = currentDate.plusDays(1);
+		
+		t.setStartDate(currentDate);
+		assertEquals("Timelines start date set", currentDate, t.getStartDate());
+		t.setStartDate(tomorrow);
+		assertEquals("Timelines start date set", tomorrow, t.getStartDate());
+		
+		//Start date cannot be after the end date
+		LocalDate myLaterStartDate = tomorrow.plusDays(365);
+		
+		t.setStartDate(currentDate);
+		t.setEndDate(tomorrow);
+		
+		//TODO: Throw error since start date cannot be later than end date.
+		t.setStartDate(myLaterStartDate);
 	}
 
 	/**
@@ -138,7 +277,24 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testGetEndDate() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		LocalDate currentDate = LocalDate.now();
+		LocalDate tomorrow = currentDate.plusDays(1);
+		
+		t.setEndDate(currentDate);
+		assertEquals("Timelines end date set", currentDate, t.getEndDate());
+		t.setEndDate(tomorrow);
+		assertEquals("Timelines end date set", tomorrow, t.getEndDate());
+		
+		//Start date cannot be after the end date
+		LocalDate mySoonerEndDate = tomorrow.minusDays(365);
+		
+		t.setStartDate(currentDate);
+		t.setEndDate(tomorrow);
+		
+		//TODO: Throw error since end date cannot be sooner than start date.
+		t.setEndDate(mySoonerEndDate);
 	}
 
 	/**
@@ -146,7 +302,24 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testGetStartTime() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		LocalTime currentTime = LocalTime.now();
+		LocalTime nextHour = currentTime.plusHours(1);
+		
+		t.setStartTime(currentTime);
+		assertEquals("Timelines start time set", currentTime, t.getStartTime());
+		t.setStartTime(nextHour);
+		assertEquals("Timelines start time set", nextHour, t.getStartTime());
+		
+		//Start date cannot be after the end date
+		LocalTime myLaterStartTime = nextHour.plusHours(365);
+		
+		t.setStartTime(currentTime);
+		t.setEndTime(nextHour);
+		
+		//TODO: Throw error since start time cannot be later than end time.
+		t.setStartTime(myLaterStartTime);
 	}
 
 	/**
@@ -154,7 +327,24 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testGetEndTime() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		LocalTime currentTime = LocalTime.now();
+		LocalTime nextHour = currentTime.plusHours(1);
+		
+		t.setEndTime(currentTime);
+		assertEquals("Timelines end time set", currentTime, t.getEndTime());
+		t.setEndTime(nextHour);
+		assertEquals("Timelines end time set", nextHour, t.getEndTime());
+		
+		//End time cannot be sooner than start time
+		LocalTime mySoonerEndTime = nextHour.minusHours(365);
+		
+		t.setStartTime(currentTime);
+		t.setEndTime(nextHour);
+		
+		//TODO: Throw error since end date cannot be sooner than start date.
+		t.setEndTime(mySoonerEndTime);
 	}
 
 	/**
@@ -162,7 +352,12 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testGetPic() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		t.setPic("/path/to/pic");
+		assertEquals("Timelines picture was set accordingly", "/path/to/pic", t.getPic());
+		t.setPic("new/path/to/pic");
+		assertEquals("Timelines picture was set accordingly", "new/path/to/pic", t.getPic());
 	}
 
 	/**
@@ -170,7 +365,21 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testAddEvent() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
+		Event e = new Event("Example event", "Example descritpion", currentDate , currentTime);
+		Event e2 = new Event("Example event2", "Example descritpion2", 
+				currentDate.plusDays(1) , currentTime.plusHours(1));
+		
+		
+		//TODO: Create some method in Timeline to test this, example size(), getEvents()
+		t.addEvent(e);
+		t.addEvent(e2);
+		
+		t.deleteEvent(e);
+		t.deleteEvent(e2);
 	}
 
 	/**
@@ -178,7 +387,21 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testDeleteEvent() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
+		Event e = new Event("Example event", "Example descritpion", currentDate , currentTime);
+		Event e2 = new Event("Example event2", "Example descritpion2", 
+				currentDate.plusDays(1) , currentTime.plusHours(1));
+		
+		
+		//TODO: Create some method in Timeline to test this, example size(), getEvents()
+		t.addEvent(e);
+		t.addEvent(e2);
+		
+		t.deleteEvent(e);
+		t.deleteEvent(e2);
 	}
 
 	/**
@@ -186,7 +409,15 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testGetDaysLength() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		t.setStartDate(LocalDate.now());
+		t.setEndDate(LocalDate.now().plusDays(1));
+		
+		assertEquals("Timeline is counting days between", 1, t.getDaysLength());
+		t.setEndDate(LocalDate.now().plusDays(400));
+		assertEquals("Timeline is counting days between", 400, t.getDaysLength());
+		t.setEndDate(LocalDate.now().plusDays(2500));
+		assertEquals("Timeline is counting days between", 2500, t.getDaysLength());
 	}
 
 	/**
@@ -194,7 +425,15 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testGetMonthsLength() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		t.setStartDate(LocalDate.now());
+		t.setEndDate(LocalDate.now().plusMonths(1));
+		
+		assertEquals("Timeline is counting months between", 1, t.getMonthsLength());
+		t.setEndDate(LocalDate.now().plusMonths(12));
+		assertEquals("Timeline is counting months between", 12, t.getMonthsLength());
+		t.setEndDate(LocalDate.now().plusMonths(200));
+		assertEquals("Timeline is counting months between", 200, t.getMonthsLength());
 	}
 
 	/**
@@ -202,7 +441,15 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testGetYearsLength() {
-		fail("Not yet implemented"); // TODO
+		Timeline t = new Timeline();
+		t.setStartDate(LocalDate.now());
+		t.setEndDate(LocalDate.now().plusYears(1));
+		
+		assertEquals("Timeline is counting years between", 1, t.getYearsLength());
+		t.setEndDate(LocalDate.now().plusYears(12));
+		assertEquals("Timeline is counting years between", 12, t.getYearsLength());
+		t.setEndDate(LocalDate.now().plusYears(200));
+		assertEquals("Timeline is counting years between", 200, t.getYearsLength());
 	}
 
 	/**
@@ -210,7 +457,7 @@ public class TimelineTest {
 	 */
 	@Test
 	public final void testToString() {
-		fail("Not yet implemented"); // TODO
+		//TODO: Timelines toString is yet to be implemented.
 	}
 
 }

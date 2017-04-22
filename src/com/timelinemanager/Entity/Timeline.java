@@ -66,6 +66,8 @@ public class Timeline {
 		description = des ;
 		startDate = inStartDate ;
 		endDate = inEndDate ;
+		startTime = inStartTime;
+		endTime = inEndTime;
 	}
 	
 	/**
