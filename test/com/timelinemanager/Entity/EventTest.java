@@ -2,6 +2,9 @@ package com.timelinemanager.Entity;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,7 +37,18 @@ public class EventTest {
 	 */
 	@Test
 	public final void testEventStringStringLocalDateLocalDateLocalTimeLocalTime() {
-		fail("Not yet implemented"); // TODO
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
+		
+		Event e = new Event ("My Event Title", "My event description", currentDate, 
+				currentDate.plusDays(1), currentTime, currentTime.plusHours(1));
+		
+		assertEquals("Event title was set accordingly", "My Event Title", e.getTitle());
+		assertEquals("Event description was set accordingly", "My event description", e.getDescription());
+		assertEquals("Event start date was set accordingly", currentDate, e.getStartDate());
+		assertEquals("Event end date was set accordingly", currentDate.plusDays(1), e.getEndDate());
+		assertEquals("Event start time was set accordingly", currentTime, e.getStartTime());
+		assertEquals("Event end time was set accordingly", currentTime.plusHours(1), e.getEndTime());
 	}
 
 	/**
@@ -42,7 +56,19 @@ public class EventTest {
 	 */
 	@Test
 	public final void testEventStringStringStringLocalDateLocalDateLocalTimeLocalTime() {
-		fail("Not yet implemented"); // TODO
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
+		
+		Event e = new Event ("My Event Title", "My event description", "/path/to/pic", currentDate, 
+				currentDate.plusDays(1), currentTime, currentTime.plusHours(1));
+		
+		assertEquals("Event title was set accordingly", "My Event Title", e.getTitle());
+		assertEquals("Event description was set accordingly", "My event description", e.getDescription());
+		assertEquals("Event picture was set accordingly", "/path/to/pic", e.getPic());
+		assertEquals("Event start date was set accordingly", currentDate, e.getStartDate());
+		assertEquals("Event end date was set accordingly", currentDate.plusDays(1), e.getEndDate());
+		assertEquals("Event start time was set accordingly", currentTime, e.getStartTime());
+		assertEquals("Event end time was set accordingly", currentTime.plusHours(1), e.getEndTime());
 	}
 
 	/**
@@ -50,7 +76,15 @@ public class EventTest {
 	 */
 	@Test
 	public final void testEventStringStringLocalDateLocalTime() {
-		fail("Not yet implemented"); // TODO
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
+		
+		Event e = new Event ("My Event Title", "My event description", currentDate, currentTime);
+		
+		assertEquals("Event title was set accordingly", "My Event Title", e.getTitle());
+		assertEquals("Event description was set accordingly", "My event description", e.getDescription());
+		assertEquals("Event start date was set accordingly", currentDate, e.getStartDate());
+		assertEquals("Event start time was set accordingly", currentTime, e.getStartTime());
 	}
 
 	/**
@@ -58,7 +92,17 @@ public class EventTest {
 	 */
 	@Test
 	public final void testEventStringStringStringLocalDateLocalTime() {
-		fail("Not yet implemented"); // TODO
+		LocalDate currentDate = LocalDate.now();
+		LocalTime currentTime = LocalTime.now();
+		
+		Event e = new Event ("My Event Title", "My event description", "/path/to/pic", 
+				currentDate, currentTime);
+		
+		assertEquals("Event title was set accordingly", "My Event Title", e.getTitle());
+		assertEquals("Event description was set accordingly", "My event description", e.getDescription());
+		assertEquals("Event picture was set accordingly", "/path/to/pic", e.getPic());
+		assertEquals("Event start date was set accordingly", currentDate, e.getStartDate());
+		assertEquals("Event start time was set accordingly", currentTime, e.getStartTime());
 	}
 
 	/**
@@ -66,7 +110,16 @@ public class EventTest {
 	 */
 	@Test
 	public final void testSetTitle() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		e.setTitle("myEvent");
+		assertEquals("Event title was set accordingly", "myEvent", e.getTitle());
+		e.setTitle("  MyT4#VEn6T");
+		assertEquals("Event title was set accordingly", "  MyT4#VEn6T", e.getTitle());
+		
+		//TODO: Should not be allowed.
+		//e.setTitle("\n\n\n\n\n\n\n\n\nTTTT!$#%");
+		//assertEquals("Event title was set accordingly", "\n\n\n\n\n\n\n\n\nTTTT!$#%", e.getTitle());
 	}
 
 	/**
@@ -74,7 +127,13 @@ public class EventTest {
 	 */
 	@Test
 	public final void testSetDescription() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		e.setDescription("My own description");
+		assertEquals("Event description was set accordingly", "My own description", e.getDescription());
+		e.setDescription("    Descriptions contains newlines and spaces ! Desscription \n Test");
+		assertEquals("Event description was set accordingly", 
+				"    Descriptions contains newlines and spaces ! Desscription \n Test", e.getDescription());
 	}
 
 	/**
@@ -82,7 +141,24 @@ public class EventTest {
 	 */
 	@Test
 	public final void testSetStartDate() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		LocalDate currentDate = LocalDate.now();
+		LocalDate tomorrow = currentDate.plusDays(1);
+		
+		e.setStartDate(currentDate);
+		assertEquals("Event start date set", currentDate, e.getStartDate());
+		e.setStartDate(tomorrow);
+		assertEquals("Event start date set", tomorrow, e.getStartDate());
+		
+		//Start date cannot be after the end date
+		LocalDate myLaterStartDate = tomorrow.plusDays(365);
+		
+		e.setStartDate(currentDate);
+		e.setEndDate(tomorrow);
+		
+		//TODO: Throw error since start date cannot be later than end date.
+		e.setStartDate(myLaterStartDate);
 	}
 
 	/**
@@ -90,7 +166,24 @@ public class EventTest {
 	 */
 	@Test
 	public final void testSetEndDate() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		LocalDate currentDate = LocalDate.now();
+		LocalDate tomorrow = currentDate.plusDays(1);
+		
+		e.setEndDate(currentDate);
+		assertEquals("Event end date set", currentDate, e.getEndDate());
+		e.setEndDate(tomorrow);
+		assertEquals("Event end date set", tomorrow, e.getEndDate());
+		
+		//Start date cannot be after the end date
+		LocalDate mySoonerEndDate = tomorrow.minusDays(365);
+		
+		e.setStartDate(currentDate);
+		e.setEndDate(tomorrow);
+		
+		//TODO: Throw error since end date cannot be sooner than start date.
+		e.setEndDate(mySoonerEndDate);
 	}
 
 	/**
@@ -98,7 +191,24 @@ public class EventTest {
 	 */
 	@Test
 	public final void testSetStartTime() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		LocalTime currentTime = LocalTime.now();
+		LocalTime nextHour = currentTime.plusHours(1);
+		
+		e.setStartTime(currentTime);
+		assertEquals("Event start time set", currentTime, e.getStartTime());
+		e.setStartTime(nextHour);
+		assertEquals("Event start time set", nextHour, e.getStartTime());
+		
+		//Start time cannot be after the end time
+		LocalTime myLaterStartTime = nextHour.plusHours(365);
+		
+		e.setStartTime(currentTime);
+		e.setEndTime(nextHour);
+		
+		//TODO: Throw error since start time cannot be later than end time.
+		e.setStartTime(myLaterStartTime);
 	}
 
 	/**
@@ -106,7 +216,24 @@ public class EventTest {
 	 */
 	@Test
 	public final void testSetEndTime() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		LocalTime currentTime = LocalTime.now();
+		LocalTime nextHour = currentTime.plusHours(1);
+		
+		e.setEndTime(currentTime);
+		assertEquals("Event end time set", currentTime, e.getEndTime());
+		e.setEndTime(nextHour);
+		assertEquals("Event end time set", nextHour, e.getEndTime());
+		
+		//End time cannot be sooner than start time
+		LocalTime mySoonerEndTime = nextHour.minusHours(365);
+		
+		e.setStartTime(currentTime);
+		e.setEndTime(nextHour);
+		
+		//TODO: Throw error since end time cannot be sooner than start time.
+		e.setEndTime(mySoonerEndTime);
 	}
 
 	/**
@@ -114,7 +241,12 @@ public class EventTest {
 	 */
 	@Test
 	public final void testSetPic() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		e.setPic("/path/to/pic");
+		assertEquals("Event picture was set accordingly", "/path/to/pic", e.getPic());
+		e.setPic("new/path/to/pic");
+		assertEquals("Event picture was set accordingly", "new/path/to/pic", e.getPic());
 	}
 
 	/**
@@ -122,7 +254,16 @@ public class EventTest {
 	 */
 	@Test
 	public final void testGetTitle() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		e.setTitle("myEvent");
+		assertEquals("Event title was set accordingly", "myEvent", e.getTitle());
+		e.setTitle("  MyT4#VEn6T");
+		assertEquals("Event title was set accordingly", "  MyT4#VEn6T", e.getTitle());
+		
+		//TODO: Should not be allowed.
+		//e.setTitle("\n\n\n\n\n\n\n\n\nTTTT!$#%");
+		//assertEquals("Event title was set accordingly", "\n\n\n\n\n\n\n\n\nTTTT!$#%", e.getTitle());
 	}
 
 	/**
@@ -130,7 +271,13 @@ public class EventTest {
 	 */
 	@Test
 	public final void testGetDescription() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		e.setDescription("My own description");
+		assertEquals("Event description was set accordingly", "My own description", e.getDescription());
+		e.setDescription("    Descriptions contains newlines and spaces ! Desscription \n Test");
+		assertEquals("Event description was set accordingly", 
+				"    Descriptions contains newlines and spaces ! Desscription \n Test", e.getDescription());
 	}
 
 	/**
@@ -138,7 +285,24 @@ public class EventTest {
 	 */
 	@Test
 	public final void testGetStartDate() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		LocalDate currentDate = LocalDate.now();
+		LocalDate tomorrow = currentDate.plusDays(1);
+		
+		e.setStartDate(currentDate);
+		assertEquals("Event start date set", currentDate, e.getStartDate());
+		e.setStartDate(tomorrow);
+		assertEquals("Event start date set", tomorrow, e.getStartDate());
+		
+		//Start date cannot be after the end date
+		LocalDate myLaterStartDate = tomorrow.plusDays(365);
+		
+		e.setStartDate(currentDate);
+		e.setEndDate(tomorrow);
+		
+		//TODO: Throw error since start date cannot be later than end date.
+		e.setStartDate(myLaterStartDate);
 	}
 
 	/**
@@ -146,7 +310,24 @@ public class EventTest {
 	 */
 	@Test
 	public final void testGetEndDate() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		LocalDate currentDate = LocalDate.now();
+		LocalDate tomorrow = currentDate.plusDays(1);
+		
+		e.setEndDate(currentDate);
+		assertEquals("Event end date set", currentDate, e.getEndDate());
+		e.setEndDate(tomorrow);
+		assertEquals("Event end date set", tomorrow, e.getEndDate());
+		
+		//Start date cannot be after the end date
+		LocalDate mySoonerEndDate = tomorrow.minusDays(365);
+		
+		e.setStartDate(currentDate);
+		e.setEndDate(tomorrow);
+		
+		//TODO: Throw error since end date cannot be sooner than start date.
+		e.setEndDate(mySoonerEndDate);
 	}
 
 	/**
@@ -154,7 +335,24 @@ public class EventTest {
 	 */
 	@Test
 	public final void testGetStartTime() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		LocalTime currentTime = LocalTime.now();
+		LocalTime nextHour = currentTime.plusHours(1);
+		
+		e.setStartTime(currentTime);
+		assertEquals("Event start time set", currentTime, e.getStartTime());
+		e.setStartTime(nextHour);
+		assertEquals("Event start time set", nextHour, e.getStartTime());
+		
+		//Start time cannot be after the end time
+		LocalTime myLaterStartTime = nextHour.plusHours(365);
+		
+		e.setStartTime(currentTime);
+		e.setEndTime(nextHour);
+		
+		//TODO: Throw error since start time cannot be later than end time.
+		e.setStartTime(myLaterStartTime);
 	}
 
 	/**
@@ -162,7 +360,24 @@ public class EventTest {
 	 */
 	@Test
 	public final void testGetEndTime() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		LocalTime currentTime = LocalTime.now();
+		LocalTime nextHour = currentTime.plusHours(1);
+		
+		e.setEndTime(currentTime);
+		assertEquals("Event end time set", currentTime, e.getEndTime());
+		e.setEndTime(nextHour);
+		assertEquals("Event end time set", nextHour, e.getEndTime());
+		
+		//End time cannot be sooner than start time
+		LocalTime mySoonerEndTime = nextHour.minusHours(365);
+		
+		e.setStartTime(currentTime);
+		e.setEndTime(nextHour);
+		
+		//TODO: Throw error since end time cannot be sooner than start time.
+		e.setEndTime(mySoonerEndTime);
 	}
 
 	/**
@@ -170,7 +385,12 @@ public class EventTest {
 	 */
 	@Test
 	public final void testGetPic() {
-		fail("Not yet implemented"); // TODO
+		Event e = new Event();
+		
+		e.setPic("/path/to/pic");
+		assertEquals("Event picture was set accordingly", "/path/to/pic", e.getPic());
+		e.setPic("new/path/to/pic");
+		assertEquals("Event picture was set accordingly", "new/path/to/pic", e.getPic());
 	}
 
 	/**
@@ -178,7 +398,7 @@ public class EventTest {
 	 */
 	@Test
 	public final void testToString() {
-		fail("Not yet implemented"); // TODO
+		//TODO: Timelines toString is yet to be implemented.
 	}
 
 }

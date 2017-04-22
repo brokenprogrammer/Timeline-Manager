@@ -172,7 +172,7 @@ public class TimelineTest {
 		t.setStartTime(nextHour);
 		assertEquals("Timelines start time set", nextHour, t.getStartTime());
 		
-		//Start date cannot be after the end date
+		//Start time cannot be after the end time
 		LocalTime myLaterStartTime = nextHour.plusHours(365);
 		
 		t.setStartTime(currentTime);
@@ -203,7 +203,7 @@ public class TimelineTest {
 		t.setStartTime(currentTime);
 		t.setEndTime(nextHour);
 		
-		//TODO: Throw error since end date cannot be sooner than start date.
+		//TODO: Throw error since end time cannot be sooner than start time.
 		t.setEndTime(mySoonerEndTime);
 	}
 
