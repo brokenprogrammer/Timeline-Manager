@@ -78,6 +78,8 @@ public class Timeline extends StackPane{
 		description = des ;
 		startDate = inStartDate ;
 		endDate = inEndDate ;
+		startTime = inStartTime;
+		endTime = inEndTime;
 		span = inSpan ;
 		setTimelineView();
 	}

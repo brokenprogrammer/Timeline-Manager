@@ -33,50 +33,6 @@ public class TimelineTest {
 	}
 
 	/**
-	 * Test method for {@link com.timelinemanager.Entity.Timeline#Timeline(java.lang.String, java.lang.String, java.lang.String, java.time.LocalDate, java.time.LocalDate, java.time.LocalTime, java.time.LocalTime)}.
-	 */
-	@Test
-	public final void testTimelineStringStringStringLocalDateLocalDateLocalTimeLocalTime() {
-		LocalDate currentDate = LocalDate.now();
-		LocalDate tomorrow = currentDate.plusDays(1);
-		LocalTime currentTime = LocalTime.now();
-		LocalTime nextHour = currentTime.plusHours(1);
-		
-		Timeline t = new Timeline("Title", "Description", "/path/to/picture", currentDate, tomorrow,
-				currentTime, nextHour, 5);
-		
-		assertEquals("Timelines title was set accordingly", "Title", t.getTitle());
-		assertEquals("Timelines description was set accordingly", "Description", t.getDescription());
-		assertEquals("Timelines image path was set accordingly", "/path/to/picture", t.getPic());
-		assertEquals("Timelines start date was set accordingly", currentDate, t.getStartDate());
-		assertEquals("Timelines end date was set accordingly", tomorrow, t.getEndDate());
-		assertEquals("Timelines start time was set accordingly", currentTime, t.getStartTime());
-		assertEquals("Timelines end time was set accordingly", nextHour, t.getEndTime());
-	}
-
-	/**
-	 * Test method for {@link com.timelinemanager.Entity.Timeline#Timeline(java.lang.String, java.lang.String, java.time.LocalDate, java.time.LocalDate, java.time.LocalTime, java.time.LocalTime)}.
-	 */
-	@Test
-	public final void testTimelineStringStringLocalDateLocalDateLocalTimeLocalTime() {
-		LocalDate currentDate = LocalDate.now();
-		LocalDate tomorrow = currentDate.plusDays(1);
-		LocalTime currentTime = LocalTime.now();
-		LocalTime nextHour = currentTime.plusHours(1);
-		
-		Timeline t = new Timeline("Title", "Description", currentDate, tomorrow,
-				currentTime, nextHour, 14);
-		
-		assertEquals("Timelines title was set accordingly", "Title", t.getTitle());
-		assertEquals("Timelines description was set accordingly", "Description", t.getDescription());
-		assertEquals("Timelines image path was set accordingly", null, t.getPic());
-		assertEquals("Timelines start date was set accordingly", currentDate, t.getStartDate());
-		assertEquals("Timelines end date was set accordingly", tomorrow, t.getEndDate());
-		assertEquals("Timelines start time was set accordingly", currentTime, t.getStartTime());
-		assertEquals("Timelines end time was set accordingly", nextHour, t.getEndTime());
-	}
-
-	/**
 	 * Test method for {@link com.timelinemanager.Entity.Timeline#setTitle(java.lang.String)}.
 	 */
 	@Test
