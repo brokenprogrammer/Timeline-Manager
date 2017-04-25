@@ -43,7 +43,7 @@ public class TimelineTest {
 		LocalTime nextHour = currentTime.plusHours(1);
 		
 		Timeline t = new Timeline("Title", "Description", "/path/to/picture", currentDate, tomorrow,
-				currentTime, nextHour);
+				currentTime, nextHour, 5);
 		
 		assertEquals("Timelines title was set accordingly", "Title", t.getTitle());
 		assertEquals("Timelines description was set accordingly", "Description", t.getDescription());
@@ -65,7 +65,7 @@ public class TimelineTest {
 		LocalTime nextHour = currentTime.plusHours(1);
 		
 		Timeline t = new Timeline("Title", "Description", currentDate, tomorrow,
-				currentTime, nextHour);
+				currentTime, nextHour, 14);
 		
 		assertEquals("Timelines title was set accordingly", "Title", t.getTitle());
 		assertEquals("Timelines description was set accordingly", "Description", t.getDescription());

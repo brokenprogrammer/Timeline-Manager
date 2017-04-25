@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.TimelineController">
    <children>
       <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="51.0" prefWidth="600.0" AnchorPane.bottomAnchor="349.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -54,6 +54,6 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane id="timeline_anchorpane_container" layoutX="-2.0" layoutY="44.0" opacity="0.07" prefHeight="310.0" prefWidth="607.0" style="-fx-background-color: grey;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0" />
+      <AnchorPane fx:id="timeline_anchorpane_container" layoutX="-2.0" layoutY="44.0" prefHeight="310.0" prefWidth="607.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="50.0" />
    </children>
 </AnchorPane>
