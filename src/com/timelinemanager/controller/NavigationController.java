@@ -177,6 +177,38 @@ public class NavigationController {
 	}
 	
 	/**
+	 * Get the local start time for the timeline.
+	 * @return local start time for timeline
+	 */
+	public static LocalTime getStartTime(){
+		return startTime.getLocalTime();
+	}
+	
+	/**
+	 * Get the local end time for the timeline.
+	 * @return local end time for timeline
+	 */
+	public static LocalTime getEndTime(){
+		return endTime.getLocalTime();
+	}
+	
+	/**
+	 * Get the local start time for the event.
+	 * @return local start time for event
+	 */
+	public static LocalTime getEventStartTime(){
+		return eventStartTime.getLocalTime();
+	}
+	
+	/**
+	 * Get the local end time for the event.
+	 * @return local end time for event
+	 */
+	public static LocalTime getEventEndTime(){
+		return eventEndTime.getLocalTime();
+	}
+	
+	/**
 	 * Initializes the TimelineModel which this class will get data from when a
 	 * new timeline is created or updated.
 	 * 
