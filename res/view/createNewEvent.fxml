@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="newEvent_anchorPane" prefHeight="407.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.CreateEventController">
+   <children>
+      <DatePicker fx:id="datePicker_eventStartDate" layoutX="81.0" layoutY="289.0" promptText="Select start date" />
+      <DatePicker fx:id="datePicker_eventEndDate" layoutX="345.0" layoutY="295.0" promptText="Select end date" />
+      <Button fx:id="createEventButton" layoutX="406.0" layoutY="345.0" mnemonicParsing="false" text="Create" />
+      <Button fx:id="cancelCreateEvent" layoutX="466.0" layoutY="345.0" mnemonicParsing="false" text="Cancel" />
+      <TextArea fx:id="eventDescription" layoutX="81.0" layoutY="99.0" prefHeight="128.0" prefWidth="234.0" promptText="Insert description" />
+      <TextField fx:id="eventTitle" layoutX="81.0" layoutY="51.0" prefHeight="25.0" prefWidth="437.0" promptText="Insert title" />
+      <ImageView fx:id="eventImage" accessibleText="Click to add image to event" fitHeight="128.0" fitWidth="189.0" layoutX="332.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="addImageLabel" layoutX="375.0" layoutY="158.0" text="Click to add picture" textAlignment="CENTER" />
+   </children>
+</AnchorPane>
