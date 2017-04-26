@@ -51,8 +51,7 @@ public class CreateTimelineController {
 	@FXML
 	public void initialize() {
 
-		// ActionEvent for the create button inside the "Create new timeline"
-		// window
+		// ActionEvent for the create button inside the "Create new timeline" window
 		createTimelineButton.setOnMouseClicked(createTimelineEvent -> {
 
 			// Populate timeline object with data
@@ -64,20 +63,18 @@ public class CreateTimelineController {
 			((Node) (createTimelineEvent.getSource())).getScene().getWindow().hide();
 		});
 
-		// ActionEvent for the cancel button inside the "Create new timeline"
-		// window
+		// ActionEvent for the cancel button inside the "Create new timeline" window
 		//Opens a pop-up window asking for exit confirmation
 		cancelCreateTimeline.setOnAction(cancelEvent -> {
 			
 			Alert closeConfirmation = new Alert(
-	                	Alert.AlertType.CONFIRMATION,
-	                	"Are you sure you want to cancel creating a timeline?"
-	        	);
+	                			Alert.AlertType.CONFIRMATION,
+	                			"Are you sure you want to cancel creating a timeline?");
 	        	cancelCreateTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(
-	                	ButtonType.OK
-	       		);
+	                			ButtonType.OK);
 	        	closeConfirmation.setHeaderText("Confirm Exit");
 	        	closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			
 	        	Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 	        	if (!ButtonType.OK.equals(closeResponse.get())) {
 	        		cancelEvent.consume();
