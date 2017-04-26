@@ -105,22 +105,20 @@ public class CreateEventController {
 		cancelCreateEvent.setOnAction(cancelEvent -> {
 			
 			Alert closeConfirmation = new Alert(
-	                Alert.AlertType.CONFIRMATION,
-	                "Are you sure you want to cancel creating an event?"
-	        );
+	                			Alert.AlertType.CONFIRMATION,
+	                			"Are you sure you want to cancel creating an event?");
 			cancelCreateEvent = (Button) closeConfirmation.getDialogPane().lookupButton(
-	                ButtonType.OK
-	        );
-	        closeConfirmation.setHeaderText("Confirm Exit");
-	        closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-	        Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
-	        if (!ButtonType.OK.equals(closeResponse.get())) {
-	        	cancelEvent.consume();
-	        }
-	        else
-	        {
-	        	((Node)(cancelEvent.getSource())).getScene().getWindow().hide();
-	        }
+	                			ButtonType.OK);
+	        	closeConfirmation.setHeaderText("Confirm Exit");
+	        	closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+	        	Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+	        	if (!ButtonType.OK.equals(closeResponse.get())) {
+	        		cancelEvent.consume();
+	        	}
+	        	else
+	        	{	
+	        		((Node)(cancelEvent.getSource())).getScene().getWindow().hide();
+	        	}
 		});
 	}
 
