@@ -37,8 +37,8 @@ public class BoxLink extends GridPane {
 
 		numberBoxGroup = new NumberBox[span];
 
-		arr = new ArrayList<Integer>(bigArr.subList(pos, pos + span));
-
+		arr = new ArrayList<Integer>(bigArr.subList(pos, pos + span  ));
+		
 		for (int i = 0; i < numberBoxGroup.length; i++) {
 			numberBoxGroup[i] = new NumberBox(arr.get(i));
 			this.add(numberBoxGroup[i], i, 0);

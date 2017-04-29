@@ -32,10 +32,7 @@ public class Timeline extends StackPane{
 	public Slider timelineSlider;
 	
 	
-	/**
-	 * Create an empty timeline
-	 */
-	public Timeline(){
+public Timeline(){
 		
 	}
 	
@@ -51,7 +48,7 @@ public class Timeline extends StackPane{
 	 * @param inEndTime timeline end time
 	 * @param inspan the length of timeline to be shown on the screen
 	 */
-	public Timeline (String ti , String des , String pic, LocalDate inStartDate , LocalDate inEndDate, LocalTime inStartTime , LocalTime inEndTime ,int inSpan){
+	public Timeline (String ti , String des , String pic, LocalDate inStartDate , LocalDate inEndDate, LocalTime inStartTime , LocalTime inEndTime){
 		title = ti;
 		description = des ;
 		startDate = inStartDate ;
@@ -59,7 +56,6 @@ public class Timeline extends StackPane{
 		startTime = inStartTime ;
 		endTime = inEndTime ;
 		picture = pic ;
-		span = inSpan ;
 		setTimelineView();
 	}
 	
@@ -73,14 +69,13 @@ public class Timeline extends StackPane{
 	 * @param inStartTime timeline start time
 	 * @param inEndTime timeline end time
 	 */
-	public Timeline (String ti , String des , LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime , int inSpan){
+	public Timeline (String ti , String des , LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime ){
 		title = ti;
 		description = des ;
 		startDate = inStartDate ;
 		endDate = inEndDate ;
 		startTime = inStartTime;
 		endTime = inEndTime;
-		span = inSpan ;
 		setTimelineView();
 	}
 	
@@ -217,7 +212,7 @@ public class Timeline extends StackPane{
 	 * @return The number of days
 	 */
 	public long getDaysLength(){
-		return ChronoUnit.DAYS.between(startDate, endDate) ;
+		return ChronoUnit.DAYS.between(startDate, endDate) + 1 ; 
 	}
 	
 	/**
@@ -225,7 +220,7 @@ public class Timeline extends StackPane{
 	 * @return The number of months
 	 */
 	public long getMonthsLength(){
-		return ChronoUnit.MONTHS.between(startDate, endDate) ;
+		return ChronoUnit.MONTHS.between(startDate, endDate) +1 ;
 	}
 	
 	/**
@@ -233,7 +228,7 @@ public class Timeline extends StackPane{
 	 * @return The number of years
 	 */
 	public long getYearsLength(){
-		return ChronoUnit.YEARS.between(startDate, endDate) ;
+		return ChronoUnit.YEARS.between(startDate, endDate) +1 ;
 	}
 	
 	@Override
@@ -245,31 +240,45 @@ public class Timeline extends StackPane{
 	 * Create a timeline view with the scroll controller and timeline chain.
 	 */
 	public void setTimelineView() {
+		System.out.println(this.getDaysLength()); 
+		System.out.println(this.getMonthsLength()); 		
+		System.out.println(this.getYearsLength()); 
+		
+		if (this.getDaysLength() < 14){
+			span = (int) this.getDaysLength()   ;
+		}
+		
+		else{
+			span = 14 ;
+		}
+		
 		this.setMinSize(300, 300);
 
-		long diffDays = ChronoUnit.DAYS.between(startDate, endDate);
+		long diffDays = getDaysLength() -1 ;
 
 		while (startDate.compareTo(endDate) < 1) {
 			bigArr.add(startDate.getDayOfMonth());
 			startDate = startDate.plusDays(1);
 		}
-
+		
+		timelineGrid = new BoxLink(0, span, bigArr);
+		StackPane.setAlignment(timelineGrid, Pos.CENTER);
+		this.getChildren().add(timelineGrid);
+		
+		if (diffDays >= 14){
 		timelineSlider = new Slider();
 		timelineSlider.setMin(0);
 		timelineSlider.setMax(diffDays - span + 1);
 		timelineSlider.setMaxWidth(1000);
 
-		timelineGrid = new BoxLink(0, span, bigArr);
-		StackPane.setAlignment(timelineGrid, Pos.CENTER);
 
 		timelineSlider.valueProperty().addListener(
 				property -> timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, bigArr));
-
-		this.getChildren().add(timelineGrid);
-
-		StackPane.setAlignment(timelineSlider, Pos.BOTTOM_CENTER);
-
 		this.getChildren().add(timelineSlider);
 
+
+		StackPane.setAlignment(timelineSlider, Pos.BOTTOM_CENTER);
+		}
+		
 	}
 }
