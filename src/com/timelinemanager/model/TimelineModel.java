@@ -1,11 +1,16 @@
 package com.timelinemanager.model;
 
+import java.util.List;
+
+import com.timelinemanager.Entity.Event;
 import com.timelinemanager.Entity.Timeline;
 import com.timelinemanager.io.FileManager;
 import com.timelinemanager.io.TimelineConverter;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Timeline model that allows the application to share timeline data across the
@@ -17,6 +22,7 @@ import javafx.beans.property.SimpleObjectProperty;
  */
 public class TimelineModel {
 	private ObjectProperty<Timeline> activeTimeline = new SimpleObjectProperty<>();
+	private final ObservableList<Event> activeTimelineEvents = FXCollections.observableArrayList();
 
 	private final String savePath = "";
 
@@ -36,6 +42,27 @@ public class TimelineModel {
 	 */
 	public void setTimeline(Timeline t) {
 		this.activeTimeline.set(t);
+	}
+	
+	/**
+	 * Gets the observable list of events within the currently active
+	 * Timeline. 
+	 * 
+	 * @return The observable list of events.
+	 */
+	public ObservableList<Event> getEvents() {
+		return this.activeTimelineEvents;
+	}
+	
+	/**
+	 * Sets the events of the active Timeline.
+	 * 
+	 * @param events - List of Events to set.
+	 */
+	public void setEvents(List<Event> events) {
+		this.activeTimelineEvents.clear();
+		
+		this.activeTimelineEvents.addAll(events);
 	}
 
 	/**
