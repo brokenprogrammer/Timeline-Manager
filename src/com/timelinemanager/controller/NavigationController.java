@@ -190,6 +190,7 @@ public class NavigationController {
 					if(fxmlLoader.getController().getClass() == CreateEventController.class) {
 						CreateEventController n = (CreateEventController) fxmlLoader.getController();
 						n.initTimelineModel(this.timelineModel);
+						n.initTimePickers(eventStartTime, eventEndTime);
 					}
 				}
 				

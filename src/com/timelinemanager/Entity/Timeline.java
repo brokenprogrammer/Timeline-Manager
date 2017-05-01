@@ -214,7 +214,7 @@ public class Timeline extends StackPane{
 	 * @return The number of days
 	 */
 	public long getDaysLength(){
-		return ChronoUnit.DAYS.between(startDate, endDate) + 1 ; 
+		return ChronoUnit.DAYS.between(startDate, endDate) + 1; 
 	}
 	
 	/**
@@ -222,7 +222,7 @@ public class Timeline extends StackPane{
 	 * @return The number of months
 	 */
 	public long getMonthsLength(){
-		return ChronoUnit.MONTHS.between(startDate, endDate) +1 ;
+		return ChronoUnit.MONTHS.between(startDate, endDate) + 1;
 	}
 	
 	/**
@@ -230,7 +230,7 @@ public class Timeline extends StackPane{
 	 * @return The number of years
 	 */
 	public long getYearsLength(){
-		return ChronoUnit.YEARS.between(startDate, endDate) +1 ;
+		return ChronoUnit.YEARS.between(startDate, endDate) + 1;
 	}
 	
 	@Override
@@ -265,18 +265,18 @@ public class Timeline extends StackPane{
 		this.getChildren().add(timelineGrid);
 		
 		if (diffDays >= 14){
-		timelineSlider = new Slider();
-		timelineSlider.setMin(0);
-		timelineSlider.setMax(diffDays - span + 1);
-		timelineSlider.setMaxWidth(1000);
-
-
-		timelineSlider.valueProperty().addListener(
-				property -> timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, bigArr));
-		this.getChildren().add(timelineSlider);
-
-
-		StackPane.setAlignment(timelineSlider, Pos.BOTTOM_CENTER);
+			timelineSlider = new Slider();
+			timelineSlider.setMin(0);
+			timelineSlider.setMax(diffDays - span + 1);
+			timelineSlider.setMaxWidth(1000);
+	
+	
+			timelineSlider.valueProperty().addListener(
+					property -> timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, bigArr));
+			this.getChildren().add(timelineSlider);
+	
+	
+			StackPane.setAlignment(timelineSlider, Pos.BOTTOM_CENTER);
 		}
 		
 	}

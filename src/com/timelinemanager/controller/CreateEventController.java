@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 
+import com.timelinemanager.Entity.Event;
 import com.timelinemanager.Entity.Timeline;
 import com.timelinemanager.model.TimelineModel;
 
@@ -22,6 +23,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
+import jfxtras.scene.control.LocalTimePicker;
 
 /**
  * 
@@ -54,6 +56,9 @@ public class CreateEventController {
 	@FXML
 	private Label addImageLabel;
 
+	private LocalTimePicker eventStartTime;
+	private LocalTimePicker eventEndTime;
+	
 	//private static Event newEvent = new Event();
 	private TimelineModel timelineModel;
 
@@ -65,13 +70,17 @@ public class CreateEventController {
 		createEventButton.setOnMouseClicked(createEvent -> {
 
 			// Populate event object with data
-//			newEvent.setTitle(eventTitle.getText());
-//			newEvent.setDescription(eventDescription.getText());
-//			newEvent.setStartTime(NavigationController.getEventStartTime());
-//			newEvent.setEndTime(NavigationController.getEventEndTime());
-//			newEvent.setStartDate(datePicker_eventStartDate.getValue());
-//			newEvent.setEndDate(datePicker_eventEndDate.getValue());
-
+			Event newEvent = new Event();
+			newEvent.setTitle(eventTitle.getText());
+			newEvent.setDescription(eventDescription.getText());
+			newEvent.setStartTime(eventStartTime.getLocalTime());
+			newEvent.setEndTime(eventEndTime.getLocalTime());
+			newEvent.setStartDate(datePicker_eventStartDate.getValue());
+			newEvent.setEndDate(datePicker_eventEndDate.getValue());
+			
+			this.timelineModel.getEvents().add(newEvent);
+			
+			((Node) (createEvent.getSource())).getScene().getWindow().hide();
 		});
 
 		// ActionEvent for the add image label inside the "Create new event"
@@ -140,5 +149,16 @@ public class CreateEventController {
 		timelineModel.getTimeline().addListener((ChangeListener<Timeline>) (observable, oldValue, newValue) -> {
 
 		});
+	}
+	
+	/**
+	 * Initializing Third-party time picker objects.
+	 * 
+	 * @param eventStartTime - UI object to control event start time.
+	 * @param eventEndTime - UI object to control event end time.
+	 */
+	public void initTimePickers(LocalTimePicker eventStartTime, LocalTimePicker eventEndTime) {
+		this.eventStartTime = eventStartTime;
+		this.eventEndTime = eventStartTime;
 	}
 }
