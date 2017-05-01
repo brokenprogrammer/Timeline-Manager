@@ -57,7 +57,7 @@ public class CreateTimelineController {
 			// Populate timeline object with data
 			newTimeline = new Timeline(timelineTitle.getText(), 
 					timelineDescription.getText(), datePicker_startDate.getValue(), 
-					datePicker_endDate.getValue(), LocalTime.now(), LocalTime.now().plusHours(1), 14);
+					datePicker_endDate.getValue(), LocalTime.now(), LocalTime.now().plusHours(1));
 			
 			this.timelineModel.setTimeline(newTimeline);
 			((Node) (createTimelineEvent.getSource())).getScene().getWindow().hide();
