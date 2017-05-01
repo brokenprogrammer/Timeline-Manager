@@ -61,19 +61,19 @@ public class TimelineController {
 		timelineModel.getTimeline().addListener((ChangeListener<Timeline>) (observable, oldValue, newValue) -> {
 			timeline_anchorpane_container.getChildren().add(timelineModel.getTimeline().getValue());
 		});
-		
-		//Code for when the events of a timeline was changed.
+
+		// Code for when the events of a timeline was changed.
 		timelineModel.getEvents().addListener(new ListChangeListener<Event>() {
 			@Override
 			public void onChanged(ListChangeListener.Change<? extends Event> c) {
 				while (c.next()) {
-					//TODO: Change content of currently active timeline here.. 
-					//	For example: remove events that was removed and add those who
-					//		were added.
+					// TODO: Change content of currently active timeline here..
+					// For example: remove events that was removed and add those
+					// who were added.
 					System.out.println("Was added? " + c.wasAdded());
-			        System.out.println("Was removed? " + c.wasRemoved());
-			        System.out.println("Was replaced? " + c.wasReplaced());
-			        System.out.println("Was permutated? " + c.wasPermutated());
+					System.out.println("Was removed? " + c.wasRemoved());
+					System.out.println("Was replaced? " + c.wasReplaced());
+					System.out.println("Was permutated? " + c.wasPermutated());
 				}
 			}
 		});
