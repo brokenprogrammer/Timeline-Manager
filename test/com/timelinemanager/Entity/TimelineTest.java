@@ -369,11 +369,11 @@ public class TimelineTest {
 		t.setStartDate(LocalDate.now());
 		t.setEndDate(LocalDate.now().plusDays(1));
 		
-		assertEquals("Timeline is counting days between", 1, t.getDaysLength());
+		assertEquals("Timeline is counting days between", 2, t.getDaysLength());
 		t.setEndDate(LocalDate.now().plusDays(400));
-		assertEquals("Timeline is counting days between", 400, t.getDaysLength());
+		assertEquals("Timeline is counting days between", 401, t.getDaysLength());
 		t.setEndDate(LocalDate.now().plusDays(2500));
-		assertEquals("Timeline is counting days between", 2500, t.getDaysLength());
+		assertEquals("Timeline is counting days between", 2501, t.getDaysLength());
 	}
 
 	/**
@@ -385,11 +385,11 @@ public class TimelineTest {
 		t.setStartDate(LocalDate.now());
 		t.setEndDate(LocalDate.now().plusMonths(1));
 		
-		assertEquals("Timeline is counting months between", 1, t.getMonthsLength());
+		assertEquals("Timeline is counting months between", 2, t.getMonthsLength());
 		t.setEndDate(LocalDate.now().plusMonths(12));
-		assertEquals("Timeline is counting months between", 12, t.getMonthsLength());
+		assertEquals("Timeline is counting months between", 13, t.getMonthsLength());
 		t.setEndDate(LocalDate.now().plusMonths(200));
-		assertEquals("Timeline is counting months between", 200, t.getMonthsLength());
+		assertEquals("Timeline is counting months between", 201, t.getMonthsLength());
 	}
 
 	/**
@@ -401,11 +401,11 @@ public class TimelineTest {
 		t.setStartDate(LocalDate.now());
 		t.setEndDate(LocalDate.now().plusYears(1));
 		
-		assertEquals("Timeline is counting years between", 1, t.getYearsLength());
+		assertEquals("Timeline is counting years between", 2, t.getYearsLength());
 		t.setEndDate(LocalDate.now().plusYears(12));
-		assertEquals("Timeline is counting years between", 12, t.getYearsLength());
+		assertEquals("Timeline is counting years between", 13, t.getYearsLength());
 		t.setEndDate(LocalDate.now().plusYears(200));
-		assertEquals("Timeline is counting years between", 200, t.getYearsLength());
+		assertEquals("Timeline is counting years between", 201, t.getYearsLength());
 	}
 
 	/**
