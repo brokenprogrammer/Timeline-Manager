@@ -45,7 +45,7 @@ public class CreateTimelineController {
 	@FXML
 	private TextField timelineTitle;
 
-	private static Timeline newTimeline;
+	protected static Timeline newTimeline;
 	private TimelineModel timelineModel;
 
 	@FXML
