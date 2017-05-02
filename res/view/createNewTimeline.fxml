@@ -6,8 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane fx:id="anchorPane" prefHeight="407.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="newTimeline_anchorPane" prefHeight="407.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.CreateTimelineController">
    <children>
       <DatePicker fx:id="datePicker_startDate" layoutX="81.0" layoutY="279.0" promptText="Select start date and time" />
       <DatePicker fx:id="datePicker_endDate" layoutX="344.0" layoutY="279.0" promptText="Select end date and time" />
