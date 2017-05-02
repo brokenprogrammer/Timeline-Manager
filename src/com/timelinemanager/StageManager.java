@@ -50,7 +50,7 @@ public class StageManager {
 		rootLayout.setCenter(timelineLayout);
 		
 		Scene mainScene = new Scene(rootLayout);
-		
+		mainStage.setOnCloseRequest(onExitCloseEverything -> System.exit(0));
 		mainStage.setScene(mainScene);
 		mainStage.setMinWidth(800);
 		mainStage.setMinHeight(600);
