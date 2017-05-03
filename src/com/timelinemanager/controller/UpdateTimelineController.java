@@ -1,6 +1,5 @@
 package com.timelinemanager.controller;
 
-import java.time.LocalTime;
 import java.util.Optional;
 
 import com.timelinemanager.Entity.Timeline;
@@ -23,65 +22,57 @@ import javafx.stage.Modality;
  * 
  * @author
  * @version 0.00.00
- * @name CreateTimelineController.java
+ * @name UpdateTimelineController.java
  */
-public class CreateTimelineController {
+public class UpdateTimelineController {
 
 	/*
-	 * Elements from the "Create new timeline" window
+	 * Elements and user input variables from the "Update timeline" window
 	 */
 	@FXML
-	private AnchorPane newTimeline_anchorPane;
+	private AnchorPane updateNewTimeline_anchorPane;
 	@FXML
-	private DatePicker datePicker_startDate;
+	private DatePicker updateDatePicker_startDate;
 	@FXML
-	private DatePicker datePicker_endDate;
+	private DatePicker updateDatePicker_endDate;
 	@FXML
-	private Button createTimelineButton;
+	private Button updateEditTimelineButton;
 	@FXML
-	private Button cancelCreateTimeline;
+	private Button updateCancelEditTimeline;
 	@FXML
-	private TextArea timelineDescription;
+	private TextArea updateTimelineDescription;
 	@FXML
-	private TextField timelineTitle;
+	private TextField updateTimelineTitle;
 
-	private Timeline newTimeline;
+	private Timeline updatedTimeline;
 	private TimelineModel timelineModel;
 
 	@FXML
 	public void initialize() {
-
-		// ActionEvent for the create button inside the "Create new timeline" window
-		createTimelineButton.setOnMouseClicked(createTimelineEvent -> {
-
-			// Populate timeline object with data
-			newTimeline = new Timeline(timelineTitle.getText(), 
-					timelineDescription.getText(), datePicker_startDate.getValue(), 
-					datePicker_endDate.getValue(), LocalTime.now(), LocalTime.now().plusHours(1));
-			
-			this.timelineModel.setTimeline(newTimeline);
-			((Node) (createTimelineEvent.getSource())).getScene().getWindow().hide();
+		
+		//Action event for the Update Timeline button.
+		//Opens a new window with the data from the current timeline which can be modified and saved.
+		updateEditTimelineButton.setOnAction(ev -> {
+			this.timelineModel.setTimeline(updatedTimeline);
+			((Node) (ev.getSource())).getScene().getWindow().hide();
 		});
-
-		// ActionEvent for the cancel button inside the "Create new timeline" window
+		
+		//ActionEvent for the cancel button inside the Update current timeline window
 		//Opens a pop-up window asking for exit confirmation
-		cancelCreateTimeline.setOnAction(cancelEvent -> {
+		updateCancelEditTimeline.setOnAction(cancelEvent -> {
 			
-			Alert closeConfirmation = new Alert(
-	                			Alert.AlertType.CONFIRMATION,
-	                			"Are you sure you want to cancel creating a timeline?");
-	        	cancelCreateTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(
-	                			ButtonType.OK);
+			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
+	                			"Are you sure you want to cancel editing the timeline?");
+			updateCancelEditTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 	        	closeConfirmation.setHeaderText("Confirm Exit");
 	        	closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-			
 	        	Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 	        	if (!ButtonType.OK.equals(closeResponse.get())) {
-	        		cancelEvent.consume();
+	        		  cancelEvent.consume();
 	        	}
 	        	else
 	        		((Node)(cancelEvent.getSource())).getScene().getWindow().hide();
-		});
+			});
 	}
 
 	/**
@@ -97,10 +88,15 @@ public class CreateTimelineController {
 		}
 
 		this.timelineModel = timelineModel;
-
+		this.updatedTimeline = timelineModel.getTimeline().getValue();
+		updateTimelineTitle.setText(updatedTimeline.getTitle());
+		updateTimelineDescription.setText(updatedTimeline.getDescription());			
+		updateDatePicker_startDate.setValue(updatedTimeline.getStartDate());
+		updateDatePicker_endDate.setValue(updatedTimeline.getEndDate());
+		
 		// Code for when timeline was changed.
 		timelineModel.getTimeline().addListener((ChangeListener<Timeline>) (observable, oldValue, newValue) -> {
-
+			
 		});
 	}
 }

@@ -3,7 +3,9 @@ package com.timelinemanager.controller;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import java.io.IOException;
+import java.util.Optional;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 
 import com.timelinemanager.model.TimelineModel;
 
@@ -11,7 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -118,12 +122,6 @@ public class NavigationController {
 	// @FXML private Label addImageLabel;
 
 	/*
-	 * Time measuring elements for the timeline.
-	 */
-	private static LocalTimePicker startTime = new LocalTimePicker();
-	private static LocalTimePicker endTime = new LocalTimePicker();
-
-	/*
 	 * Time measuring elements for the event.
 	 */
 	private static LocalTimePicker eventStartTime = new LocalTimePicker();
@@ -157,15 +155,6 @@ public class NavigationController {
 				}
 					
 				Scene mainScene = new Scene(root);
-
-				((AnchorPane) root).getChildren().add(startTime);
-				startTime.setLayoutX(90);
-				startTime.setLayoutY(240);
-
-				((AnchorPane) root).getChildren().add(endTime);
-				endTime.setLayoutX(355);
-				endTime.setLayoutY(240);
-
 				Stage stage = new Stage();
 				stage.setHeight(500);
 				stage.setWidth(620);
@@ -181,6 +170,7 @@ public class NavigationController {
 		// ActionEvent for new event button.
 		// Opens new window which allows the user to create a new event.
 		menuItem_newEvent.setOnAction(newEventWindow -> {
+			
 			try {
 				FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/createNewEvent.fxml"));
 				Parent root = (Parent) fxmlLoader.load();
@@ -214,7 +204,48 @@ public class NavigationController {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
+		});
+		
+		// ActionEvent for update timeline button.
+		// Opens new window which allows the user to edit the currently active timeline.
+		menuItem_updateTimeline.setOnAction(updateTimeline -> {	
+			
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/updateTimeline.fxml"));
+				Parent root = (Parent) fxmlLoader.load();
 
+				//Initialize the same timeline model into every controller.
+				if(fxmlLoader.getController() != null) {
+					if(fxmlLoader.getController().getClass() == UpdateTimelineController.class) {
+						UpdateTimelineController n = (UpdateTimelineController) fxmlLoader.getController();
+						n.initTimelineModel(this.timelineModel);
+					}
+				}
+					
+				Scene mainScene = new Scene(root);
+				Stage stage = new Stage();
+				stage.setHeight(500);
+				stage.setWidth(620);
+				stage.setScene(mainScene);
+				stage.setTitle("Edit the currently active timeline");
+				stage.showAndWait();
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		// ActionEvent for remove timeline button.
+		// Opens an alert dialogue which allows the user to remove the currently active timeline.
+		menuItem_removeTimeline.setOnAction(removeTimeline -> {
+			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
+        			"Are you sure you want to remove the currently active timeline?");
+			closeConfirmation.setHeaderText("Confirm removal");
+			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			Optional<ButtonType> result = closeConfirmation.showAndWait();
+			if (result.get() == ButtonType.OK){
+				//insert what happens here
+			}
 		});
 
 		// ActionEvent for the exit button.

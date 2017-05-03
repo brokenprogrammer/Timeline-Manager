@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="updateNewTimeline_anchorPane" prefHeight="407.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.UpdateTimelineController">
+   <children>
+      <DatePicker fx:id="updateDatePicker_startDate" layoutX="81.0" layoutY="279.0" />
+      <DatePicker fx:id="updateDatePicker_endDate" layoutX="344.0" layoutY="279.0" />
+      <Button fx:id="updateEditTimelineButton" layoutX="406.0" layoutY="345.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="updateCancelEditTimeline" layoutX="466.0" layoutY="345.0" mnemonicParsing="false" text="Cancel" />
+      <TextArea fx:id="updateTimelineDescription" layoutX="81.0" layoutY="99.0" prefHeight="128.0" prefWidth="437.0" />
+      <TextField fx:id="updateTimelineTitle" layoutX="81.0" layoutY="51.0" prefHeight="25.0" prefWidth="437.0" />
+   </children>
+</AnchorPane>
