@@ -1,9 +1,6 @@
 package com.timelinemanager.Entity;
 
 import java.util.ArrayList;
-
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 
 /**
@@ -17,8 +14,6 @@ import javafx.scene.layout.GridPane;
 public class BoxLink extends GridPane {
 
 	private int pos;
-	private int span;
-	private ArrayList<Integer> bigArr;
 	private NumberBox[] numberBoxGroup;
 	private static ArrayList<Integer> arr = new ArrayList<Integer>();
 
@@ -30,11 +25,12 @@ public class BoxLink extends GridPane {
 	 * @param bigArr the numbers which are represented by the boxes
 	 */
 	public BoxLink(int pos, int span, ArrayList<Integer> bigArr) {
-		this.setAlignment(Pos.CENTER);
-		this.setPadding(new Insets(11.5, 12.5, 13.5, 14.4));
-		this.setHgap(5.5);
-		this.setVgap(5.5);
-
+		//this.setAlignment(Pos.CENTER);
+		//this.setPadding(new Insets(11.5, 12.5, 0, 14.4));
+		//this.setHgap(1);
+		
+		this.setGridLinesVisible(true);
+		
 		numberBoxGroup = new NumberBox[span];
 
 		arr = new ArrayList<Integer>(bigArr.subList(pos, pos + span  ));
@@ -53,9 +49,12 @@ public class BoxLink extends GridPane {
 	 * @param bigArr the numbers which are represented by the boxes
 	 */
 	public void setBoxLink(int start, int span, ArrayList<Integer> bigArr) {
+		
+		this.getChildren().clear();
+
+		this.setGridLinesVisible(true);
+
 		this.pos = start;
-		this.span = span;
-		this.bigArr = bigArr;
 		numberBoxGroup = new NumberBox[span];
 
 		arr = new ArrayList<Integer>(bigArr.subList(pos, pos + span));
