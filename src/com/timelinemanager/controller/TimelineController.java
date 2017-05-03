@@ -59,7 +59,10 @@ public class TimelineController {
 
 		// Code for when timeline was changed.
 		timelineModel.getTimeline().addListener((ChangeListener<Timeline>) (observable, oldValue, newValue) -> {
-			timeline_anchorpane_container.getChildren().add(timelineModel.getTimeline().getValue());
+			timeline_anchorpane_container.getChildren().clear();
+			if (timelineModel.getTimeline().getValue() != null) {
+				timeline_anchorpane_container.getChildren().add(timelineModel.getTimeline().getValue());
+			}
 		});
 
 		// Code for when the events of a timeline was changed.
