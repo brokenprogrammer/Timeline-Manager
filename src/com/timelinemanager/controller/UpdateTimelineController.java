@@ -44,22 +44,16 @@ public class UpdateTimelineController {
 	@FXML
 	private TextField updateTimelineTitle;
 
-	//private Timeline updatedTimeline;
+	private Timeline updatedTimeline;
 	private TimelineModel timelineModel;
 
 	@FXML
 	public void initialize() {
-	
-		//Populate current window with fields from the currently active timeline.
-		updateTimelineTitle.setText(this.timelineModel.getTimeline().getValue().getTitle());
-		updateTimelineDescription.setText(this.timelineModel.getTimeline().getValue().getDescription());			
-		updateDatePicker_startDate.setValue(this.timelineModel.getTimeline().getValue().getStartDate());
-		updateDatePicker_endDate.setValue(this.timelineModel.getTimeline().getValue().getEndDate());
 		
 		//Action event for the Update Timeline button.
 		//Opens a new window with the data from the current timeline which can be modified and saved.
 		updateEditTimelineButton.setOnAction(ev -> {
-			
+			this.timelineModel.setTimeline(updatedTimeline);
 			((Node) (ev.getSource())).getScene().getWindow().hide();
 		});
 		
@@ -94,6 +88,11 @@ public class UpdateTimelineController {
 		}
 
 		this.timelineModel = timelineModel;
+		this.updatedTimeline = timelineModel.getTimeline().getValue();
+		updateTimelineTitle.setText(updatedTimeline.getTitle());
+		updateTimelineDescription.setText(updatedTimeline.getDescription());			
+		updateDatePicker_startDate.setValue(updatedTimeline.getStartDate());
+		updateDatePicker_endDate.setValue(updatedTimeline.getEndDate());
 		
 		// Code for when timeline was changed.
 		timelineModel.getTimeline().addListener((ChangeListener<Timeline>) (observable, oldValue, newValue) -> {

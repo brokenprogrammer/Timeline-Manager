@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -119,12 +120,6 @@ public class NavigationController {
 	@FXML
 	private ImageView eventImage;
 	// @FXML private Label addImageLabel;
-
-	/*
-	 * Time measuring elements for the timeline.
-	 */
-	private static LocalTimePicker startTime = new LocalTimePicker();
-	private static LocalTimePicker endTime = new LocalTimePicker();
 
 	/*
 	 * Time measuring elements for the event.
