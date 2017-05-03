@@ -244,7 +244,7 @@ public class NavigationController {
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 			Optional<ButtonType> result = closeConfirmation.showAndWait();
 			if (result.get() == ButtonType.OK){
-				//insert what happens here
+				timelineModel.setTimeline(null);
 			}
 		});
 

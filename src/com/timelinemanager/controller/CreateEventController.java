@@ -78,7 +78,7 @@ public class CreateEventController {
 			newEvent.setStartDate(datePicker_eventStartDate.getValue());
 			newEvent.setEndDate(datePicker_eventEndDate.getValue());
 			
-			this.timelineModel.getEvents().add(newEvent);
+			this.timelineModel.getTimeline().getValue().addEvent(newEvent); 
 			
 			((Node) (createEvent.getSource())).getScene().getWindow().hide();
 		});
