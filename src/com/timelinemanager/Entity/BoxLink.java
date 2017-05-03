@@ -25,14 +25,8 @@ public class BoxLink extends GridPane {
 	 * @param bigArr the numbers which are represented by the boxes
 	 */
 	public BoxLink(int pos, int span, ArrayList<Integer> bigArr) {
-		//this.setAlignment(Pos.CENTER);
-		//this.setPadding(new Insets(11.5, 12.5, 0, 14.4));
-		//this.setHgap(1);
-		
-		this.setGridLinesVisible(true);
-		
+		this.setGridLinesVisible(true);	
 		numberBoxGroup = new NumberBox[span];
-
 		arr = new ArrayList<Integer>(bigArr.subList(pos, pos + span  ));
 		
 		for (int i = 0; i < numberBoxGroup.length; i++) {
@@ -51,14 +45,11 @@ public class BoxLink extends GridPane {
 	public void setBoxLink(int start, int span, ArrayList<Integer> bigArr) {
 		
 		this.getChildren().clear();
-
 		this.setGridLinesVisible(true);
-
 		this.pos = start;
 		numberBoxGroup = new NumberBox[span];
 
 		arr = new ArrayList<Integer>(bigArr.subList(pos, pos + span));
-
 		for (int i = 0; i < numberBoxGroup.length; i++) {
 			numberBoxGroup[i] = new NumberBox(arr.get(i));
 			this.add(numberBoxGroup[i], i, 0);
