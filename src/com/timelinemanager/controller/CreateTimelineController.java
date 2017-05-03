@@ -23,7 +23,7 @@ import javafx.stage.Modality;
  * 
  * @author
  * @version 0.00.00
- * @name TimelineController.java
+ * @name CreateTimelineController.java
  */
 public class CreateTimelineController {
 
@@ -45,7 +45,7 @@ public class CreateTimelineController {
 	@FXML
 	private TextField timelineTitle;
 
-	protected static Timeline newTimeline;
+	private Timeline newTimeline;
 	private TimelineModel timelineModel;
 
 	@FXML
