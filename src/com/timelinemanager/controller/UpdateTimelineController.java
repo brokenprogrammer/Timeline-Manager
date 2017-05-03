@@ -22,9 +22,9 @@ import javafx.stage.Modality;
  * 
  * @author
  * @version 0.00.00
- * @name TimelineController.java
+ * @name UpdateTimelineController.java
  */
-public class UpdateTimelineController extends CreateTimelineController {
+public class UpdateTimelineController {
 
 	/*
 	 * Elements and user input variables from the "Update timeline" window
@@ -51,46 +51,34 @@ public class UpdateTimelineController extends CreateTimelineController {
 	public void initialize() {
 	
 		//Populate current window with fields from the currently active timeline.
-		updateTimelineTitle.setText(newTimeline.getTitle());
-		updateTimelineDescription.setText(newTimeline.getDescription());			
-		updateDatePicker_startDate.setValue(newTimeline.getStartDate());
-		updateDatePicker_endDate.setValue(newTimeline.getEndDate());
+		updateTimelineTitle.setText(this.timelineModel.getTimeline().getValue().getTitle());
+		updateTimelineDescription.setText(this.timelineModel.getTimeline().getValue().getDescription());			
+		updateDatePicker_startDate.setValue(this.timelineModel.getTimeline().getValue().getStartDate());
+		updateDatePicker_endDate.setValue(this.timelineModel.getTimeline().getValue().getEndDate());
 		
 		//Action event for the Update Timeline button.
 		//Opens a new window with the data from the current timeline which can be modified and saved.
 		updateEditTimelineButton.setOnAction(ev -> {
 			
-					if(newTimeline.getTitle() != updateTimelineTitle.getText()){
-						newTimeline.setTitle(updateTimelineTitle.getText());
-					}
-					if(newTimeline.getDescription() != updateTimelineDescription.getText()){
-						newTimeline.setDescription(updateTimelineDescription.getText());
-					}
-					if(!newTimeline.getStartDate().isEqual(updateDatePicker_startDate.getValue())){
-						newTimeline.setStartDate(updateDatePicker_startDate.getValue());
-					}
-					if(newTimeline.getEndDate() != updateDatePicker_endDate.getValue()){
-						newTimeline.setEndDate(updateDatePicker_endDate.getValue());
-					}
-					((Node) (ev.getSource())).getScene().getWindow().hide();
+			((Node) (ev.getSource())).getScene().getWindow().hide();
 		});
 		
 		//ActionEvent for the cancel button inside the Update current timeline window
 		//Opens a pop-up window asking for exit confirmation
 		updateCancelEditTimeline.setOnAction(cancelEvent -> {
 			
-			    Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
+			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 	                			"Are you sure you want to cancel editing the timeline?");
-			    updateCancelEditTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
-	        closeConfirmation.setHeaderText("Confirm Exit");
-	        closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-	        Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
-	        if (!ButtonType.OK.equals(closeResponse.get())) {
+			updateCancelEditTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
+	        	closeConfirmation.setHeaderText("Confirm Exit");
+	        	closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+	        	Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+	        	if (!ButtonType.OK.equals(closeResponse.get())) {
 	        		  cancelEvent.consume();
-	        }
-	        else
+	        	}
+	        	else
 	        		((Node)(cancelEvent.getSource())).getScene().getWindow().hide();
-		});
+			});
 	}
 
 	/**
