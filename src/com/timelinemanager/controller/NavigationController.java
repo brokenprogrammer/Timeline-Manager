@@ -221,8 +221,8 @@ public class NavigationController {
 
 				//Initialize the same timeline model into every controller.
 				if(fxmlLoader.getController() != null) {
-					if(fxmlLoader.getController().getClass() == CreateTimelineController.class) {
-						CreateTimelineController n = (CreateTimelineController) fxmlLoader.getController();
+					if(fxmlLoader.getController().getClass() == UpdateTimelineController.class) {
+						UpdateTimelineController n = (UpdateTimelineController) fxmlLoader.getController();
 						n.initTimelineModel(this.timelineModel);
 					}
 				}
@@ -249,10 +249,7 @@ public class NavigationController {
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 			Optional<ButtonType> result = closeConfirmation.showAndWait();
 			if (result.get() == ButtonType.OK){
-				CreateTimelineController.newTimeline.setTitle(null);
-				CreateTimelineController.newTimeline.setDescription(null);
-				CreateTimelineController.newTimeline.setStartDate(null);
-				CreateTimelineController.newTimeline.setEndDate(null);
+				//insert what happens here
 			}
 		});
 
