@@ -36,7 +36,7 @@ public class NumberBox extends BorderPane{
 		numText.setFill(Color.BLACK);
 		javafx.scene.paint.Color color = javafx.scene.paint.Color.rgb(250, 124,0, 1.0);
 		this.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
-		this.setMinSize(70, 40);
+		this.setMinSize(72, 40);
 		this.setCenter(numText);
 	}
 }
