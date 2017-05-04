@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 
 /**
  * Controls the actions for the UI events related to the timeline area of the
@@ -37,10 +38,16 @@ public class TimelineController {
 	private Button add_event_button;
 
 	private TimelineModel timelineModel;
-
+	
+	// Rectangle to clip overflow out of the timeline container.
+	private Rectangle clipRect;
+	
 	@FXML
 	public void initialize() {
-		// timeline_anchorpane_container.getChildren().add(myTimeline);
+		clipRect = new Rectangle(timeline_anchorpane_container.getWidth(), timeline_anchorpane_container.getHeight());
+		clipRect.heightProperty().bind(timeline_anchorpane_container.heightProperty());
+		clipRect.widthProperty().bind(timeline_anchorpane_container.widthProperty());
+		timeline_anchorpane_container.setClip(clipRect);
 	}
 
 	/**
