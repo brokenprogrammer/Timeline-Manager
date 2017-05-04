@@ -9,6 +9,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
+/**
+ *  <code>EventBoxLink</code> class is an array that hold the event elements
+ *  
+ * @author Mohammed Basel Nasrini
+ * @version 0.00.00
+ * @name EventBoxLink.java
+ *
+ */
 public class EventBoxLink extends GridPane {
 
 	public static ArrayList<Event> arr = new ArrayList<Event>();
