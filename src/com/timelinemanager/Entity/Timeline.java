@@ -262,12 +262,16 @@ public class Timeline extends StackPane{
 	public void setEventGrid(){
 		eventGrid.setEventBoxLink(getStart() , span , eventArr );
 		
-		LocalDateTime temp = getStart();		
+		LocalDateTime temp = getStart();
+		if (this.getDaysLength() <= 14)
+			eventGrid.setEventBoxLink(getStart() , span , eventArr );
+		else{
 		timelineSlider.valueProperty().addListener(
 				property ->{
 					eventGrid.getChildren().clear();
 				int plus =  (int) Math.round(timelineSlider.getValue());
-				eventGrid.setEventBoxLink( temp.plusDays(plus) , span, eventArr );});			
+				eventGrid.setEventBoxLink( temp.plusDays(plus) , span, eventArr );});
+		}			
 	}	
 	
 	/**
@@ -279,10 +283,7 @@ public class Timeline extends StackPane{
 		}		
 		else{
 			span = 14 ;
-		}
-		
-		this.setStyle("-fx-border-color: red ");
-				
+		}		
 		eventGrid = new EventBoxLink (getStart() , span );
 		StackPane.setAlignment(eventGrid, Pos.CENTER);
 		this.getChildren().add(eventGrid);		
