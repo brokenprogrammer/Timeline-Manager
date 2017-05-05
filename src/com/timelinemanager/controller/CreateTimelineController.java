@@ -60,6 +60,7 @@ public class CreateTimelineController {
 					datePicker_endDate.getValue(), LocalTime.now(), LocalTime.now().plusHours(1));
 			
 			this.timelineModel.setTimeline(newTimeline);
+			this.timelineModel.getLoadedTimelines().add(newTimeline);
 			((Node) (createTimelineEvent.getSource())).getScene().getWindow().hide();
 		});
 

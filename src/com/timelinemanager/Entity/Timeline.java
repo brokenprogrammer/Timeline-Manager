@@ -311,5 +311,18 @@ public class Timeline extends StackPane{
 		this.getChildren().add(timelineSlider);
 		StackPane.setAlignment(timelineSlider, Pos.BOTTOM_CENTER);		
 		}	
-	}	
+	}
+	
+	/**
+	 * Rebuilds the timeline view.
+	 */
+	public void reDraw() {
+		this.getChildren().remove(eventGrid);
+		this.getChildren().add(eventGrid);
+		this.getChildren().remove(timelineGrid);
+		this.getChildren().add(timelineGrid);
+		this.getChildren().remove(timelineSlider);
+		this.getChildren().add(timelineSlider);
+		timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, bigArr);
+	}
 }
