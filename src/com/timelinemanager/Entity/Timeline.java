@@ -27,9 +27,9 @@ public class Timeline extends StackPane{
 	public ArrayList<Event> eventArr = new ArrayList<Event>();	
 	private int span ;	
 	public ArrayList<Integer> bigArr = new ArrayList<Integer> ();
-	public static BoxLink timelineGrid;
+	public BoxLink timelineGrid;
 	public Slider timelineSlider;
-	public static EventBoxLink eventGrid ;
+	public EventBoxLink eventGrid ;
 	
 	/**
 	 * Create an empty timeline
