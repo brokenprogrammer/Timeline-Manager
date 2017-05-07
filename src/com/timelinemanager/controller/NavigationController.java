@@ -206,6 +206,12 @@ public class NavigationController {
 			}
 		});
 		
+		// ActionEvent for save button.
+		// Saves the currently active timeline to the file system.
+		menuItem_save.setOnAction(saveTimeline -> {
+			this.timelineModel.saveTimeline();
+		});
+		
 		// ActionEvent for update timeline button.
 		// Opens new window which allows the user to edit the currently active timeline.
 		menuItem_updateTimeline.setOnAction(updateTimeline -> {	

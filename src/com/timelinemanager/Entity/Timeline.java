@@ -253,7 +253,21 @@ public class Timeline extends StackPane{
 	
 	@Override
 	public String toString(){
-		return title ;
+		StringBuilder sb = new StringBuilder();
+		sb.append("[Timeline]" + "\n");
+		sb.append("Title:" + this.getTitle() + "\n");
+		sb.append("Description:" + this.getDescription() + "\n");
+		sb.append("Start Date:" + this.getStartDate().toString() + "\n");
+		sb.append("End Date:" + this.getEndDate().toString() + "\n");
+		sb.append("\n");
+		
+		for (Event e : this.eventArr) {
+			sb.append("[Event]" + "\n");
+			sb.append(e.toString());
+			sb.append("\n");
+		}
+		
+		return sb.toString();
 	}	
 	
 	/**

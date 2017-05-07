@@ -353,7 +353,23 @@ public class Event extends StackPane {
 	
 	@Override
 	public String toString(){
-		return title ;
+		StringBuilder sb = new StringBuilder();
+		sb.append("Title:" + this.getTitle() + "\n");
+		sb.append("Description:" + this.getDescription() + "\n");
+		sb.append("Start Date:" + this.getStartDate().toString() + "\n");
+		sb.append("End Date:" + this.getEndDate().toString() + "\n");
+
+		if (this.startTime != null) {
+			sb.append("Start Time:" + this.getStartTime().toString() + "\n");
+		}
+		
+		if (this.endTime != null) {
+			sb.append("End Time:" + this.getEndTime().toString() + "\n");
+		}
+		
+		sb.append("\n");
+		
+		return sb.toString();
 	}
 	
 	
