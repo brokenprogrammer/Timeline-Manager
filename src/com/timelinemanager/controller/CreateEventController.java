@@ -3,7 +3,6 @@ package com.timelinemanager.controller;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Optional;
 
 import com.timelinemanager.Entity.Event;
@@ -33,7 +32,7 @@ import jfxtras.scene.control.LocalTimePicker;
  * 
  * @author
  * @version 0.00.00
- * @name TimelineController.java
+ * @name CreateEventController.java
  */
 public class CreateEventController {
 
@@ -112,7 +111,7 @@ public class CreateEventController {
 				alert.setContentText("Max 500 characters only!");
 				alert.showAndWait();
 				
-			} else if (startEvent.isAfter(endEvent)) {
+			} else if (endEvent != null && (startEvent.isAfter(endEvent))) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
