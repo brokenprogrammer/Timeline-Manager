@@ -71,7 +71,6 @@ public class CreateEventController {
 		// ActionEvent for the create button inside the "Create new event"
 		// window
 		// Alert dialogs for error inputs
-		
 		createEventButton.setOnMouseClicked(createEvent -> {
 			
 			LocalDate startEvent = datePicker_eventStartDate.getValue();

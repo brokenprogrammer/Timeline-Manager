@@ -1,5 +1,6 @@
 package com.timelinemanager.controller;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 
@@ -10,6 +11,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
@@ -32,6 +34,11 @@ public class CreateTimelineController {
 	 */
 	@FXML
 	private AnchorPane newTimeline_anchorPane;
+
+	@FXML
+	private TextField timelineTitle;
+	@FXML
+	private TextArea timelineDescription;
 	@FXML
 	private DatePicker datePicker_startDate;
 	@FXML
@@ -40,10 +47,6 @@ public class CreateTimelineController {
 	private Button createTimelineButton;
 	@FXML
 	private Button cancelCreateTimeline;
-	@FXML
-	private TextArea timelineDescription;
-	@FXML
-	private TextField timelineTitle;
 
 	private Timeline newTimeline;
 	private TimelineModel timelineModel;
@@ -51,36 +54,82 @@ public class CreateTimelineController {
 	@FXML
 	public void initialize() {
 
-		// ActionEvent for the create button inside the "Create new timeline" window
-		createTimelineButton.setOnMouseClicked(createTimelineEvent -> {
+		// ActionEvent for the create button inside the "Create new timeline"
+		// window
+		// Alert dialogs for error inputs
+		createTimelineButton.setOnMouseClicked(createTimeline -> {
 
-			// Populate timeline object with data
-			newTimeline = new Timeline(timelineTitle.getText(), 
-					timelineDescription.getText(), datePicker_startDate.getValue(), 
-					datePicker_endDate.getValue(), LocalTime.now(), LocalTime.now().plusHours(1));
-			
-			this.timelineModel.setTimeline(newTimeline);
-			((Node) (createTimelineEvent.getSource())).getScene().getWindow().hide();
+			LocalDate start = datePicker_startDate.getValue();
+			LocalDate end = datePicker_endDate.getValue();
+
+			if (timelineTitle.getText().length() == 0 && start == null && end == null) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Input Error");
+				alert.setContentText("The required fields are empty, please fill them all to create a Timeline!");
+				alert.showAndWait();
+
+			} else if (timelineTitle.getText().length() == 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Input Error");
+				alert.setContentText("Title is missing, please enter a title to create a Timeline!");
+				alert.showAndWait();
+				
+			} else if (start == null || end == null) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Date Error");
+				alert.setContentText("Date is missing, please enter a start and end date to create a Timeline!");
+				alert.showAndWait();
+				
+			} else if (timelineTitle.getText().length() > 50) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Input Error");
+				alert.setContentText("Max 50 characters only!");
+				alert.showAndWait();
+				
+			} else if (timelineDescription.getText().length() > 500) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Input Error");
+				alert.setContentText("Max 500 characters only!");
+				alert.showAndWait();
+				
+			} else if (start.isAfter(end)) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Date Error");
+				alert.setContentText("Please type date in the correct date format!");
+				alert.showAndWait();
+			} else {
+
+				newTimeline = new Timeline(timelineTitle.getText(), timelineDescription.getText(),
+						datePicker_startDate.getValue(), datePicker_endDate.getValue(), LocalTime.now(),
+						LocalTime.now().plusHours(1));
+
+				this.timelineModel.setTimeline(newTimeline);
+				((Node) (createTimeline.getSource())).getScene().getWindow().hide();
+			}
 		});
 
-		// ActionEvent for the cancel button inside the "Create new timeline" window
-		//Opens a pop-up window asking for exit confirmation
+		// ActionEvent for the cancel button inside the "Create new timeline"
+		// window
+		// Opens a pop-up window asking for exit confirmation
 		cancelCreateTimeline.setOnAction(cancelEvent -> {
-			
-			Alert closeConfirmation = new Alert(
-	                			Alert.AlertType.CONFIRMATION,
-	                			"Are you sure you want to cancel creating a timeline?");
-	        	cancelCreateTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(
-	                			ButtonType.OK);
-	        	closeConfirmation.setHeaderText("Confirm Exit");
-	        	closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-			
-	        	Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
-	        	if (!ButtonType.OK.equals(closeResponse.get())) {
-	        		cancelEvent.consume();
-	        	}
-	        	else
-	        		((Node)(cancelEvent.getSource())).getScene().getWindow().hide();
+
+			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
+					"Are you sure you want to cancel creating a timeline?");
+			cancelCreateTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
+			closeConfirmation.setHeaderText("Confirm Exit");
+			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+
+			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+			if (!ButtonType.OK.equals(closeResponse.get())) {
+				cancelEvent.consume();
+			} else
+				((Node) (cancelEvent.getSource())).getScene().getWindow().hide();
 		});
 	}
 
