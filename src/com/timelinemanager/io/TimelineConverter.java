@@ -68,20 +68,20 @@ public class TimelineConverter {
 	 */
 	public static boolean isTimeline(File f) {
 		String s = FileManager.load(f.getPath());
-		boolean[] b = new boolean[TIMELINE_FIELDS.length];
-		String[] se = s.split("\n");
+		boolean[] exists = new boolean[TIMELINE_FIELDS.length];
+		String[] content = s.split("\n");
 		
-		for (int i = 0; i < se.length; i++) {
+		for (int i = 0; i < content.length; i++) {
 			for (int x = 0; x < TIMELINE_FIELDS.length; x++) {
-				if(se[i].contains(TIMELINE_FIELDS[x])) {
-					b[x] = true;
+				if(content[i].contains(TIMELINE_FIELDS[x])) {
+					exists[x] = true;
 				}
 			}
 		}
 		
 		boolean allExists = true;
-		for (int i = 0; i < b.length; i++) {
-			if (b[i] != true) {
+		for (int i = 0; i < exists.length; i++) {
+			if (exists[i] != true) {
 				allExists = false;
 			}
 		}
