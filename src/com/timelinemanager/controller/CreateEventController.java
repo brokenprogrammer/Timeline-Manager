@@ -3,7 +3,6 @@ package com.timelinemanager.controller;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Optional;
 
 import com.timelinemanager.Entity.Event;
@@ -33,7 +32,7 @@ import jfxtras.scene.control.LocalTimePicker;
  * 
  * @author
  * @version 0.00.00
- * @name TimelineController.java
+ * @name CreateEventController.java
  */
 public class CreateEventController {
 
@@ -72,16 +71,7 @@ public class CreateEventController {
 		// window
 		// Alert dialogs for error inputs
 		createEventButton.setOnMouseClicked(createEvent -> {
-
-			// Populate event object with data
-			Event newEvent = new Event();
-			newEvent.setTitle(eventTitle.getText());
-			newEvent.setDescription(eventDescription.getText());
-			newEvent.setStartTime(eventStartTime.getLocalTime());
-			newEvent.setEndTime(eventEndTime.getLocalTime());
-			newEvent.setStartDate(datePicker_eventStartDate.getValue());
-			newEvent.setEndDate(datePicker_eventEndDate.getValue());
-
+			
 			LocalDate startEvent = datePicker_eventStartDate.getValue();
 			LocalDate endEvent = datePicker_eventEndDate.getValue();
 
@@ -100,7 +90,7 @@ public class CreateEventController {
 				alert.setContentText("Title is missing, please enter a title to create an event!");
 				alert.showAndWait();
 				
-			} else if (startEvent == null || endEvent == null) {
+			} else if (startEvent == null || startEvent == null && endEvent != null) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
@@ -121,7 +111,7 @@ public class CreateEventController {
 				alert.setContentText("Max 500 characters only!");
 				alert.showAndWait();
 				
-			} else if (startEvent.isAfter(endEvent)) {
+			} else if (endEvent != null && (startEvent.isAfter(endEvent))) {
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
@@ -129,8 +119,17 @@ public class CreateEventController {
 				alert.showAndWait();
 				
 			} else {
+				// Populate event object with data
+				Event newEvent = new Event();
+				newEvent.setTitle(eventTitle.getText());
+				newEvent.setDescription(eventDescription.getText());
+				newEvent.setStartTime(eventStartTime.getLocalTime());
+				newEvent.setEndTime(eventEndTime.getLocalTime());
+				newEvent.setStartDate(datePicker_eventStartDate.getValue());
+				newEvent.setEndDate(datePicker_eventEndDate.getValue());
+				
 				this.timelineModel.getTimeline().getValue().addEvent(newEvent);
-				((Node) (createEvent.getSource())).getScene().getWindow();
+				((Node) (createEvent.getSource())).getScene().getWindow().hide();
 			}
 		});
 
