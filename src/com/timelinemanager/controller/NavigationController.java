@@ -227,7 +227,17 @@ public class NavigationController {
 		// ActionEvent for save button.
 		// Saves the currently active timeline to the file system.
 		menuItem_save.setOnAction(saveTimeline -> {
-			this.timelineModel.saveTimeline();
+			if (timelineModel.getTimeline().getValue() == null) {
+				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
+	        			"There is no Timeline to save, please create a Timeline before saving.");
+				noTimeline.setHeaderText("No Timeline to save.");
+				noTimeline.initModality(Modality.APPLICATION_MODAL);
+				Optional<ButtonType> res = noTimeline.showAndWait();
+//				if (res.get() == ButtonType.OK){
+//				}
+			} else {
+				this.timelineModel.saveTimeline();
+			}
 		});
 		
 		// ActionEvent for update timeline button.
