@@ -2,6 +2,8 @@ package com.timelinemanager.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 
 import com.timelinemanager.Entity.Event;
@@ -18,6 +20,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -58,8 +61,8 @@ public class CreateEventController {
 
 	private LocalTimePicker eventStartTime;
 	private LocalTimePicker eventEndTime;
-	
-	//private static Event newEvent = new Event();
+
+	// private static Event newEvent = new Event();
 	private TimelineModel timelineModel;
 
 	@FXML
@@ -67,6 +70,7 @@ public class CreateEventController {
 
 		// ActionEvent for the create button inside the "Create new event"
 		// window
+		// Alert dialogs for error inputs
 		createEventButton.setOnMouseClicked(createEvent -> {
 
 			// Populate event object with data
@@ -77,10 +81,57 @@ public class CreateEventController {
 			newEvent.setEndTime(eventEndTime.getLocalTime());
 			newEvent.setStartDate(datePicker_eventStartDate.getValue());
 			newEvent.setEndDate(datePicker_eventEndDate.getValue());
-			
-			this.timelineModel.getTimeline().getValue().addEvent(newEvent); 
-			
-			((Node) (createEvent.getSource())).getScene().getWindow().hide();
+
+			LocalDate startEvent = datePicker_eventStartDate.getValue();
+			LocalDate endEvent = datePicker_eventEndDate.getValue();
+
+			if (eventTitle.getText().length() == 0 && eventDescription.getText().length() == 0 && startEvent == null
+					&& endEvent == null) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Input Error");
+				alert.setContentText("The required fields are empty, please fill them to create an event!");
+				alert.showAndWait();
+				
+			} else if (eventTitle.getText().length() == 0) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Input Error");
+				alert.setContentText("Title is missing, please enter a title to create an event!");
+				alert.showAndWait();
+				
+			} else if (startEvent == null || endEvent == null) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Date Error");
+				alert.setContentText("Date is missing, please enter a start and end date to create an event!");
+				alert.showAndWait();
+				
+			} else if (eventTitle.getText().length() > 50) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Input Error");
+				alert.setContentText("Max 50 characters only!");
+				alert.showAndWait();
+				
+			} else if (eventDescription.getText().length() > 500) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Input Error");
+				alert.setContentText("Max 500 characters only!");
+				alert.showAndWait();
+				
+			} else if (startEvent.isAfter(endEvent)) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Date Error");
+				alert.setContentText("Please type date in the correct date format!");
+				alert.showAndWait();
+				
+			} else {
+				this.timelineModel.getTimeline().getValue().addEvent(newEvent);
+				((Node) (createEvent.getSource())).getScene().getWindow();
+			}
 		});
 
 		// ActionEvent for the add image label inside the "Create new event"
@@ -110,24 +161,20 @@ public class CreateEventController {
 
 		// ActionEvent for the cancel button inside the "Create new event"
 		// window
-		//Opens a pop-up window asking for exit confirmation
+		// Opens a pop-up window asking for exit confirmation
 		cancelCreateEvent.setOnAction(cancelEvent -> {
-			
-			Alert closeConfirmation = new Alert(
-	                			Alert.AlertType.CONFIRMATION,
-	                			"Are you sure you want to cancel creating an event?");
-			cancelCreateEvent = (Button) closeConfirmation.getDialogPane().lookupButton(
-	                			ButtonType.OK);
-	        	closeConfirmation.setHeaderText("Confirm Exit");
-	        	closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-	        	Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
-	        	if (!ButtonType.OK.equals(closeResponse.get())) {
-	        		cancelEvent.consume();
-	        	}
-	        	else
-	        	{	
-	        		((Node)(cancelEvent.getSource())).getScene().getWindow().hide();
-	        	}
+
+			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
+					"Are you sure you want to cancel creating an event?");
+			cancelCreateEvent = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
+			closeConfirmation.setHeaderText("Confirm Exit");
+			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+			if (!ButtonType.OK.equals(closeResponse.get())) {
+				cancelEvent.consume();
+			} else {
+				((Node) (cancelEvent.getSource())).getScene().getWindow().hide();
+			}
 		});
 	}
 
@@ -150,12 +197,14 @@ public class CreateEventController {
 
 		});
 	}
-	
+
 	/**
 	 * Initializing Third-party time picker objects.
 	 * 
-	 * @param eventStartTime - UI object to control event start time.
-	 * @param eventEndTime - UI object to control event end time.
+	 * @param eventStartTime
+	 *            - UI object to control event start time.
+	 * @param eventEndTime
+	 *            - UI object to control event end time.
 	 */
 	public void initTimePickers(LocalTimePicker eventStartTime, LocalTimePicker eventEndTime) {
 		this.eventStartTime = eventStartTime;
