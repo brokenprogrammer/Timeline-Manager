@@ -357,14 +357,22 @@ public class Event extends StackPane {
 		sb.append("Title:" + this.getTitle() + "\n");
 		sb.append("Description:" + this.getDescription() + "\n");
 		sb.append("Start Date:" + this.getStartDate().toString() + "\n");
-		sb.append("End Date:" + this.getEndDate().toString() + "\n");
-
+		
+		if (this.endDate != null) {
+			sb.append("End Date:" + this.getEndDate().toString() + "\n");
+		} else {
+			sb.append("End Date:\n");
+		}
 		if (this.startTime != null) {
 			sb.append("Start Time:" + this.getStartTime().toString() + "\n");
+		} else {
+			sb.append("Start Time:\n");
 		}
 		
 		if (this.endTime != null) {
 			sb.append("End Time:" + this.getEndTime().toString() + "\n");
+		} else {
+			sb.append("End Time:\n");
 		}
 		
 		sb.append("\n");
