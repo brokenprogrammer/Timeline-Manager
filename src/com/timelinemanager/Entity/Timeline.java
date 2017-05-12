@@ -37,13 +37,19 @@ import javafx.stage.Stage;
  */
 public class Timeline extends StackPane{
 	
+	// Data for the timeline.
 	private String title;
 	private String description;
 	private String picture ;
 	private LocalDate startDate, endDate;
 	private LocalTime startTime, endTime;
+	
+	// Observable list of events used for windows connected to modifying & removing events.
 	private final ObservableList<Event> events = FXCollections.observableArrayList();
+	
+	// List of events used by the timeline to draw and display all the events.
 	public ArrayList<Event> eventArr = new ArrayList<Event>();	
+	
 	private int span ;	
 	public ArrayList<Integer> bigArr = new ArrayList<Integer> ();
 
@@ -52,6 +58,8 @@ public class Timeline extends StackPane{
 	public EventBoxLink eventGrid ;
 	private int index = -1;
 	private EventEditor editor;
+	
+	// Buttons for the modify or remove event window.
 	private Button Changebt = new Button("Change");
 	private Button cancel = new Button("Cancel");
 	private Button delete = new Button("delete");
@@ -224,7 +232,10 @@ public class Timeline extends StackPane{
 	 */
 	public void addEvent (Event in){
 		eventArr.add(in);
+		
+		// Updates the observable list so is the same as the event array.
 		events.setAll(eventArr);
+		
 		this.setEventGrid();
 	}
 	
@@ -234,7 +245,10 @@ public class Timeline extends StackPane{
 	 */
 	public void deleteEvent (Event in){
 		eventArr.remove(in);
+		
+		// Updates the observable list so is the same as the event array.
 		events.setAll(eventArr);
+		
 		this.setEventGrid();
 	}
 	
@@ -278,6 +292,11 @@ public class Timeline extends StackPane{
 		return this.endDate.atTime(this.endTime);
 	}	
 	
+	/**
+	 * Converts this timeline object into a String.
+	 * 
+	 * @return String representation of the timeline object.
+	 */
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
@@ -288,6 +307,7 @@ public class Timeline extends StackPane{
 		sb.append("End Date:" + this.getEndDate().toString() + "\n");
 		sb.append("\n");
 		
+		// Adds every event within the event array into the String representation.
 		for (Event e : this.eventArr) {
 			sb.append("[Event]" + "\n");
 			sb.append(e.toString());
@@ -357,6 +377,7 @@ public class Timeline extends StackPane{
 	
 	/**
 	 * Rebuilds the timeline view.
+	 * This is used when switching between timelines to re-draw the content.
 	 */
 	public void reDraw() {
 		this.getChildren().remove(eventGrid);
@@ -373,11 +394,13 @@ public class Timeline extends StackPane{
 	 * and choose to modify or delete them.
 	 */
 	public void searchEvent() {
+		//Container for the entire search event window.
 		GridPane pane_container = new GridPane();
 		pane_container.setPadding(new Insets(10,10,10,10));
 		pane_container.setHgap(10.0);
 		pane_container.setVgap(10.0);
 		
+		// Container for the search bar and search button.
 		HBox search_event_name = new HBox();
 		TextField titleField = new TextField();
 		titleField.setPromptText("Event Title");
@@ -385,8 +408,10 @@ public class Timeline extends StackPane{
 		Button event_search = new Button("Search");
 		search_event_name.getChildren().add(event_search);
 		
-		//Make sure the observable event list is updated.
+		// Make sure the observable event list is updated.
 		events.setAll(eventArr);
+		
+		// List representation of the events in this timeline.
 		ListView<Event> eventList = new ListView<Event>();
 		
 		//Set display settings for the ListView with events.
@@ -401,14 +426,17 @@ public class Timeline extends StackPane{
 				}
 			}
 		});
+		// Set the List representation to use the items in the observable list of events.
 		eventList.setItems(events);
 		
+		// Search button handler.
 		event_search.setOnAction(e -> {
 			String searchWord = titleField.getText().toUpperCase();
 			
 			//If there is a search word then perform the search and populate a new list
 			//with all the mathces.
 			if (!searchWord.equals("") && searchWord != null) {
+				// subentry list which contains all the search results.
 			    ObservableList<Event> subentries = FXCollections.observableArrayList();
 			    for (Event event : events) {
 			    	boolean match = true;
@@ -424,16 +452,21 @@ public class Timeline extends StackPane{
 			    }
 			    eventList.setItems(subentries);
 			} else {
+				// If there was no search word then go back to using the entire list of events.
 				eventList.setItems(events);
 			}
 		});
 		
+		// Okay button handler. 
+		// The ok button is used to initiate the modify event action on target event.
 		Button okButton = new Button("Ok");
 		okButton.setOnAction(e -> {
+			// Get the event that is currently selected in the event list.
 			Event selectedEvent = eventList.getSelectionModel().getSelectedItem();
 			editEvent(selectedEvent);
 		});
 		
+		// Cancel button handler, asks if the user really want to stop the selection of an event.
 		Button cancelButton = new Button("Cancel");
 		cancelButton.setOnAction(e -> {
 			Alert closeConfirmation = new Alert(
@@ -453,6 +486,7 @@ public class Timeline extends StackPane{
 			}
 		});
 		
+		// Container for all the buttons.
 		HBox buttons_container = new HBox();
 		buttons_container.setPadding(new Insets(10,10,10,10));
 		buttons_container.setSpacing(10);
@@ -465,6 +499,7 @@ public class Timeline extends StackPane{
 		pane_container.add(eventList, 0, 1);
 		pane_container.add(buttons_container, 0, 2);
 		
+		// Build the window and display it.
 		Scene mainScene = new Scene(pane_container);
 		Stage stage = new Stage();
 		stage.setHeight(550);
@@ -477,20 +512,27 @@ public class Timeline extends StackPane{
 	
 	/**
 	 * set a pane and some action for modifying and deleting events
+	 * 
+	 * @param e - Event to populate the window with.
 	 */
 	public void editEvent(Event e){
+		//Container for the entire search event window.
 		GridPane pane_container = new GridPane();
 		pane_container.setPadding(new Insets(10,10,10,10));
 		pane_container.setHgap(10.0);
 		pane_container.setVgap(10.0);
 		
+		// Set the index to the one of the target Event within our event array.
 		index = eventArr.indexOf(e);
 		
+		// Container for the editor.
 		VBox editor_container = new VBox();
 		editor_container.setPrefSize(600, 300);
 		editor = new EventEditor(null,null,null,null,null,null,null);
 		editor_container.getChildren().add(editor);
 		StackPane.setAlignment(editor_container, Pos.CENTER);
+		
+		// Cancel button that asks for confirmation of the cancel of modifying or deleting target event.
 		cancel.setOnAction(cancelEvent -> {
 			Alert closeConfirmation = new Alert(
 					Alert.AlertType.CONFIRMATION,
@@ -509,11 +551,11 @@ public class Timeline extends StackPane{
 			}
 		});
 		
-		
+		// Remove the editor window and populate it with the specified event data.
 		editor_container.getChildren().remove(editor);
 		editor = new EventEditor(e.getTitle(),e.getDescription(), e.getPic(), e.getStartDate(), e.getEndDate(), e.getStartTime(), e.getStartTime());
 		
-		
+		// Change button confirms that the user really want to change this event then modifies it directly in the event array.
 		Changebt.setOnAction(changeInformation->{
 			editor.setDescription();
 			editor.setTitle();
@@ -547,6 +589,7 @@ public class Timeline extends StackPane{
 			}
 		});
 		
+		// Delete button that confirms if the user really want to delete the target event.
 		delete.setOnAction(deleteEvent->{
 			Alert Confirmation = new Alert(
 					Alert.AlertType.CONFIRMATION,
@@ -580,6 +623,7 @@ public class Timeline extends StackPane{
 		GridPane.setMargin(buttons_container, new Insets(0, 0, 0, 360));
 		pane_container.add(buttons_container, 0, 1);
 		
+		// Build the window and display it.
 		Scene mainScene = new Scene(pane_container);
 		Stage stage = new Stage();
 		stage.setHeight(500);
