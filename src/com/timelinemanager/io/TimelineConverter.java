@@ -47,11 +47,9 @@ public class TimelineConverter {
 		
 		for (int x = 0; x < content.length; x++) {
 			if (content[x].equals("[Timeline]")) {
-				System.out.println("HANDLE TIMELINE");
 				timelineData = readTimeline(content, x+1);
 				t = new Timeline(timelineData[0], timelineData[1], LocalDate.parse(timelineData[2]), LocalDate.parse(timelineData[3]), LocalTime.now(), LocalTime.now().plusHours(1));
 			} else if (content[x].equals("[Event]")){
-				System.out.println("HANDLE EVENT " + x);
 				t.addEvent(readEvent(content, x+1));
 			}
 		}
@@ -142,10 +140,6 @@ public class TimelineConverter {
 			
 			counter++;
 			i++;
-		}
-		
-		for (String q : s) {
-			System.out.println(q);
 		}
 		
 		// Populate event object with data

@@ -55,7 +55,6 @@ public class Timeline extends StackPane{
 	private Button Changebt = new Button("Change");
 	private Button cancel = new Button("Cancel");
 	private Button delete = new Button("delete");
-	private Button editBtn;
 	
 	/**
 	 * Create an empty timeline
@@ -366,8 +365,6 @@ public class Timeline extends StackPane{
 		this.getChildren().add(timelineGrid);
 		this.getChildren().remove(timelineSlider);
 		this.getChildren().add(timelineSlider);
-		this.getChildren().remove(editBtn);
-		this.getChildren().add(editBtn);
 		timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, bigArr);
 	}
 	
@@ -416,10 +413,9 @@ public class Timeline extends StackPane{
 			    for (Event event : events) {
 			    	boolean match = true;
 			    	String eventTitle = event.getTitle().toUpperCase();
-			    	System.out.println(searchWord + " " + eventTitle);
+			    	
 			    	if (!eventTitle.contains(searchWord)) {
 			    		match = false;
-			    		break;
 			    	}
 			    	
 			    	if (match) {
