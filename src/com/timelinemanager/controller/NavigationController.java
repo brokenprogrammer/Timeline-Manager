@@ -138,6 +138,13 @@ public class NavigationController {
 		menuItem_open.setOnAction((openFileEvent -> {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Open Resource File");
+			
+			// Creating a new file object to retrieve the path of the current directory
+			// and open the FileChooser there.
+			File openingDir = new File(".");
+			openingDir = new File(openingDir.getPath());
+			fileChooser.setInitialDirectory(openingDir);
+			
 			File f = fileChooser.showOpenDialog(null);
 			
 			if ((f != null) && f.isFile()) {
