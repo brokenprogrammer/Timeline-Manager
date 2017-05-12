@@ -50,6 +50,7 @@ public class Timeline extends StackPane{
 	private Button Changebt = new Button("Change");
 	private Button cancel = new Button("Cancel");
 	private Button delete = new Button("delete");
+	private Button editBtn;
 	
 	/**
 	 * Create an empty timeline
@@ -346,13 +347,14 @@ public class Timeline extends StackPane{
 		this.getChildren().add(timelineSlider);
 		StackPane.setAlignment(timelineSlider, Pos.BOTTOM_CENTER);		
 		}	
-    Button bt = new Button("Edit event");
-		StackPane.setAlignment(bt, Pos.CENTER_LEFT);	
-		bt.setOnAction(e->{
+		
+		editBtn = new Button("Edit event");
+		StackPane.setAlignment(editBtn, Pos.CENTER_LEFT);	
+		editBtn.setOnAction(e->{
 			editEvent();
 		}
 		);
-		this.getChildren().add(bt);
+		this.getChildren().add(editBtn);
 	}
 	
 	/**
@@ -365,6 +367,8 @@ public class Timeline extends StackPane{
 		this.getChildren().add(timelineGrid);
 		this.getChildren().remove(timelineSlider);
 		this.getChildren().add(timelineSlider);
+		this.getChildren().remove(editBtn);
+		this.getChildren().add(editBtn);
 		timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, bigArr);
 	}	
 	
