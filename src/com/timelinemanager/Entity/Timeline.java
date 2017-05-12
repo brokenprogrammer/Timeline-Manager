@@ -5,9 +5,23 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Optional;
+
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * <code>Entity</code> class to represent the <code>Timeline</code> object in the
@@ -27,9 +41,15 @@ public class Timeline extends StackPane{
 	public ArrayList<Event> eventArr = new ArrayList<Event>();	
 	private int span ;	
 	public ArrayList<Integer> bigArr = new ArrayList<Integer> ();
+
 	public BoxLink timelineGrid;
-	public Slider timelineSlider;
+	public Slider timelineSlider = new Slider();
 	public EventBoxLink eventGrid ;
+	private int index = -1;
+	private EventEditor editor;
+	private Button Changebt = new Button("Change");
+	private Button cancel = new Button("Cancel");
+	private Button delete = new Button("delete");
 	
 	/**
 	 * Create an empty timeline
@@ -298,9 +318,11 @@ public class Timeline extends StackPane{
 		else{
 			span = 14 ;
 		}		
+		
+		
 		eventGrid = new EventBoxLink (getStart() , span );
 		StackPane.setAlignment(eventGrid, Pos.CENTER);
-		this.getChildren().add(eventGrid);		
+			
 		this.setMinSize(300, 300);
 
 		long diffDays = getDaysLength() -1 ;
@@ -313,9 +335,8 @@ public class Timeline extends StackPane{
 		timelineGrid = new BoxLink(0, span, bigArr);
 		StackPane.setAlignment(timelineGrid, Pos.CENTER);
 		this.getChildren().add(timelineGrid);
-		
+		this.getChildren().add(eventGrid);	
 		if (diffDays >= 14){
-		timelineSlider = new Slider();
 		timelineSlider.setMin(0);
 		timelineSlider.setMax(diffDays - span + 1);
 		timelineSlider.setMaxWidth(1000);
@@ -325,6 +346,13 @@ public class Timeline extends StackPane{
 		this.getChildren().add(timelineSlider);
 		StackPane.setAlignment(timelineSlider, Pos.BOTTOM_CENTER);		
 		}	
+    Button bt = new Button("Edit event");
+		StackPane.setAlignment(bt, Pos.CENTER_LEFT);	
+		bt.setOnAction(e->{
+			editEvent();
+		}
+		);
+		this.getChildren().add(bt);
 	}
 	
 	/**
@@ -338,5 +366,145 @@ public class Timeline extends StackPane{
 		this.getChildren().remove(timelineSlider);
 		this.getChildren().add(timelineSlider);
 		timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, bigArr);
+	}	
+	
+	/**
+	 * set a pane and some action for modifying and deleting events
+	 */
+	public void editEvent(){
+		GridPane pane_container = new GridPane();
+		pane_container.setPadding(new Insets(10,10,10,10));
+		pane_container.setHgap(10.0);
+		pane_container.setVgap(10.0);
+		
+		
+		HBox search_event_name = new HBox();
+		TextField titleField = new TextField();
+		titleField.setPromptText("Event Title");
+		search_event_name.getChildren().add(titleField);
+		Button event_search = new Button("Search");
+		search_event_name.getChildren().add(event_search);
+		
+		VBox editor_container = new VBox();
+		editor_container.setPrefSize(600, 300);
+		editor = new EventEditor(null,null,null,null,null,null,null);
+		editor_container.getChildren().add(editor);
+		StackPane.setAlignment(editor_container, Pos.CENTER);
+		cancel.setOnAction(cancelEvent -> {
+			Alert closeConfirmation = new Alert(
+					Alert.AlertType.CONFIRMATION,
+					"Are you sure you want to cancel modifying an event?");
+			cancel = (Button) closeConfirmation.getDialogPane().lookupButton(
+					ButtonType.OK);
+			closeConfirmation.setHeaderText("Confirm Exit");
+			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+			if (!ButtonType.OK.equals(closeResponse.get())) {
+				cancelEvent.consume();
+			}
+			else
+			{	
+				((Node)(cancelEvent.getSource())).getScene().getWindow().hide();
+			}
+		});			
+
+		event_search.setOnAction(f->{
+			String title = titleField.getText();
+			index = -1;
+			for (int i = 0; i < eventArr.size(); i++) {
+				if (title.equals(eventArr.get(i).getTitle())){
+					index = i;
+				}
+			}
+			if (index<0){
+				String message = "There's not such a event called "+title +".";
+				Alert closeConfirmation = new Alert(
+						Alert.AlertType.INFORMATION,message);
+				closeConfirmation.setHeaderText("Warning");
+				closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+				Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+				if (ButtonType.OK.equals(closeResponse.get())) {
+					f.consume();
+				}
+			}
+			else if (index>=0){
+				editor_container.getChildren().remove(editor);
+				editor = new EventEditor(eventArr.get(index).getTitle(),eventArr.get(index).getDescription(),eventArr.get(index).getPic(), eventArr.get(index).getStartDate(),eventArr.get(index).getEndDate(), eventArr.get(index).getStartTime(), eventArr.get(index).getStartTime());
+				
+				Changebt.setOnAction(changeInformation->{
+					editor.setDescription();
+					editor.setTitle();
+					editor.setStartDate();
+					editor.setStartTime();
+					editor.setEndDate();
+					editor.setEndTime();
+					Alert closeConfirmation = new Alert(
+							Alert.AlertType.CONFIRMATION,
+							"Are you sure you want to modify this event?");
+					closeConfirmation.setHeaderText("Confirm Exit");
+					closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+					Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+					if (ButtonType.OK.equals(closeResponse.get())) {
+						eventArr.get(index).setTitle(editor.getTitle()); 
+						eventArr.get(index).setDescription(editor.getDescription());
+						eventArr.get(index).setPic(editor.getPicture());
+						eventArr.get(index).setStartDate(editor.getStartDate());
+						eventArr.get(index).setStartTime(editor.getStartTime());
+						eventArr.get(index).setEndDate(editor.getEndDate());
+						eventArr.get(index).setEndTime(editor.getEndTime());
+						double a = timelineSlider.getValue();
+						timelineSlider.setValue(a+0.1);
+						((Node) (changeInformation.getSource())).getScene().getWindow().hide();
+					}
+					else
+					{	
+						changeInformation.consume();
+						
+					}
+				});
+				delete.setOnAction(deleteEvent->{
+					Alert Confirmation = new Alert(
+							Alert.AlertType.CONFIRMATION,
+							"Are you sure you want to delete this event?");
+					Confirmation.setHeaderText("Confirm Exit");
+					Confirmation.initModality(Modality.APPLICATION_MODAL);
+					Optional<ButtonType> Response = Confirmation.showAndWait();
+					if (ButtonType.OK.equals(Response.get())) {
+						eventArr.remove(index);
+						double a = timelineSlider.getValue();
+						timelineSlider.setValue(a+0.1);
+						((Node) (f.getSource())).getScene().getWindow().hide();
+					}
+					else
+					{	
+						f.consume();
+					}
+				});
+
+				StackPane.setAlignment(editor, Pos.CENTER);
+				editor_container.getChildren().add(editor);
+			}
+		});
+		
+		HBox buttons_container = new HBox();
+		buttons_container.setPadding(new Insets(10,10,10,10));
+		buttons_container.setSpacing(10);
+		buttons_container.getChildren().addAll(Changebt,delete,cancel);
+		
+		StackPane.setAlignment(search_event_name, Pos.TOP_LEFT);
+		StackPane.setAlignment(buttons_container, Pos.BOTTOM_RIGHT);
+		
+		pane_container.add(search_event_name, 0, 0);
+		pane_container.add(editor_container, 0, 1);
+		GridPane.setMargin(buttons_container, new Insets(0, 0, 0, 360));
+		pane_container.add(buttons_container, 0, 2);
+		
+		Scene mainScene = new Scene(pane_container);
+		Stage stage = new Stage();
+		stage.setHeight(500);
+		stage.setWidth(620);
+		stage.setScene(mainScene);
+		stage.setTitle("Event Editor");
+		stage.showAndWait();
 	}
 }
