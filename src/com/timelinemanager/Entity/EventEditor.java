@@ -131,9 +131,6 @@ public class EventEditor extends GridPane{
 		this.setMinSize(600	, 300);
 	}
 	
-	
-
-
 	/**
 	 * return the title 
 	 */
@@ -192,10 +189,11 @@ public class EventEditor extends GridPane{
 	public void setTitle(){
 		this.title = titleField.getText();
 	}
+	
 	/**
 	 * set the path of the picture
 	 */
-	public void setPicture(){
+	public void setPicture(String picture){
 		this.picture = picture;
 	}
 	
