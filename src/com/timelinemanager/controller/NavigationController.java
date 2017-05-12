@@ -233,8 +233,9 @@ public class NavigationController {
 				noTimeline.setHeaderText("No Timeline to save.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Optional<ButtonType> res = noTimeline.showAndWait();
-//				if (res.get() == ButtonType.OK){
-//				}
+				if (res.get() == ButtonType.OK){
+					
+				}
 			} else {
 				this.timelineModel.saveTimeline();
 			}
@@ -279,6 +280,21 @@ public class NavigationController {
 			Optional<ButtonType> result = closeConfirmation.showAndWait();
 			if (result.get() == ButtonType.OK){
 				timelineModel.setTimeline(null);
+			}
+		});
+		
+		menuItem_updateEvent.setOnAction(updateEvent -> {
+			if (this.timelineModel.getTimeline().getValue() != null) {
+				this.timelineModel.getTimeline().getValue().searchEvent();
+			} else {
+				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
+	        			"There is no Timeline to update events in, please create a Timeline.");
+				noTimeline.setHeaderText("No Timeline.");
+				noTimeline.initModality(Modality.APPLICATION_MODAL);
+				Optional<ButtonType> res = noTimeline.showAndWait();
+				if (res.get() == ButtonType.OK){
+					
+				}
 			}
 		});
 
