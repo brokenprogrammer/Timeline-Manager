@@ -7,29 +7,12 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="t_listings_container_anchorpane" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="831.0" prefWidth="180.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="t_listings_container_anchorpane" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="831.0" prefWidth="180.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.TimelineListingController">
    <children>
       <ScrollPane id="timelinesListing_scrollpane" fx:id="timelineHolder" layoutX="-5.0" prefHeight="831.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
          <content>
             <AnchorPane fx:id="timelineListing_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="160.0">
-               <children>
-                  <Line id="Line_separator" endX="100.0" layoutX="101.0" startX="-100.0" />
-                  <Pane id="ColoredPane_behind_unique_timeline" layoutX="-13.0" layoutY="3.0" prefHeight="22.0" prefWidth="187.0" style="-fx-background-color: oldlace;" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="14.0" />
-                  <Label layoutX="1.0" layoutY="4.0" prefHeight="21.0" prefWidth="140.0" text="Example timeline 1" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="14.0">
-                     <font>
-                        <Font name="Calibri Light" size="17.0" />
-                     </font>
-                  </Label>
-                  <Pane id="ColoredPane_behind_unique_timeline" layoutX="5.0" layoutY="36.0" prefHeight="22.0" prefWidth="187.0" style="-fx-background-color: lightblue;">
-                     <children>
-                        <Label layoutX="6.0" layoutY="1.0" prefHeight="21.0" prefWidth="140.0" text="Example timeline 2">
-                           <font>
-                              <Font name="Calibri Light" size="17.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </Pane>
-               </children>
+               
             </AnchorPane>
          </content>
       </ScrollPane>

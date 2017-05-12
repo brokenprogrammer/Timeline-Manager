@@ -104,12 +104,13 @@ public class CreateTimelineController {
 				alert.setContentText("Please type date in the correct date format!");
 				alert.showAndWait();
 			} else {
-
+			// Populate timeline object with data
 				newTimeline = new Timeline(timelineTitle.getText(), timelineDescription.getText(),
 						datePicker_startDate.getValue(), datePicker_endDate.getValue(), LocalTime.now(),
 						LocalTime.now().plusHours(1));
 
 				this.timelineModel.setTimeline(newTimeline);
+        this.timelineModel.getLoadedTimelines().add(newTimeline);
 				((Node) (createTimeline.getSource())).getScene().getWindow().hide();
 			}
 		});

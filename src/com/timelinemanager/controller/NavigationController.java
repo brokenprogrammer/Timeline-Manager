@@ -2,11 +2,14 @@ package com.timelinemanager.controller;
 
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+
+import java.io.File;
 import java.io.IOException;
 import java.util.Optional;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 
+import com.timelinemanager.io.TimelineConverter;
 import com.timelinemanager.model.TimelineModel;
 
 import javafx.fxml.FXML;
@@ -135,7 +138,22 @@ public class NavigationController {
 		menuItem_open.setOnAction((openFileEvent -> {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Open Resource File");
-			fileChooser.showOpenDialog(null);
+			File f = fileChooser.showOpenDialog(null);
+			
+			if ((f != null) && f.isFile()) {
+				if(TimelineConverter.isTimeline(f)) {
+					timelineModel.loadTimeline(f.getPath());
+				} else {
+					Alert closeConfirmation = new Alert(Alert.AlertType.WARNING,
+		        			"The specified file is not a valid Timeline file. \n"
+		        			+ "Please select a valid file.");
+					closeConfirmation.setHeaderText("Invalid Timeline file.");
+					closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+					Optional<ButtonType> result = closeConfirmation.showAndWait();
+					if (result.get() == ButtonType.OK){
+					}
+				}
+			}
 		}));
 
 		// ActionEvent for new timeline button.
@@ -203,6 +221,22 @@ public class NavigationController {
 
 			} catch (IOException e1) {
 				e1.printStackTrace();
+			}
+		});
+		
+		// ActionEvent for save button.
+		// Saves the currently active timeline to the file system.
+		menuItem_save.setOnAction(saveTimeline -> {
+			if (timelineModel.getTimeline().getValue() == null) {
+				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
+	        			"There is no Timeline to save, please create a Timeline before saving.");
+				noTimeline.setHeaderText("No Timeline to save.");
+				noTimeline.initModality(Modality.APPLICATION_MODAL);
+				Optional<ButtonType> res = noTimeline.showAndWait();
+//				if (res.get() == ButtonType.OK){
+//				}
+			} else {
+				this.timelineModel.saveTimeline();
 			}
 		});
 		

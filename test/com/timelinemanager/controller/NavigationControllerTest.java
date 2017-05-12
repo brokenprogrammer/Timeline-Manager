@@ -60,6 +60,8 @@ public class NavigationControllerTest extends ApplicationTest{
 		
 		moveCheckClick("File");
 		moveCheckClick("Save");
+		//Close dialog window using ALT + F4
+		push(KeyCode.ALT, KeyCode.F4);
 		
 		moveCheckClick("File");
 		moveCheckClick("Save as");

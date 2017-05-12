@@ -41,14 +41,16 @@ public class Timeline extends StackPane{
 	public ArrayList<Event> eventArr = new ArrayList<Event>();	
 	private int span ;	
 	public ArrayList<Integer> bigArr = new ArrayList<Integer> ();
-	public static BoxLink timelineGrid;
+
+	public BoxLink timelineGrid;
 	public Slider timelineSlider = new Slider();
-	public static EventBoxLink eventGrid ;
+	public EventBoxLink eventGrid ;
 	private int index = -1;
 	private EventEditor editor;
 	private Button Changebt = new Button("Change");
 	private Button cancel = new Button("Cancel");
 	private Button delete = new Button("delete");
+	private Button editBtn;
 	
 	/**
 	 * Create an empty timeline
@@ -272,7 +274,21 @@ public class Timeline extends StackPane{
 	
 	@Override
 	public String toString(){
-		return title ;
+		StringBuilder sb = new StringBuilder();
+		sb.append("[Timeline]" + "\n");
+		sb.append("Title:" + this.getTitle() + "\n");
+		sb.append("Description:" + this.getDescription() + "\n");
+		sb.append("Start Date:" + this.getStartDate().toString() + "\n");
+		sb.append("End Date:" + this.getEndDate().toString() + "\n");
+		sb.append("\n");
+		
+		for (Event e : this.eventArr) {
+			sb.append("[Event]" + "\n");
+			sb.append(e.toString());
+			sb.append("\n");
+		}
+		
+		return sb.toString();
 	}	
 	
 	/**
@@ -331,13 +347,29 @@ public class Timeline extends StackPane{
 		this.getChildren().add(timelineSlider);
 		StackPane.setAlignment(timelineSlider, Pos.BOTTOM_CENTER);		
 		}	
-		Button bt = new Button("Edit event");
-		StackPane.setAlignment(bt, Pos.CENTER_LEFT);	
-		bt.setOnAction(e->{
+		
+		editBtn = new Button("Edit event");
+		StackPane.setAlignment(editBtn, Pos.CENTER_LEFT);	
+		editBtn.setOnAction(e->{
 			editEvent();
 		}
 		);
-		this.getChildren().add(bt);
+		this.getChildren().add(editBtn);
+	}
+	
+	/**
+	 * Rebuilds the timeline view.
+	 */
+	public void reDraw() {
+		this.getChildren().remove(eventGrid);
+		this.getChildren().add(eventGrid);
+		this.getChildren().remove(timelineGrid);
+		this.getChildren().add(timelineGrid);
+		this.getChildren().remove(timelineSlider);
+		this.getChildren().add(timelineSlider);
+		this.getChildren().remove(editBtn);
+		this.getChildren().add(editBtn);
+		timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, bigArr);
 	}	
 	
 	/**
