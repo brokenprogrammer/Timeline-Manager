@@ -1,6 +1,7 @@
 package com.timelinemanager.controller;
 
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
@@ -17,7 +18,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Menu;
@@ -84,6 +87,8 @@ public class NavigationController {
 	// Buttons within the Help menu inside the MenuBar
 	@FXML
 	private MenuItem menuItem_about;
+	@FXML
+	private MenuItem menuItem_manual;
 
 	/*
 	 * Elements and user input variables from the "Create new timeline" window
@@ -149,6 +154,8 @@ public class NavigationController {
 		        			+ "Please select a valid file.");
 					closeConfirmation.setHeaderText("Invalid Timeline file.");
 					closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+					Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
+			        	stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 					Optional<ButtonType> result = closeConfirmation.showAndWait();
 					if (result.get() == ButtonType.OK){
 					}
@@ -174,6 +181,7 @@ public class NavigationController {
 					
 				Scene mainScene = new Scene(root);
 				Stage stage = new Stage();
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				stage.setHeight(500);
 				stage.setWidth(620);
 				stage.setScene(mainScene);
@@ -213,6 +221,7 @@ public class NavigationController {
 				eventEndTime.setLayoutY(240);
 
 				Stage stage = new Stage();
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				stage.setHeight(500);
 				stage.setWidth(620);
 				stage.setScene(mainScene);
@@ -232,6 +241,8 @@ public class NavigationController {
 	        			"There is no Timeline to save, please create a Timeline before saving.");
 				noTimeline.setHeaderText("No Timeline to save.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
+				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
+		        	stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				Optional<ButtonType> res = noTimeline.showAndWait();
 //				if (res.get() == ButtonType.OK){
 //				}
@@ -243,8 +254,16 @@ public class NavigationController {
 		// ActionEvent for update timeline button.
 		// Opens new window which allows the user to edit the currently active timeline.
 		menuItem_updateTimeline.setOnAction(updateTimeline -> {	
-			
-			try {
+			if(timelineModel.getTimeline().getValue() == null){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Timeline Error");
+				alert.setContentText("There is no currently active timeline. Please create a timeline before updating!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		        	stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+				alert.showAndWait();
+			} else {
+				try {
 				FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/updateTimeline.fxml"));
 				Parent root = (Parent) fxmlLoader.load();
 
@@ -258,27 +277,85 @@ public class NavigationController {
 					
 				Scene mainScene = new Scene(root);
 				Stage stage = new Stage();
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				stage.setHeight(500);
 				stage.setWidth(620);
 				stage.setScene(mainScene);
 				stage.setTitle("Edit the currently active timeline");
 				stage.showAndWait();
 
-			} catch (IOException e) {
-				e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		
 		// ActionEvent for remove timeline button.
 		// Opens an alert dialogue which allows the user to remove the currently active timeline.
 		menuItem_removeTimeline.setOnAction(removeTimeline -> {
-			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
+			if(timelineModel.getTimeline().getValue() == null){
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Timeline Error");
+				alert.setContentText("There is no currently active timeline. Please create a timeline before removing!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+		        	stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+				alert.showAndWait();
+			} else {
+				Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
         			"Are you sure you want to remove the currently active timeline?");
-			closeConfirmation.setHeaderText("Confirm removal");
-			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-			Optional<ButtonType> result = closeConfirmation.showAndWait();
-			if (result.get() == ButtonType.OK){
-				timelineModel.setTimeline(null);
+				closeConfirmation.setHeaderText("Confirm removal");
+				closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+				Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
+		        	stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+				Optional<ButtonType> result = closeConfirmation.showAndWait();
+				if (result.get() == ButtonType.OK){
+					timelineModel.setTimeline(null);
+				}
+			}
+		});
+		
+		//ActionEvent for about menu button
+		//Opens information dialog with info about the creators
+		menuItem_about.setOnAction(openAbout -> {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("About TimelineManager");
+			alert.setHeaderText(null);
+			alert.setContentText("This is a timeline managing application created by Group8." 
+					+ "\nWe are.. "
+					+ "\n\n\t\tMendel Oskar"
+					+ "\n\t\tAlhrazy Waeel"
+					+ "\n\t\tZhao Shizhen"
+					+ "\n\t\tModic Milan"
+					+ "\n\t\tMironov Georgiana"
+					+ "\n\t\tArgyriou Dimitrios"
+					+ "\n\nAll resources used in the making of this application are used under a Creative Commons license. Futhermore, the application itself is under the MIT License. "
+					);
+			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+	        	stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+			alert.showAndWait();
+		});
+		
+		//ActionEvent for manual menu button
+		//Opens a confirmation dialog where the user can choose to open
+		//an external file containing the manual for the application
+		menuItem_manual.setOnAction(openManual -> {
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Application Manual");
+			alert.setHeaderText("Need some help?");
+			alert.setContentText("Unsure about how our application works? Open the manual.");
+			
+			ButtonType manual = new ButtonType("Open");
+			ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
+			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+	        	stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+			alert.getButtonTypes().setAll(manual, cancel);
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == manual){
+			    // open external pdf
+			} else {
+			    
 			}
 		});
 
