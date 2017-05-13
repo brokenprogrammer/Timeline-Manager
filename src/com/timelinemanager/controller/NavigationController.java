@@ -280,16 +280,45 @@ public class NavigationController {
 			}
 		});
 		
+		// ActionEvent for the close button.
+		// Closes the currently active timeline but keeps it in the timeline listings.
+		menuItem_close.setOnAction(e -> {
+			if (timelineModel.getTimeline().getValue() == null) {
+				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
+	        			"There is no Timeline to close, please open a Timeline.");
+				noTimeline.setHeaderText("No Timeline to close.");
+				noTimeline.initModality(Modality.APPLICATION_MODAL);
+				Optional<ButtonType> res = noTimeline.showAndWait();
+				if (res.get() == ButtonType.OK){
+					
+				}
+			} else {
+				timelineModel.setTimeline(null);
+			}
+		});
+		
 		// ActionEvent for remove timeline button.
 		// Opens an alert dialogue which allows the user to remove the currently active timeline.
 		menuItem_removeTimeline.setOnAction(removeTimeline -> {
-			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
-        			"Are you sure you want to remove the currently active timeline?");
-			closeConfirmation.setHeaderText("Confirm removal");
-			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-			Optional<ButtonType> result = closeConfirmation.showAndWait();
-			if (result.get() == ButtonType.OK){
-				timelineModel.setTimeline(null);
+			if (timelineModel.getTimeline().getValue() != null) {
+				Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
+	        			"Are you sure you want to remove the currently active timeline?");
+				closeConfirmation.setHeaderText("Confirm removal");
+				closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+				Optional<ButtonType> result = closeConfirmation.showAndWait();
+				if (result.get() == ButtonType.OK){
+					timelineModel.getLoadedTimelines().remove(timelineModel.getTimeline().getValue());
+					timelineModel.setTimeline(null);
+				}
+			} else {
+				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
+	        			"There is no Timeline to remove.");
+				noTimeline.setHeaderText("No Timeline to remove.");
+				noTimeline.initModality(Modality.APPLICATION_MODAL);
+				Optional<ButtonType> res = noTimeline.showAndWait();
+				if (res.get() == ButtonType.OK){
+					
+				}
 			}
 		});
 		
