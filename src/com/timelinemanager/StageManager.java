@@ -50,6 +50,7 @@ public class StageManager {
 		rootLayout.setCenter(timelineLayout);
 		
 		Scene mainScene = new Scene(rootLayout);
+		mainStage.getIcons().add(new Image("/view/img/appicon.PNG"));
 		mainStage.setOnCloseRequest(onExitCloseEverything -> System.exit(0));
 		mainStage.setScene(mainScene);
 		mainStage.setMinWidth(800);
