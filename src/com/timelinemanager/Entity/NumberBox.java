@@ -29,6 +29,8 @@ public class NumberBox extends BorderPane{
 	 */
 	public NumberBox(int num){
 		this.num = num;
+		setId("timelineManagerNumberBox");
+		
 		String numString = this.num+"";
 		Text numText = new Text(numString);
 		Font font = new Font("SansSerif", 20);

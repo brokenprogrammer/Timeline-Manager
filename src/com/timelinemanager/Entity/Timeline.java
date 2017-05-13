@@ -67,7 +67,9 @@ public class Timeline extends StackPane{
 	/**
 	 * Create an empty timeline
 	 */
-	public Timeline(){		
+	public Timeline(){
+		setId("timelineManagerTimeline");
+		timelineSlider.setId("timelineManagerTimelineSlider");
 	}
 	
 	/**
@@ -90,6 +92,10 @@ public class Timeline extends StackPane{
 		startTime = inStartTime ;
 		endTime = inEndTime ;
 		picture = pic ;
+		
+		setId("timelineManagerTimeline");
+		timelineSlider.setId("timelineManagerTimelineSlider");
+		
 		setTimelineView();
 	}	
 	
@@ -111,6 +117,10 @@ public class Timeline extends StackPane{
 		endDate = inEndDate ;
 		startTime = inStartTime;
 		endTime = inEndTime;
+		
+		setId("timelineManagerTimeline");
+		timelineSlider.setId("timelineManagerTimelineSlider");
+		
 		setTimelineView();
 	}
 	

@@ -33,7 +33,7 @@ public class Event extends StackPane {
 	 * Create an empty event
 	 */
 	public Event () {
-		
+		setId("timelineManagerEvent");
 	}
 	
 	/**
@@ -52,6 +52,9 @@ public class Event extends StackPane {
 		endDate = inEndDate ;
 		startTime = inStartTime ;
 		endTime = inEndTime ;
+		
+		setId("timelineManagerEvent");
+		
 		setEventElement() ;
 	}
 	
@@ -75,6 +78,8 @@ public class Event extends StackPane {
 		endTime = inEndTime ;
 		picture = pic ;
 		
+		setId("timelineManagerEvent");
+		
 		if (inEndDate != null)
 			setEventElement() ;
 		else
@@ -95,6 +100,9 @@ public class Event extends StackPane {
 		description = des ;
 		startDate = inDate ;
 		startTime = inTime ;
+		
+		setId("timelineManagerEvent");
+		
 		setEventWithoutDuraElement() ;
 	}
 
@@ -113,6 +121,9 @@ public class Event extends StackPane {
 		picture = pic ;
 		startDate = inDate ;
 		startTime = inTime ;
+		
+		setId("timelineManagerEvent");
+		
 		setEventWithoutDuraElement() ;
 
 	}
@@ -128,6 +139,8 @@ public class Event extends StackPane {
 		this.picture = in.picture ;
 		this.endDate = in.endDate ;
 		this.endTime = in.endTime ;
+		
+		setId("timelineManagerEvent");
 		
 		if (in.getEndDate() != null)
 			setEventElement() ;
@@ -148,6 +161,8 @@ public class Event extends StackPane {
 		this.startTime = in.startTime ;	
 		if (in.picture != null)
 			this.picture = in.picture ;
+		
+		setId("timelineManagerEvent");
 		
 		if ( in.endDate != null ){
 			this.endDate = in.endDate ;

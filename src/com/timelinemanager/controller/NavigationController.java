@@ -134,6 +134,9 @@ public class NavigationController {
 	@FXML
 	public void initialize() {
 
+		eventStartTime.setId("timelineManagerTimePickerStart");
+		eventEndTime.setId("timelineManagerTimePickerEnd");
+		
 		// ActionEvent for the open button. //UPDATE!!
 		menuItem_open.setOnAction((openFileEvent -> {
 			FileChooser fileChooser = new FileChooser();

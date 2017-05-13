@@ -26,6 +26,9 @@ public class BoxLink extends GridPane {
 	 */
 	public BoxLink(int pos, int span, ArrayList<Integer> bigArr) {
 		this.setGridLinesVisible(true);	
+		
+		setId("timelineManagerBoxLink");
+		
 		numberBoxGroup = new NumberBox[span];
 		arr = new ArrayList<Integer>(bigArr.subList(pos, pos + span  ));
 		

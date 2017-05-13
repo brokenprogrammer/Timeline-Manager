@@ -28,6 +28,8 @@ public class EventBoxLink extends GridPane {
 	 * @param span the length of the timeline
 	 */
 	public EventBoxLink(LocalDateTime start, int span ) {
+		setId("timelineManagerEventBoxLink");
+		
 		for (int colIndex = 0; colIndex < 336; colIndex++) {
 			ColumnConstraints cc = new ColumnConstraints(3);
 			cc.setHgrow(Priority.ALWAYS);
