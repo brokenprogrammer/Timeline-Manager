@@ -60,6 +60,8 @@ public class CreateEventController {
 
 	private LocalTimePicker eventStartTime;
 	private LocalTimePicker eventEndTime;
+	
+	private String imageURL;
 
 	// private static Event newEvent = new Event();
 	private TimelineModel timelineModel;
@@ -128,6 +130,10 @@ public class CreateEventController {
 				newEvent.setStartDate(datePicker_eventStartDate.getValue());
 				newEvent.setEndDate(datePicker_eventEndDate.getValue());
 				
+				if (this.imageURL != null) {
+					newEvent.setPic(imageURL);
+				}
+				
 				this.timelineModel.getTimeline().getValue().addEvent(newEvent);
 				((Node) (createEvent.getSource())).getScene().getWindow().hide();
 			}
@@ -146,8 +152,8 @@ public class CreateEventController {
 			fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
 			File file = fileChooser.showOpenDialog(null);
-
-			Image image1 = new Image(file.toURI().toString());
+			imageURL = file.toURI().toString();
+			Image image1 = new Image(imageURL);
 			eventImage.setImage(image1);
 			eventImage.setPreserveRatio(true);
 			eventImage.setFitWidth(189.0);

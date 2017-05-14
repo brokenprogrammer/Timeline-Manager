@@ -371,6 +371,13 @@ public class Event extends StackPane {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Title:" + this.getTitle() + "\n");
 		sb.append("Description:" + this.getDescription() + "\n");
+		
+		if (this.getPic() != null) {
+			sb.append("Image:" + this.getPic() + "\n");
+		} else {
+			sb.append("Image:\n");
+		}
+		
 		sb.append("Start Date:" + this.getStartDate().toString() + "\n");
 		
 		if (this.endDate != null) {
