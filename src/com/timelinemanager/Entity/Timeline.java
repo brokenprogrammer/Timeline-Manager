@@ -471,9 +471,11 @@ public class Timeline extends StackPane{
 		// The ok button is used to initiate the modify event action on target event.
 		Button okButton = new Button("Ok");
 		okButton.setOnAction(e -> {
-			// Get the event that is currently selected in the event list.
-			Event selectedEvent = eventList.getSelectionModel().getSelectedItem();
-			editEvent(selectedEvent);
+			if (eventList.getSelectionModel().getSelectedItem() != null) {
+				// Get the event that is currently selected in the event list.
+				Event selectedEvent = eventList.getSelectionModel().getSelectedItem();
+				editEvent(selectedEvent);
+			}
 		});
 		
 		// Cancel button handler, asks if the user really want to stop the selection of an event.
