@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -25,8 +24,6 @@ public class TimelineListingController {
 
 	// UI controls for the timeline listings area.
 	@FXML
-	private ScrollPane timelineHolder;
-	@FXML
 	private AnchorPane timelineListing_anchorpane;
 	@FXML
 	private Label Timelines_Headline_text;
@@ -38,7 +35,11 @@ public class TimelineListingController {
 
 	@FXML
 	public void initialize() {
+		timelineListing_anchorpane.setPrefSize(180, 350);
+		timelineListing_anchorpane.setMinSize(180, 350);
 		timelineListing_anchorpane.getChildren().add(list);
+		list.setPrefSize(180, 350);
+		list.setMinSize(180, 350);
 	}
 
 	/**

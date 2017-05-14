@@ -9,13 +9,9 @@
 
 <AnchorPane fx:id="t_listings_container_anchorpane" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="831.0" prefWidth="180.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.TimelineListingController">
    <children>
-      <ScrollPane id="timelinesListing_scrollpane" fx:id="timelineHolder" layoutX="-5.0" prefHeight="831.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
-         <content>
-            <AnchorPane fx:id="timelineListing_anchorpane" minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="160.0">
+    	<AnchorPane fx:id="timelineListing_anchorpane" layoutX="-5.0" prefHeight="831.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
                
-            </AnchorPane>
-         </content>
-      </ScrollPane>
+        </AnchorPane>
       <Label fx:id="Timelines_Headline_text" layoutY="-1.0" opacity="0.72" prefHeight="30.0" prefWidth="157.0" text="Timelines" AnchorPane.leftAnchor="10.0">
          <font>
             <Font name="System Bold Italic" size="16.0" />

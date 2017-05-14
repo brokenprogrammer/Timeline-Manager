@@ -38,8 +38,6 @@ public class StageManager {
 		
 		timelineModel = new TimelineModel();
 		
-		//TODO: Inside fxml files add fx:controller back
-		//TODO: Fix size on elements in fxml
 		VBox navigationLayout = (VBox) loadLayout(NAVIGATION_LAYOUT);
 		AnchorPane timelinesListingLayout = (AnchorPane) loadLayout(TIMELINES_LISTING_LAYOUT);
 		AnchorPane timelineLayout = (AnchorPane) loadLayout(TIMELINE_LAYOUT); 
@@ -52,9 +50,14 @@ public class StageManager {
 		Scene mainScene = new Scene(rootLayout);
 		mainStage.setOnCloseRequest(onExitCloseEverything -> System.exit(0));
 		mainStage.setScene(mainScene);
-		mainStage.setMinWidth(800);
-		mainStage.setMinHeight(600);
-        mainStage.show();
+		
+		// Locking window size
+		mainStage.setMinWidth(1250);
+		mainStage.setMinHeight(450);
+		mainStage.setMaxWidth(1250);
+		mainStage.setMaxHeight(450);
+        
+		mainStage.show();
 	}
 	
 	/**
