@@ -118,6 +118,20 @@ public class CreateEventController {
 				alert.setContentText("Please type date in the correct date format!");
 				alert.showAndWait();
 				
+			} else if (startEvent.isBefore(this.timelineModel.getTimeline().getValue().getStartDate())) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Date Error");
+				alert.setContentText("The date is outside the timeline range! Please check start date.");
+				alert.showAndWait();
+				
+			} else if (endEvent.isAfter(this.timelineModel.getTimeline().getValue().getEndDate())) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Date Error");
+				alert.setContentText("The date is outside the timeline range! Please check end date.");
+				alert.showAndWait();
+				
 			} else {
 				// Populate event object with data
 				Event newEvent = new Event();
