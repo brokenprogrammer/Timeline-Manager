@@ -196,8 +196,17 @@ public class NavigationController {
 		// ActionEvent for new event button.
 		// Opens new window which allows the user to create a new event.
 		menuItem_newEvent.setOnAction(newEventWindow -> {
-			
-			try {
+			if (timelineModel.getTimeline().getValue() == null) {
+				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
+	        			"There is no active timeline, please create a timeline before creating an event.");
+				noTimeline.setHeaderText("No timeline to add event to.");
+				noTimeline.initModality(Modality.APPLICATION_MODAL);
+				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
+		        stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+		        noTimeline.showAndWait();
+
+			} else {
+				try {
 				FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/createNewEvent.fxml"));
 				Parent root = (Parent) fxmlLoader.load();
 
@@ -228,9 +237,11 @@ public class NavigationController {
 				stage.setTitle("Create a new event");
 				stage.showAndWait();
 
-			} catch (IOException e1) {
-				e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
+			
 		});
 		
 		// ActionEvent for save button.
@@ -238,7 +249,7 @@ public class NavigationController {
 		menuItem_save.setOnAction(saveTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
-	        			"There is no Timeline to save, please create a Timeline before saving.");
+	        			"There is no timeline to save, please create a timeline before saving.");
 				noTimeline.setHeaderText("No Timeline to save.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
@@ -354,8 +365,6 @@ public class NavigationController {
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == manual){
 			    // open external pdf
-			} else {
-			    
 			}
 		});
 
