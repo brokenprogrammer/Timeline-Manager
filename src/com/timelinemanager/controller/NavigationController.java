@@ -196,41 +196,52 @@ public class NavigationController {
 		// ActionEvent for new event button.
 		// Opens new window which allows the user to create a new event.
 		menuItem_newEvent.setOnAction(newEventWindow -> {
+			if (timelineModel.getTimeline().getValue() == null) {
+				
+				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
+	        			"There is no active timeline, please create a timeline before creating an event.");
+				noTimeline.setHeaderText("No timeline to add event to.");
+				noTimeline.initModality(Modality.APPLICATION_MODAL);
+				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
+		        	stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+		        	noTimeline.showAndWait();
 
-			try {
-				FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/createNewEvent.fxml"));
-				Parent root = (Parent) fxmlLoader.load();
+			} else {
+				try {
+					FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/createNewEvent.fxml"));
+					Parent root = (Parent) fxmlLoader.load();
 
-				// Initialize the same timeline model into every controller.
-				if (fxmlLoader.getController() != null) {
-					if (fxmlLoader.getController().getClass() == CreateEventController.class) {
-						CreateEventController n = (CreateEventController) fxmlLoader.getController();
-						n.initTimelineModel(this.timelineModel);
-						n.initTimePickers(eventStartTime, eventEndTime);
+					// Initialize the same timeline model into every controller.
+					if (fxmlLoader.getController() != null) {
+						if (fxmlLoader.getController().getClass() == CreateEventController.class) {
+							CreateEventController n = (CreateEventController) fxmlLoader.getController();
+							n.initTimelineModel(this.timelineModel);
+							n.initTimePickers(eventStartTime, eventEndTime);
+						}
 					}
+
+					Scene mainScene = new Scene(root);
+
+					((AnchorPane) root).getChildren().add(eventStartTime);
+					eventStartTime.setLayoutX(90);
+					eventStartTime.setLayoutY(240);
+
+					((AnchorPane) root).getChildren().add(eventEndTime);
+					eventEndTime.setLayoutX(355);
+					eventEndTime.setLayoutY(240);
+
+					Stage stage = new Stage();
+					stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+					stage.setHeight(500);
+					stage.setWidth(620);
+					stage.setScene(mainScene);
+					stage.setTitle("Create a new event");
+					stage.showAndWait();
+
+				} catch (IOException e1) {
+					e1.printStackTrace();
 				}
-
-				Scene mainScene = new Scene(root);
-
-				((AnchorPane) root).getChildren().add(eventStartTime);
-				eventStartTime.setLayoutX(90);
-				eventStartTime.setLayoutY(240);
-
-				((AnchorPane) root).getChildren().add(eventEndTime);
-				eventEndTime.setLayoutX(355);
-				eventEndTime.setLayoutY(240);
-
-				Stage stage = new Stage();
-				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
-				stage.setHeight(500);
-				stage.setWidth(620);
-				stage.setScene(mainScene);
-				stage.setTitle("Create a new event");
-				stage.showAndWait();
-
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			}			
 		});
 
 		// ActionEvent for save button.
