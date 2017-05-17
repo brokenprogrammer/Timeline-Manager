@@ -6,6 +6,10 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Optional;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -13,6 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.Slider;
@@ -34,12 +40,15 @@ import javafx.stage.Stage;
  * @name Timeline.java
  */
 public class Timeline extends BorderPane {
-
 	private String title;
 	private String description;
 	private String picture;
 	private LocalDate startDate, endDate;
 	private LocalTime startTime, endTime;
+	
+	// Observable list of events used for windows connected to modifying & removing events.
+	private final ObservableList<Event> events = FXCollections.observableArrayList();
+
 	public ArrayList<Event> eventArr = new ArrayList<Event>();
 	private int span;
 	public ArrayList<Integer> bigArr = new ArrayList<Integer>();
@@ -51,18 +60,21 @@ public class Timeline extends BorderPane {
 	public EventBoxLink eventGrid;
 	private int index = -1;
 	private EventEditor editor;
+	
+	// Buttons for the modify or remove event window.
 	private Button Changebt = new Button("Change");
 	private Button cancel = new Button("Cancel");
 	private Button delete = new Button("delete");
-	private Button editBtn;
 	private Boolean dayLevel = true;
 	private BorderPane timeline = new BorderPane();
 	private ScrollPane timeline_container = new ScrollPane();
-
+	
 	/**
 	 * Create an empty timeline
 	 */
-	public Timeline() {
+	public Timeline(){
+		setId("timelineManagerTimeline");
+		timelineSlider.setId("timelineManagerTimelineSlider");
 	}
 
 	/**
@@ -88,12 +100,16 @@ public class Timeline extends BorderPane {
 	public Timeline(String ti, String des, String pic, LocalDate inStartDate, LocalDate inEndDate,
 			LocalTime inStartTime, LocalTime inEndTime) {
 		title = ti;
-		description = des;
-		startDate = inStartDate;
-		endDate = inEndDate;
-		startTime = inStartTime;
-		endTime = inEndTime;
-		picture = pic;
+		description = des ;
+		startDate = inStartDate ;
+		endDate = inEndDate ;
+		startTime = inStartTime ;
+		endTime = inEndTime ;
+		picture = pic ;
+		
+		setId("timelineManagerTimeline");
+		timelineSlider.setId("timelineManagerTimelineSlider");
+		
 		setTimelineView();
 	}
 
@@ -122,6 +138,10 @@ public class Timeline extends BorderPane {
 		endDate = inEndDate;
 		startTime = inStartTime;
 		endTime = inEndTime;
+		
+		setId("timelineManagerTimeline");
+		timelineSlider.setId("timelineManagerTimelineSlider");
+		
 		setTimelineView();
 	}
 
@@ -266,6 +286,10 @@ public class Timeline extends BorderPane {
 	 */
 	public void addEvent(Event in) {
 		eventArr.add(in);
+		
+		// Updates the observable list so is the same as the event array.
+		events.setAll(eventArr);
+		
 		this.setEventGrid();
 	}
 
@@ -277,6 +301,10 @@ public class Timeline extends BorderPane {
 	 */
 	public void deleteEvent(Event in) {
 		eventArr.remove(in);
+		
+		// Updates the observable list so is the same as the event array.
+		events.setAll(eventArr);
+		
 		this.setEventGrid();
 	}
 
@@ -323,8 +351,13 @@ public class Timeline extends BorderPane {
 	 */
 	public LocalDateTime getEnd() {
 		return this.endDate.atTime(this.endTime);
-	}
-
+	}	
+	
+	/**
+	 * Converts this timeline object into a String.
+	 * 
+	 * @return String representation of the timeline object.
+	 */
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -334,7 +367,8 @@ public class Timeline extends BorderPane {
 		sb.append("Start Date:" + this.getStartDate().toString() + "\n");
 		sb.append("End Date:" + this.getEndDate().toString() + "\n");
 		sb.append("\n");
-
+    
+		// Adds every event within the event array into the String representation.
 		for (Event e : this.eventArr) {
 			sb.append("[Event]" + "\n");
 			sb.append(e.toString());
@@ -438,14 +472,7 @@ public class Timeline extends BorderPane {
 		
 		StackPane.setMargin(downBtn, new Insets(50, 0, 50, 0));
 
-		editBtn = new Button("Edit event");
-		StackPane.setAlignment(editBtn, Pos.BOTTOM_LEFT);
-		editBtn.setOnAction(e -> {
-			editEvent();
-		});
-		StackPane.setMargin(editBtn, new Insets(150, 0, 0, 0));
-
-		buttonsPane.getChildren().addAll(upBtn, editBtn, downBtn);
+		buttonsPane.getChildren().addAll(upBtn, downBtn);
 
 		this.setRight(buttonsPane);
 
@@ -520,27 +547,152 @@ public class Timeline extends BorderPane {
 	}
 
 	/**
-	 * set a pane and some action for modifying and deleting events
+	 * Opens up a new window and lets you search for individual events
+	 * and choose to modify or delete them.
 	 */
-	public void editEvent() {
+	public void searchEvent() {
+		//Container for the entire search event window.
 		GridPane pane_container = new GridPane();
 		pane_container.setPadding(new Insets(10, 10, 10, 10));
 		pane_container.setHgap(10.0);
 		pane_container.setVgap(10.0);
-
+    
+		// Container for the search bar and search button.
 		HBox search_event_name = new HBox();
 		TextField titleField = new TextField();
 		titleField.setPromptText("Event Title");
 		search_event_name.getChildren().add(titleField);
 		Button event_search = new Button("Search");
 		search_event_name.getChildren().add(event_search);
-
+		
+		// Make sure the observable event list is updated.
+		events.setAll(eventArr);
+		
+		// List representation of the events in this timeline.
+		ListView<Event> eventList = new ListView<Event>();
+		
+		//Set display settings for the ListView with events.
+		eventList.setCellFactory(lv -> new ListCell<Event>() {
+			@Override
+			public void updateItem(Event result, boolean empty) {
+				super.updateItem(result, empty);
+				if (empty) {
+					setText(null);
+				} else {
+					setText(result.getTitle());
+				}
+			}
+		});
+		// Set the List representation to use the items in the observable list of events.
+		eventList.setItems(events);
+		
+		// Search button handler.
+		event_search.setOnAction(e -> {
+			String searchWord = titleField.getText().toUpperCase();
+			
+			//If there is a search word then perform the search and populate a new list
+			//with all the mathces.
+			if (!searchWord.equals("") && searchWord != null) {
+				// subentry list which contains all the search results.
+			    ObservableList<Event> subentries = FXCollections.observableArrayList();
+			    for (Event event : events) {
+			    	boolean match = true;
+			    	String eventTitle = event.getTitle().toUpperCase();
+			    	
+			    	if (!eventTitle.contains(searchWord)) {
+			    		match = false;
+			    	}
+			    	
+			    	if (match) {
+			    		subentries.add(event);
+			    	}
+			    }
+			    eventList.setItems(subentries);
+			} else {
+				// If there was no search word then go back to using the entire list of events.
+				eventList.setItems(events);
+			}
+		});
+		
+		// Okay button handler. 
+		// The ok button is used to initiate the modify event action on target event.
+		Button okButton = new Button("Ok");
+		okButton.setOnAction(e -> {
+			if (eventList.getSelectionModel().getSelectedItem() != null) {
+				// Get the event that is currently selected in the event list.
+				Event selectedEvent = eventList.getSelectionModel().getSelectedItem();
+				editEvent(selectedEvent);
+			}
+		});
+		
+		// Cancel button handler, asks if the user really want to stop the selection of an event.
+		Button cancelButton = new Button("Cancel");
+		cancelButton.setOnAction(e -> {
+			Alert closeConfirmation = new Alert(
+					Alert.AlertType.CONFIRMATION,
+					"Are you sure you want to cancel selecting an event?");
+			cancel = (Button) closeConfirmation.getDialogPane().lookupButton(
+					ButtonType.OK);
+			closeConfirmation.setHeaderText("Confirm Cancel");
+			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+			if (!ButtonType.OK.equals(closeResponse.get())) {
+				e.consume();
+			}
+			else
+			{	
+				((Node)(e.getSource())).getScene().getWindow().hide();
+			}
+		});
+		
+		// Container for all the buttons.
+		HBox buttons_container = new HBox();
+		buttons_container.setPadding(new Insets(10,10,10,10));
+		buttons_container.setSpacing(10);
+		buttons_container.getChildren().addAll(okButton,cancelButton);
+		
+		StackPane.setAlignment(search_event_name, Pos.TOP_LEFT);
+		StackPane.setAlignment(buttons_container, Pos.BOTTOM_RIGHT);
+		
+		pane_container.add(search_event_name, 0, 0);
+		pane_container.add(eventList, 0, 1);
+		pane_container.add(buttons_container, 0, 2);
+		
+		// Build the window and display it.
+		Scene mainScene = new Scene(pane_container);
+		Stage stage = new Stage();
+		stage.setHeight(550);
+		stage.setWidth(240);
+		stage.setScene(mainScene);
+		stage.setTitle("Select event");
+		stage.setResizable(false);
+		stage.showAndWait();
+	}
+	
+	/**
+	 * set a pane and some action for modifying and deleting events
+	 * 
+	 * @param e - Event to populate the window with.
+	 */
+	public void editEvent(Event e){
+		//Container for the entire search event window.
+		GridPane pane_container = new GridPane();
+		pane_container.setPadding(new Insets(10,10,10,10));
+		pane_container.setHgap(10.0);
+		pane_container.setVgap(10.0);
+		
+		// Set the index to the one of the target Event within our event array.
+		index = eventArr.indexOf(e);
+		
+		// Container for the editor.
 		VBox editor_container = new VBox();
 		editor_container.setPrefSize(600, 300);
 		editor = new EventEditor(null, null, null, null, null, null, null);
 
 		editor_container.getChildren().add(editor);
 		StackPane.setAlignment(editor_container, Pos.CENTER);
+		
+		// Cancel button that asks for confirmation of the cancel of modifying or deleting target event.
 		cancel.setOnAction(cancelEvent -> {
 			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 					"Are you sure you want to cancel modifying an event?");
@@ -554,91 +706,81 @@ public class Timeline extends BorderPane {
 				((Node) (cancelEvent.getSource())).getScene().getWindow().hide();
 			}
 		});
-
-		event_search.setOnAction(f -> {
-			String title = titleField.getText();
-			index = -1;
-			for (int i = 0; i < eventArr.size(); i++) {
-				if (title.equals(eventArr.get(i).getTitle())) {
-					index = i;
-				}
+		
+		// Remove the editor window and populate it with the specified event data.
+		editor_container.getChildren().remove(editor);
+		editor = new EventEditor(e.getTitle(),e.getDescription(), e.getPic(), e.getStartDate(), e.getEndDate(), e.getStartTime(), e.getStartTime());
+		
+		// Change button confirms that the user really want to change this event then modifies it directly in the event array.
+		Changebt.setOnAction(changeInformation->{
+			editor.setDescription();
+			editor.setTitle();
+			editor.setStartDate();
+			editor.setStartTime();
+			editor.setEndDate();
+			editor.setEndTime();
+			Alert closeConfirmation = new Alert(
+					Alert.AlertType.CONFIRMATION,
+					"Are you sure you want to modify this event?");
+			closeConfirmation.setHeaderText("Confirm Exit");
+			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
+			if (ButtonType.OK.equals(closeResponse.get())) {
+				eventArr.get(index).setTitle(editor.getTitle()); 
+				eventArr.get(index).setDescription(editor.getDescription());
+				eventArr.get(index).setPic(editor.getPicture());
+				eventArr.get(index).setStartDate(editor.getStartDate());
+				eventArr.get(index).setStartTime(editor.getStartTime());
+				eventArr.get(index).setEndDate(editor.getEndDate());
+				eventArr.get(index).setEndTime(editor.getEndTime());
+				events.setAll(eventArr);
+				double a = timelineSlider.getValue();
+				timelineSlider.setValue(a+0.1);
+				((Node) (changeInformation.getSource())).getScene().getWindow().hide();
 			}
-			if (index < 0) {
-				String message = "There's not such a event called " + title + ".";
-				Alert closeConfirmation = new Alert(Alert.AlertType.INFORMATION, message);
-				closeConfirmation.setHeaderText("Warning");
-				closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-				Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
-				if (ButtonType.OK.equals(closeResponse.get())) {
-					f.consume();
-				}
-			} else if (index >= 0) {
-				editor_container.getChildren().remove(editor);
-				editor = new EventEditor(eventArr.get(index).getTitle(), eventArr.get(index).getDescription(),
-						eventArr.get(index).getPic(), eventArr.get(index).getStartDate(),
-						eventArr.get(index).getEndDate(), eventArr.get(index).getStartTime(),
-						eventArr.get(index).getStartTime());
-				Changebt.setOnAction(changeInformation -> {
-					editor.setDescription();
-					editor.setTitle();
-					editor.setStartDate();
-					editor.setStartTime();
-					editor.setEndDate();
-					editor.setEndTime();
-					Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
-							"Are you sure you want to modify this event?");
-					closeConfirmation.setHeaderText("Confirm Exit");
-					closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-					Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
-					if (ButtonType.OK.equals(closeResponse.get())) {
-						eventArr.get(index).setTitle(editor.getTitle());
-						eventArr.get(index).setDescription(editor.getDescription());
-						eventArr.get(index).setPic(editor.getPicture());
-						eventArr.get(index).setStartDate(editor.getStartDate());
-						eventArr.get(index).setStartTime(editor.getStartTime());
-						eventArr.get(index).setEndDate(editor.getEndDate());
-						eventArr.get(index).setEndTime(editor.getEndTime());
-						double a = timelineSlider.getValue();
-						timelineSlider.setValue(a + 0.1);
-						((Node) (changeInformation.getSource())).getScene().getWindow().hide();
-					} else {
-						changeInformation.consume();
-
-					}
-				});
-				delete.setOnAction(deleteEvent -> {
-					Alert Confirmation = new Alert(Alert.AlertType.CONFIRMATION,
-							"Are you sure you want to delete this event?");
-					Confirmation.setHeaderText("Confirm Exit");
-					Confirmation.initModality(Modality.APPLICATION_MODAL);
-					Optional<ButtonType> Response = Confirmation.showAndWait();
-					if (ButtonType.OK.equals(Response.get())) {
-						eventArr.remove(index);
-						double a = timelineSlider.getValue();
-						timelineSlider.setValue(a + 0.1);
-						((Node) (f.getSource())).getScene().getWindow().hide();
-					} else {
-						f.consume();
-					}
-				});
-
-				StackPane.setAlignment(editor, Pos.CENTER);
-				editor_container.getChildren().add(editor);
+			else
+			{	
+				changeInformation.consume();
+				
 			}
 		});
+		
+		// Delete button that confirms if the user really want to delete the target event.
+		delete.setOnAction(deleteEvent->{
+			Alert Confirmation = new Alert(
+					Alert.AlertType.CONFIRMATION,
+					"Are you sure you want to delete this event?");
+			Confirmation.setHeaderText("Confirm Exit");
+			Confirmation.initModality(Modality.APPLICATION_MODAL);
+			Optional<ButtonType> Response = Confirmation.showAndWait();
+			if (ButtonType.OK.equals(Response.get())) {
+				deleteEvent(e);
+				double a = timelineSlider.getValue();
+				timelineSlider.setValue(a+0.1);
+				((Node) (deleteEvent.getSource())).getScene().getWindow().hide();
+			}
+			else
+			{	
+				deleteEvent.consume();
+			}
+		});
+
+		StackPane.setAlignment(editor, Pos.CENTER);
+		editor_container.getChildren().add(editor);
+		
 
 		HBox buttons_container = new HBox();
 		buttons_container.setPadding(new Insets(10, 10, 10, 10));
 		buttons_container.setSpacing(10);
-		buttons_container.getChildren().addAll(Changebt, delete, cancel);
-
-		StackPane.setAlignment(search_event_name, Pos.TOP_LEFT);
+		buttons_container.getChildren().addAll(Changebt,delete,cancel);
+		
 		StackPane.setAlignment(buttons_container, Pos.BOTTOM_RIGHT);
-
-		pane_container.add(search_event_name, 0, 0);
-		pane_container.add(editor_container, 0, 1);
+		
+		pane_container.add(editor_container, 0, 0);
 		GridPane.setMargin(buttons_container, new Insets(0, 0, 0, 360));
-		pane_container.add(buttons_container, 0, 2);
+		pane_container.add(buttons_container, 0, 1);
+		
+		// Build the window and display it.
 
 		Scene mainScene = new Scene(pane_container);
 		Stage stage = new Stage();
@@ -646,6 +788,7 @@ public class Timeline extends BorderPane {
 		stage.setWidth(620);
 		stage.setScene(mainScene);
 		stage.setTitle("Event Editor");
+		stage.setResizable(false);
 		stage.showAndWait();
 		this.setEventGrid();
 	}

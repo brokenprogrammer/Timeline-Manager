@@ -35,7 +35,7 @@ public class EventBoxLink extends GridPane {
 	 *            the length of the timeline
 	 */
 	public EventBoxLink(LocalDateTime start, int span, boolean dayLevel) {
-
+    setId("timelineManagerEventBoxLink");
 		if (dayLevel == true) {
 			for (int colIndex = 0; colIndex < 336; colIndex++) {
 				ColumnConstraints cc = new ColumnConstraints(3);

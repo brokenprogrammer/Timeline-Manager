@@ -93,6 +93,7 @@ public class TimelineModel {
 	 */
 	public void loadTimeline(String path) {
 		this.activeTimeline.set(TimelineConverter.convert(FileManager.load(path)));
+		this.loadedTimelines.add(this.activeTimeline.getValue());
 	}
 
 	/**

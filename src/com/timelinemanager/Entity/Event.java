@@ -43,8 +43,8 @@ public class Event extends StackPane {
 	/**
 	 * Create an empty event
 	 */
-	public Event() {
-
+	public Event () {
+		setId("timelineManagerEvent");
 	}
 
 	/**
@@ -66,13 +66,15 @@ public class Event extends StackPane {
 	public Event(String ti, String des, LocalDate inStartDate, LocalDate inEndDate, LocalTime inStartTime,
 			LocalTime inEndTime) {
 		title = ti;
-		description = des;
-		startDate = inStartDate;
-		endDate = inEndDate;
-		startTime = inStartTime;
-		endTime = inEndTime;
-		setInformation();
-		setEventElement();
+		description = des ;
+		startDate = inStartDate ;
+		endDate = inEndDate ;
+		startTime = inStartTime ;
+		endTime = inEndTime ;
+		
+		setId("timelineManagerEvent");
+		
+		setEventElement() ;
 	}
 
 	/**
@@ -96,12 +98,15 @@ public class Event extends StackPane {
 	public Event(String ti, String des, String pic, LocalDate inStartDate, LocalDate inEndDate, LocalTime inStartTime,
 			LocalTime inEndTime) {
 		title = ti;
-		description = des;
-		startDate = inStartDate;
-		endDate = inEndDate;
-		startTime = inStartTime;
-		endTime = inEndTime;
-		picture = pic;
+		description = des ;
+		startDate = inStartDate ;
+		endDate = inEndDate ;
+		startTime = inStartTime ;
+		endTime = inEndTime ;
+		picture = pic ;
+		
+		setId("timelineManagerEvent");
+    
 		setInformation();
 		if (inEndDate != null)
 			setEventElement();
@@ -124,11 +129,13 @@ public class Event extends StackPane {
 	 */
 	public Event(String ti, String des, LocalDate inDate, LocalTime inTime) {
 		title = ti;
-		description = des;
-		startDate = inDate;
-		startTime = inTime;
-		setInformation();
-		setEventWithoutDuraElement();
+		description = des ;
+		startDate = inDate ;
+		startTime = inTime ;
+		
+		setId("timelineManagerEvent");
+		
+		setEventWithoutDuraElement() ;
 	}
 
 	/**
@@ -147,20 +154,20 @@ public class Event extends StackPane {
 	 */
 	public Event(String ti, String des, String pic, LocalDate inDate, LocalTime inTime) {
 		title = ti;
-		description = des;
-		picture = pic;
-		startDate = inDate;
-		startTime = inTime;
-		setInformation();
-		setEventWithoutDuraElement();
+		description = des ;
+		picture = pic ;
+		startDate = inDate ;
+		startTime = inTime ;
+		
+		setId("timelineManagerEvent");
+		
+		setEventWithoutDuraElement() ;
 
 	}
 
 	/**
 	 * Create an event as a copy of the given event
-	 * 
-	 * @param in
-	 *            An event
+	 * @param in An event
 	 */
 	public Event(Event in) {
 		this.title = in.title;
@@ -171,6 +178,8 @@ public class Event extends StackPane {
 		this.endDate = in.endDate;
 		this.endTime = in.endTime;
 
+    setId("timelineManagerEvent");
+      
 		if (in.getEndDate() != null) {
 			setInformation();
 			this.inf_start = in.inf_start;
@@ -201,7 +210,9 @@ public class Event extends StackPane {
 		this.startTime = in.startTime;
 		if (in.picture != null)
 			this.picture = in.picture;
-
+    
+      setId("timelineManagerEvent");
+      
 		if (in.endDate != null) {
 			this.endDate = in.endDate;
 			this.endTime = in.endTime;
@@ -528,6 +539,13 @@ public class Event extends StackPane {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Title:" + this.getTitle() + "\n");
 		sb.append("Description:" + this.getDescription() + "\n");
+		
+		if (this.getPic() != null) {
+			sb.append("Image:" + this.getPic() + "\n");
+		} else {
+			sb.append("Image:\n");
+		}
+		
 		sb.append("Start Date:" + this.getStartDate().toString() + "\n");
 
 		if (this.endDate != null) {

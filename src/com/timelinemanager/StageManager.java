@@ -53,9 +53,14 @@ public class StageManager {
 		mainScene.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 		mainStage.setOnCloseRequest(onExitCloseEverything -> System.exit(0));
 		mainStage.setScene(mainScene);
-		mainStage.setMinWidth(800);
+		
+		// Locking window size
+		mainStage.setMinWidth(1325);
 		mainStage.setMinHeight(600);
-    mainStage.show();
+		mainStage.setMaxWidth(1325);
+		mainStage.setMaxHeight(600);
+        
+		mainStage.show();
 	}
 	
 	/**

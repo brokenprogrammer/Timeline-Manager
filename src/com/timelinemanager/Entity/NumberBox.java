@@ -33,6 +33,8 @@ public class NumberBox extends BorderPane{
 	public NumberBox(int num , boolean dayLevel){
 		if (dayLevel == true){
 		this.num = num;
+		setId("timelineManagerNumberBox");
+		
 		String numString = this.num+"";
 		Text numText = new Text(numString);
 		Font font = new Font("SansSerif", 20);

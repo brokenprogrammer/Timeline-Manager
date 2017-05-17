@@ -36,7 +36,7 @@ public class BoxLink extends GridPane {
 	 */
 	public BoxLink(int pos, int span, boolean dayLevel, LocalDate startDate, LocalDate endDate) {
 		this.setGridLinesVisible(true);
-
+    setId("timelineManagerBoxLink");
 		if (dayLevel == true) {
 
 			LocalDate temp = startDate;

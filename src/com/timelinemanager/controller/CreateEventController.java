@@ -60,6 +60,8 @@ public class CreateEventController {
 
 	private LocalTimePicker eventStartTime;
 	private LocalTimePicker eventEndTime;
+	
+	private String imageURL;
 
 	// private static Event newEvent = new Event();
 	private TimelineModel timelineModel;
@@ -125,14 +127,14 @@ public class CreateEventController {
 				alert.setContentText("The date is outside the timeline range! Please check start date.");
 				alert.showAndWait();
 				
-			} else if (this.timelineModel.getTimeline().getValue().getEndDate() != null 
-				  && (this.timelineModel.getTimeline().getValue().getEndDate()).isBefore(endEvent)) {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Error Dialog");
-				alert.setHeaderText("Date Error");
-				alert.setContentText("The date is outside the timeline range! Please check end date.");
-				alert.showAndWait();
-				
+			} else if (this.timelineModel.getTimeline().getValue().getEndDate() != null && (endEvent != null)) {
+				if (this.timelineModel.getTimeline().getValue().getEndDate().isBefore(endEvent)) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error Dialog");
+					alert.setHeaderText("Date Error");
+					alert.setContentText("The date is outside the timeline range! Please check end date.");
+					alert.showAndWait();
+				}
 			} else {
 				// Populate event object with data
 				Event newEvent = new Event();
@@ -142,6 +144,10 @@ public class CreateEventController {
 				newEvent.setEndTime(eventEndTime.getLocalTime());
 				newEvent.setStartDate(datePicker_eventStartDate.getValue());
 				newEvent.setEndDate(datePicker_eventEndDate.getValue());
+				
+				if (this.imageURL != null) {
+					newEvent.setPic(imageURL);
+				}
 				
 				this.timelineModel.getTimeline().getValue().addEvent(newEvent);
 				((Node) (createEvent.getSource())).getScene().getWindow().hide();
@@ -161,7 +167,7 @@ public class CreateEventController {
 			fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
 			File file = fileChooser.showOpenDialog(null);
-
+			imageURL = file.toURI().toString();
 			Image image1 = new Image(file.toURI().toString());
 			eventImage.setImage(image1);
 			eventImage.setPreserveRatio(true);
@@ -170,7 +176,6 @@ public class CreateEventController {
 			eventImage.setSmooth(true);
 			eventImage.setCache(true);
 			addImageLabel.setVisible(false);
-
 		});
 
 		// ActionEvent for the cancel button inside the "Create new event"
