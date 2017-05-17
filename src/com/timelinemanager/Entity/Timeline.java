@@ -65,6 +65,9 @@ public class Timeline extends BorderPane {
 	private Button Changebt = new Button("Change");
 	private Button cancel = new Button("Cancel");
 	private Button delete = new Button("delete");
+	private Boolean dayLevel = true;
+	private BorderPane timeline = new BorderPane();
+	private ScrollPane timeline_container = new ScrollPane();
 	
 	/**
 	 * Create an empty timeline
@@ -72,11 +75,6 @@ public class Timeline extends BorderPane {
 	public Timeline(){
 		setId("timelineManagerTimeline");
 		timelineSlider.setId("timelineManagerTimelineSlider");
-	private Button editBtn;
-	private Boolean dayLevel = true;
-	private BorderPane timeline = new BorderPane();
-	private ScrollPane timeline_container = new ScrollPane();
-
 	}
 
 	/**
@@ -474,14 +472,7 @@ public class Timeline extends BorderPane {
 		
 		StackPane.setMargin(downBtn, new Insets(50, 0, 50, 0));
 
-		editBtn = new Button("Edit event");
-		StackPane.setAlignment(editBtn, Pos.BOTTOM_LEFT);
-		editBtn.setOnAction(e -> {
-			editEvent();
-		});
-		StackPane.setMargin(editBtn, new Insets(150, 0, 0, 0));
-
-		buttonsPane.getChildren().addAll(upBtn, editBtn, downBtn);
+		buttonsPane.getChildren().addAll(upBtn, downBtn);
 
 		this.setRight(buttonsPane);
 

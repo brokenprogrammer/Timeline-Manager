@@ -169,24 +169,6 @@ public class Event extends StackPane {
 	 * Create an event as a copy of the given event
 	 * @param in An event
 	 */
-	public Event (Event in){
-		this.title = in.title ;
-		this.description = in.description ;
-		this.startDate = in.startDate ;
-		this.startTime = in.startTime ;	
-		this.picture = in.picture ;
-		this.endDate = in.endDate ;
-		this.endTime = in.endTime ;
-		
-		setId("timelineManagerEvent");
-		
-		if (in.getEndDate() != null)
-			setEventElement() ;
-		else
-	 * 
-	 * @param in
-	 *            An event
-	 */
 	public Event(Event in) {
 		this.title = in.title;
 		this.description = in.description;

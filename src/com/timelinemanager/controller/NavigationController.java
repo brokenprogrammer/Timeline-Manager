@@ -383,6 +383,7 @@ public class NavigationController {
 				if (res.get() == ButtonType.OK){
 					
 				}
+			}
 		});
 
 		// ActionEvent for about menu button
