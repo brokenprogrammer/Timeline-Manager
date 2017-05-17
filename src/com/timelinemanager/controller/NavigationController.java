@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -140,20 +141,10 @@ public class NavigationController {
 	@FXML
 	public void initialize() {
 
-		eventStartTime.setId("timelineManagerTimePickerStart");
-		eventEndTime.setId("timelineManagerTimePickerEnd");
-		
 		// ActionEvent for the open button. //UPDATE!!
 		menuItem_open.setOnAction((openFileEvent -> {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Open Resource File");
-			
-			// Creating a new file object to retrieve the path of the current directory
-			// and open the FileChooser there.
-			File openingDir = new File(".");
-			openingDir = new File(openingDir.getPath());
-			fileChooser.setInitialDirectory(openingDir);
-			
 			File f = fileChooser.showOpenDialog(null);
 
 			if ((f != null) && f.isFile()) {
@@ -162,6 +153,8 @@ public class NavigationController {
 				} else {
 					Alert closeConfirmation = new Alert(Alert.AlertType.WARNING,
 							"The specified file is not a valid Timeline file. \n" + "Please select a valid file.");
+					DialogPane dialogPane = closeConfirmation.getDialogPane();
+					dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 					closeConfirmation.setHeaderText("Invalid Timeline file.");
 					closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 					Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
@@ -249,14 +242,15 @@ public class NavigationController {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
 						"There is no timeline to save, please create a timeline before saving.");
+				DialogPane dialogPane = noTimeline.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				noTimeline.setHeaderText("No Timeline to save.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
 				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				Optional<ButtonType> res = noTimeline.showAndWait();
-				if (res.get() == ButtonType.OK){
-					
-				}
+				// if (res.get() == ButtonType.OK){
+				// }
 			} else {
 				this.timelineModel.saveTimeline();
 			}
@@ -266,6 +260,8 @@ public class NavigationController {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline1 = new Alert(Alert.AlertType.WARNING,
 						"There is no timeline to save, please create a timeline before saving.");
+				DialogPane dialogPane = noTimeline1.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				noTimeline1.setHeaderText("No Timeline to save.");
 				noTimeline1.initModality(Modality.APPLICATION_MODAL);
 				Stage stage1 = (Stage) noTimeline1.getDialogPane().getScene().getWindow();
@@ -278,6 +274,8 @@ public class NavigationController {
 		menuItem_close.setOnAction(closeTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline = new Alert(Alert.AlertType.WARNING, "There is no active timeline to close.");
+				DialogPane dialogPane = noTimeline.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				noTimeline.setHeaderText("No Timeline to close.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage1 = (Stage) noTimeline.getDialogPane().getScene().getWindow();
@@ -294,6 +292,8 @@ public class NavigationController {
 		menuItem_updateTimeline.setOnAction(updateTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Timeline Error");
 				alert.setContentText(
@@ -328,60 +328,35 @@ public class NavigationController {
 				}
 			}
 		});
-		
-		// ActionEvent for the close button.
-		// Closes the currently active timeline but keeps it in the timeline listings.
-		menuItem_close.setOnAction(e -> {
-			if (timelineModel.getTimeline().getValue() == null) {
-				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
-	        			"There is no Timeline to close, please open a Timeline.");
-				noTimeline.setHeaderText("No Timeline to close.");
-				noTimeline.initModality(Modality.APPLICATION_MODAL);
-				Optional<ButtonType> res = noTimeline.showAndWait();
-				if (res.get() == ButtonType.OK){
-					
-				}
-			} else {
-				timelineModel.setTimeline(null);
-			}
-		});
+
 		// ActionEvent for remove timeline button.
 		// Opens an alert dialogue which allows the user to remove the currently
 		// active timeline.
 		menuItem_removeTimeline.setOnAction(removeTimeline -> {
-			if (timelineModel.getTimeline().getValue() != null) {
+			if (timelineModel.getTimeline().getValue() == null) {
+				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Timeline Error");
+				alert.setContentText(
+						"There is no currently active timeline. Please create a timeline before removing!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+				alert.showAndWait();
+
+			} else {
 				Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
-	        			"Are you sure you want to remove the currently active timeline?");
+						"Are you sure you want to remove the currently active timeline?");
+				DialogPane dialogPane = closeConfirmation.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				closeConfirmation.setHeaderText("Confirm removal");
 				closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+				Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				Optional<ButtonType> result = closeConfirmation.showAndWait();
-				if (result.get() == ButtonType.OK){
-					timelineModel.getLoadedTimelines().remove(timelineModel.getTimeline().getValue());
+				if (result.get() == ButtonType.OK) {
 					timelineModel.setTimeline(null);
-				}
-			} else {
-				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
-	        			"There is no Timeline to remove.");
-				noTimeline.setHeaderText("No Timeline to remove.");
-				noTimeline.initModality(Modality.APPLICATION_MODAL);
-				Optional<ButtonType> res = noTimeline.showAndWait();
-				if (res.get() == ButtonType.OK){
-					
-				}
-			}
-		});
-		
-		menuItem_updateEvent.setOnAction(updateEvent -> {
-			if (this.timelineModel.getTimeline().getValue() != null) {
-				this.timelineModel.getTimeline().getValue().searchEvent();
-			} else {
-				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
-	        			"There is no Timeline to update events in, please create a Timeline.");
-				noTimeline.setHeaderText("No Timeline.");
-				noTimeline.initModality(Modality.APPLICATION_MODAL);
-				Optional<ButtonType> res = noTimeline.showAndWait();
-				if (res.get() == ButtonType.OK){
-					
 				}
 			}
 		});
@@ -390,6 +365,8 @@ public class NavigationController {
 		// Opens information dialog with info about the creators
 		menuItem_about.setOnAction(openAbout -> {
 			Alert alert = new Alert(AlertType.INFORMATION);
+			DialogPane dialogPane = alert.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			alert.setTitle("About TimelineManager");
 			alert.setHeaderText(null);
 			alert.setContentText("This is a timeline managing application created by Group8." + "\nWe are.. "
@@ -406,6 +383,8 @@ public class NavigationController {
 		// an external file containing the manual for the application
 		menuItem_manual.setOnAction(openManual -> {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
+			DialogPane dialogPane = alert.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			alert.setTitle("Application Manual");
 			alert.setHeaderText("Need some help?");
 			alert.setContentText("Unsure about how our application works? Open the manual.");
@@ -420,12 +399,15 @@ public class NavigationController {
 			if (result.get() == manual) {
 				// open external pdf
 			} else {
+
 			}
 		});
 
 		// ActionEvent for the exit button.
 		menuItem_exit.setOnAction(exitAppEvent -> {
 			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
+			DialogPane dialogPane = closeConfirmation.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			cancelCreateTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
@@ -436,6 +418,8 @@ public class NavigationController {
 			} else {
 				Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 						"Do you want to save your work before you exit");
+				DialogPane dialogPane1 = saveConfirmation.getDialogPane();
+				dialogPane1.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				cancelCreateTimeline = (Button) saveConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 				saveConfirmation.setHeaderText("Save Timeline");
 				saveConfirmation.initModality(Modality.APPLICATION_MODAL);
