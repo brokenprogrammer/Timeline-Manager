@@ -72,23 +72,23 @@ public class EventEditor extends GridPane{
 			fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
 			File file = fileChooser.showOpenDialog(null);
-
-			Image image = new Image(file.toURI().toString());
+			if(file != null){
+				Image image = new Image(file.toURI().toString());
 			
-			ImageView imageView = new ImageView ();
-			imageView.setImage(image);
-			imageView.setPreserveRatio(true);
-			imageView.setFitWidth(189.0);
-			imageView.setFitHeight(128.0);
-			imageView.setSmooth(true);
-			imageView.setCache(true);
-			clickToAdd.setVisible(false);
-			this.picture = file.toURI().toString();
+				ImageView imageView = new ImageView ();
+				imageView.setImage(image);
+				imageView.setPreserveRatio(true);
+				imageView.setFitWidth(189.0);
+				imageView.setFitHeight(128.0);
+				imageView.setSmooth(true);
+				imageView.setCache(true);
+				clickToAdd.setVisible(false);
+				this.picture = file.toURI().toString();
 			
-			System.out.println(this.picture);
-			GridPane.setMargin(imageView, new Insets(15, 0, 0, 360));
-			this.add(imageView, 0, 1);
-			
+				System.out.println(this.picture);
+				GridPane.setMargin(imageView, new Insets(15, 0, 0, 360));
+				this.add(imageView, 0, 1);
+			}
 		});
 		
 		}
