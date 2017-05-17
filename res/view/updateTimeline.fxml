@@ -6,12 +6,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="updateNewTimeline_anchorPane" prefHeight="407.0" prefWidth="595.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.UpdateTimelineController">
+<AnchorPane id="updateTimelineAnchorPane" fx:id="updateNewTimeline_anchorPane" prefHeight="407.0" prefWidth="595.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.UpdateTimelineController">
    <children>
-      <DatePicker fx:id="updateDatePicker_startDate" layoutX="81.0" layoutY="279.0" />
-      <DatePicker fx:id="updateDatePicker_endDate" layoutX="344.0" layoutY="279.0" />
-      <Button fx:id="updateEditTimelineButton" layoutX="406.0" layoutY="345.0" mnemonicParsing="false" text="Edit" />
-      <Button fx:id="updateCancelEditTimeline" layoutX="466.0" layoutY="345.0" mnemonicParsing="false" text="Cancel" />
+      <DatePicker fx:id="updateDatePicker_startDate" layoutX="81.0" layoutY="279.0" prefHeight="31.0" prefWidth="200.0" />
+      <DatePicker fx:id="updateDatePicker_endDate" layoutX="318.0" layoutY="279.0" prefHeight="31.0" prefWidth="200.0" />
+      <Button id="timelineEditButton" fx:id="updateEditTimelineButton" layoutX="377.0" layoutY="345.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="64.0" text="Edit" />
+      <Button id="timelineCancelButton" fx:id="updateCancelEditTimeline" layoutX="454.0" layoutY="345.0" mnemonicParsing="false" text="Cancel" />
       <TextArea fx:id="updateTimelineDescription" layoutX="81.0" layoutY="99.0" prefHeight="128.0" prefWidth="437.0" />
       <TextField fx:id="updateTimelineTitle" layoutX="81.0" layoutY="51.0" prefHeight="25.0" prefWidth="437.0" />
    </children>
