@@ -196,52 +196,41 @@ public class NavigationController {
 		// ActionEvent for new event button.
 		// Opens new window which allows the user to create a new event.
 		menuItem_newEvent.setOnAction(newEventWindow -> {
-			if (timelineModel.getTimeline().getValue() == null) {
-				
-				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
-	        			"There is no active timeline, please create a timeline before creating an event.");
-				noTimeline.setHeaderText("No timeline to add event to.");
-				noTimeline.initModality(Modality.APPLICATION_MODAL);
-				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
-		        	stage.getIcons().add(new Image("/view/img/appicon.PNG"));
-		        	noTimeline.showAndWait();
 
-			} else {
-				try {
-					FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/createNewEvent.fxml"));
-					Parent root = (Parent) fxmlLoader.load();
+			try {
+				FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/createNewEvent.fxml"));
+				Parent root = (Parent) fxmlLoader.load();
 
-					// Initialize the same timeline model into every controller.
-					if (fxmlLoader.getController() != null) {
-						if (fxmlLoader.getController().getClass() == CreateEventController.class) {
-							CreateEventController n = (CreateEventController) fxmlLoader.getController();
-							n.initTimelineModel(this.timelineModel);
-							n.initTimePickers(eventStartTime, eventEndTime);
-						}
+				// Initialize the same timeline model into every controller.
+				if (fxmlLoader.getController() != null) {
+					if (fxmlLoader.getController().getClass() == CreateEventController.class) {
+						CreateEventController n = (CreateEventController) fxmlLoader.getController();
+						n.initTimelineModel(this.timelineModel);
+						n.initTimePickers(eventStartTime, eventEndTime);
 					}
-
-					Scene mainScene = new Scene(root);
-
-					((AnchorPane) root).getChildren().add(eventStartTime);
-					eventStartTime.setLayoutX(90);
-					eventStartTime.setLayoutY(240);
-
-					((AnchorPane) root).getChildren().add(eventEndTime);
-					eventEndTime.setLayoutX(355);
-					eventEndTime.setLayoutY(240);
-
-					Stage stage = new Stage();
-					stage.getIcons().add(new Image("/view/img/appicon.PNG"));
-					stage.setHeight(500);
-					stage.setWidth(620);
-					stage.setScene(mainScene);
-					stage.setTitle("Create a new event");
-					stage.showAndWait();
-
-				} catch (IOException e1) {
-					e1.printStackTrace();
 				}
-			}			
+
+				Scene mainScene = new Scene(root);
+
+				((AnchorPane) root).getChildren().add(eventStartTime);
+				eventStartTime.setLayoutX(90);
+				eventStartTime.setLayoutY(240);
+
+				((AnchorPane) root).getChildren().add(eventEndTime);
+				eventEndTime.setLayoutX(355);
+				eventEndTime.setLayoutY(240);
+
+				Stage stage = new Stage();
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+				stage.setHeight(500);
+				stage.setWidth(620);
+				stage.setScene(mainScene);
+				stage.setTitle("Create a new event");
+				stage.showAndWait();
+
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		});
 
 		// ActionEvent for save button.
@@ -259,22 +248,30 @@ public class NavigationController {
 				// }
 			} else {
 				this.timelineModel.saveTimeline();
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(null);
+				alert.setContentText("Your timeline is saved now");
+
+				alert.showAndWait();
 			}
 		});
 
 		menuItem_saveAs.setOnAction(saveAsTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline1 = new Alert(Alert.AlertType.WARNING,
-						"There is no timeline to save, please create a timeline before saving.");
+						"There is no timeline to save, create a timeline before saving.");
 				noTimeline1.setHeaderText("No Timeline to save.");
 				noTimeline1.initModality(Modality.APPLICATION_MODAL);
 				Stage stage1 = (Stage) noTimeline1.getDialogPane().getScene().getWindow();
 				stage1.getIcons().add(new Image("/view/img/appicon.PNG"));
 				Optional<ButtonType> res = noTimeline1.showAndWait();
 			} else {
+				
 				this.timelineModel.saveTimeline();
 			}
-		});
+				});
+		// Action Event to close the active timeline 
 		menuItem_close.setOnAction(closeTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline = new Alert(Alert.AlertType.WARNING, "There is no active timeline to close.");
@@ -284,7 +281,8 @@ public class NavigationController {
 				stage1.getIcons().add(new Image("/view/img/appicon.PNG"));
 				Optional<ButtonType> res = noTimeline.showAndWait();
 			} else {
-				this.timelineModel.saveTimeline();
+				timelineModel.setTimeline(null);
+				
 			}
 		});
 
@@ -406,6 +404,9 @@ public class NavigationController {
 			if (!ButtonType.OK.equals(closeResponse.get())) {
 				exitAppEvent.consume();
 			} else {
+				if (this.timelineModel.getTimeline().getValue() == null && this.timelineModel.getLoadedTimelines()==null){ 
+					System.exit(0);
+				} else {
 				Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 						"Do you want to save your work before you exit");
 				cancelCreateTimeline = (Button) saveConfirmation.getDialogPane().lookupButton(ButtonType.OK);
@@ -416,9 +417,10 @@ public class NavigationController {
 				if (!ButtonType.OK.equals(saveResponse.get())) {
 					exitAppEvent.consume();
 				} else {
+					this.timelineModel.saveTimeline();
 					System.exit(0);
 				}
-			}
+				}	}
 		});
 	}
 
