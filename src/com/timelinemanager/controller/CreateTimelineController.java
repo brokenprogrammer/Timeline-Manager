@@ -15,6 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -64,6 +65,8 @@ public class CreateTimelineController {
 
 			if (timelineTitle.getText().length() == 0 && start == null && end == null) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("The required fields are empty, please fill them all to create a Timeline!");
@@ -71,6 +74,8 @@ public class CreateTimelineController {
 
 			} else if (timelineTitle.getText().length() == 0) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Title is missing, please enter a title to create a Timeline!");
@@ -78,6 +83,8 @@ public class CreateTimelineController {
 				
 			} else if (start == null || end == null) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("Date is missing, please enter a start and end date to create a Timeline!");
@@ -85,6 +92,8 @@ public class CreateTimelineController {
 				
 			} else if (timelineTitle.getText().length() > 50) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Max 50 characters only!");
@@ -92,6 +101,8 @@ public class CreateTimelineController {
 				
 			} else if (timelineDescription.getText().length() > 500) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Max 500 characters only!");
@@ -99,6 +110,8 @@ public class CreateTimelineController {
 				
 			} else if (start.isAfter(end)) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("Please type date in the correct date format!");
@@ -110,7 +123,7 @@ public class CreateTimelineController {
 						LocalTime.now().plusHours(1));
 
 				this.timelineModel.setTimeline(newTimeline);
-				this.timelineModel.getLoadedTimelines().add(newTimeline);
+        this.timelineModel.getLoadedTimelines().add(newTimeline);
 				((Node) (createTimeline.getSource())).getScene().getWindow().hide();
 			}
 		});
@@ -122,6 +135,8 @@ public class CreateTimelineController {
 
 			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 					"Are you sure you want to cancel creating a timeline?");
+			DialogPane dialogPane = closeConfirmation.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			cancelCreateTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
