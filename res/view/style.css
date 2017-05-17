@@ -98,7 +98,7 @@
 	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);
 }
 #addeventbutton,#newEventCreateButton,#newEventCancelButton,#datePickerButton,.date-picker:editable
-,#newTimelineCreateButton, #newTimelineCancelButton, #timelineEditButton,#timelineCancelButton{
+,#newTimelineCreateButton, #newTimelineCancelButton, #timelineEditButton,#timelineCancelButton,.dialog-pane > .button-bar > .container > .button{
 	-fx-background-color: #0a9bf5;
 }
 /*====================ADD EVENT BUTTON========================*/
@@ -451,7 +451,6 @@
 }
 #timelineListing_anchorpane{
 	-fx-background-color: #FFFAFA;
-	-fx-padding-bottom:200;
 }
 #newEventAnchorpaneBg{
 	-fx-background-color:linear-gradient(to bottom right,#B0C4DE,#88a6cc);
@@ -686,15 +685,54 @@
 	-fx-font-size: 22;	
 }
 
-
-
-
-
-#timelineManagerEventBoxLink{
-}
-#timelineManagerBoxLink{
-}
-#timelineManagerEvent{
+.leftLine,.rightLine{
+	-fx-scale-x:0.5;
 }
 
 
+
+/************************************************************
+*	    		  DIALOG PANES			    *
+*************************************************************/
+
+.dialog-pane, .dialogPane1 {
+    -fx-background-color:#B0C4DE;
+}
+.dialog-pane:header .header-panel {
+    /*-fx-padding: 0.833em 1.166em 0.833em 1.166em; *//* 10px 14px 10px 14px */
+    -fx-padding: 0.833em; /* 10px */
+    -fx-background-color:#B0C4DE;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+.dialog-pane > .button-bar > .container > .details-button {
+  -fx-alignment: baseline-left;
+  -fx-focus-traversable: false;
+  -fx-padding: 0.416em; /* 5px */
+}
+
+.dialog-pane:header .header-panel .label {
+    -fx-font-size: 1.167em; /* 14px */
+    -fx-wrap-text: true;
+	-fx-fill:white;
+	-fx-text-color:white;
+}
+.dialog-pane > .button-bar > .container > .button{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+	-fx-background-radius: 3px,3px,2px,1px;
+    -fx-min-width: 55;
+    -fx-min-height: 30;
+    -fx-max-width: 55;
+    -fx-max-height: 30;
+	-fx-padding:0.3, 0.6, 0.3, 0.6;
+}
+.dialog-pane > .button-bar > .container > .button:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;
+}
+.dialog-pane > .button-bar > .container > .button:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);
+}
