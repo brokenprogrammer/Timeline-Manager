@@ -70,7 +70,7 @@ public class TimelineController {
 			
 			if (timelineModel.getTimeline().getValue() != null) {
 				//Re-draw timeline.
-				timelineModel.getTimeline().getValue().reDraw();
+				timelineModel.getTimeline().getValue().setEventGrid();
 				timeline_anchorpane_container.getChildren().add(timelineModel.getTimeline().getValue());
 			}
 		});
