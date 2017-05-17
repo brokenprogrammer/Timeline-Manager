@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="t_listings_container_anchorpane" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="831.0" prefWidth="180.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.TimelineListingController">
+<AnchorPane fx:id="t_listings_container_anchorpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="290.0" prefWidth="180.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.TimelineListingController">
    <children>
-    	<AnchorPane fx:id="timelineListing_anchorpane" layoutX="-5.0" prefHeight="831.0" prefWidth="180.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+    	<AnchorPane fx:id="timelineListing_anchorpane" layoutX="19.0" prefHeight="309.0" prefWidth="144.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="30.0">
                
         </AnchorPane>
       <Label fx:id="Timelines_Headline_text" layoutY="-1.0" opacity="0.72" prefHeight="30.0" prefWidth="157.0" text="Timelines" AnchorPane.leftAnchor="10.0">
