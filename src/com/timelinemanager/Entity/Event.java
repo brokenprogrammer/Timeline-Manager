@@ -33,7 +33,7 @@ public class Event extends StackPane {
 	 * Create an empty event
 	 */
 	public Event () {
-		
+		setId("timelineManagerEvent");
 	}
 	
 	/**
@@ -52,6 +52,9 @@ public class Event extends StackPane {
 		endDate = inEndDate ;
 		startTime = inStartTime ;
 		endTime = inEndTime ;
+		
+		setId("timelineManagerEvent");
+		
 		setEventElement() ;
 	}
 	
@@ -75,6 +78,8 @@ public class Event extends StackPane {
 		endTime = inEndTime ;
 		picture = pic ;
 		
+		setId("timelineManagerEvent");
+		
 		if (inEndDate != null)
 			setEventElement() ;
 		else
@@ -95,6 +100,9 @@ public class Event extends StackPane {
 		description = des ;
 		startDate = inDate ;
 		startTime = inTime ;
+		
+		setId("timelineManagerEvent");
+		
 		setEventWithoutDuraElement() ;
 	}
 
@@ -113,6 +121,9 @@ public class Event extends StackPane {
 		picture = pic ;
 		startDate = inDate ;
 		startTime = inTime ;
+		
+		setId("timelineManagerEvent");
+		
 		setEventWithoutDuraElement() ;
 
 	}
@@ -128,6 +139,8 @@ public class Event extends StackPane {
 		this.picture = in.picture ;
 		this.endDate = in.endDate ;
 		this.endTime = in.endTime ;
+		
+		setId("timelineManagerEvent");
 		
 		if (in.getEndDate() != null)
 			setEventElement() ;
@@ -148,6 +161,8 @@ public class Event extends StackPane {
 		this.startTime = in.startTime ;	
 		if (in.picture != null)
 			this.picture = in.picture ;
+		
+		setId("timelineManagerEvent");
 		
 		if ( in.endDate != null ){
 			this.endDate = in.endDate ;
@@ -399,10 +414,12 @@ public class Event extends StackPane {
 		if (width > 80){			
 			this.setMinSize(width,level);
 			
-			Rectangle rectangle = new Rectangle(width,20,Color.DARKCYAN);			
+			Rectangle rectangle = new Rectangle(width,20,Color.DARKCYAN);
+			rectangle.getStyleClass().add("eventRectangleOver80");
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 			
 			Text text = new Text(this.getTitle());
+			text.setId("textOver80");
 			Font font = new Font("SansSerif", 20);
 			text.setFont(font);
 			text.setFill(Color.BLACK);
@@ -423,10 +440,12 @@ public class Event extends StackPane {
 		else{
 			this.setMinSize(width,level);
 			
-			Rectangle rectangle = new Rectangle(80,20,Color.DARKCYAN);			
+			Rectangle rectangle = new Rectangle(80,20,Color.DARKCYAN);
+			rectangle.getStyleClass().add("eventRectangleUnder80");
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);		
 			
 			Text text = new Text(this.getTitle());
+			text.setId("textUnder80");
 			Font font = new Font("SansSerif", 20);
 			text.setFont(font);
 			text.setFill(Color.BLACK);
@@ -466,10 +485,12 @@ public class Event extends StackPane {
 					
 			if (width > 80){				
 				this.setMinSize(width,newlevel);
-				Rectangle rectangle = new Rectangle(width,20,Color.DARKCYAN);				
+				Rectangle rectangle = new Rectangle(width,20,Color.DARKCYAN);
+				rectangle.getStyleClass().add("eventRectangleOver80WithLevel");
 				StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 				
 				Text text = new Text(this.getTitle());
+				text.setId("textOver80WithLevel");
 				Font font = new Font("SansSerif", 20);
 				text.setFont(font);
 				text.setFill(Color.BLACK);
@@ -490,10 +511,12 @@ public class Event extends StackPane {
 			}
 			else{
 				this.setMinSize(width,newlevel);				
-				Rectangle rectangle = new Rectangle(80,20,Color.DARKCYAN);				
+				Rectangle rectangle = new Rectangle(80,20,Color.DARKCYAN);
+				rectangle.getStyleClass().add("eventRectangleUnder80WithLevel");
 				StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);				
 				
 				Text text = new Text(this.getTitle());
+				text.setId("textUnder80WithLevel");
 				Font font = new Font("SansSerif", 20);
 				text.setFont(font);
 				text.setFill(Color.BLACK);
@@ -521,10 +544,12 @@ public class Event extends StackPane {
 	public void setEventWithoutDuraElement(){			
 			this.setMinSize(100,level);
 			
-			Rectangle rectangle = new Rectangle(130,20,Color.DARKCYAN);	
+			Rectangle rectangle = new Rectangle(130,20,Color.DARKCYAN);
+			rectangle.getStyleClass().add("eventRectangleNoDuration");
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 			
 			Text text = new Text(this.getTitle());
+			text.setId("textNoDuration");
 			Font font = new Font("SansSerif", 20);
 			text.setFont(font);
 			text.setFill(Color.BLACK);
@@ -545,14 +570,16 @@ public class Event extends StackPane {
 				newlevel = 70 * a + newlevel ;
 				this.setMinSize(100,newlevel);
 				
-				Rectangle rectangle = new Rectangle(130,20,Color.DARKCYAN);		
+				Rectangle rectangle = new Rectangle(130,20,Color.DARKCYAN);
+				rectangle.getStyleClass().add("eventRectangleNoDurationWithLevel");
 				StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 				
 				Text text = new Text(this.getTitle());
+				text.setId("textNoDurationWithLevel");
 				Font font = new Font("SansSerif", 20);
 				text.setFont(font);
 				text.setFill(Color.BLACK);
-				StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
+				StackPane.setAlignment(text, Pos.BOTTOM_LEFT);
 				
 				Line lineleft = new Line(0, 0,   0,   newlevel-5);
 				lineleft.setStrokeWidth(4);				
