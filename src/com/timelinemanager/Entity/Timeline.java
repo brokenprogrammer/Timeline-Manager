@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -18,8 +19,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -28,34 +32,32 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * <code>Entity</code> class to represent the <code>Timeline</code> object in the
- * application.
+ * <code>Entity</code> class to represent the <code>Timeline</code> object in
+ * the application.
  * 
  * @author Mohammed Basel Nasrini
  * @version 0.00.00
  * @name Timeline.java
  */
-public class Timeline extends StackPane{
-	
-	// Data for the timeline.
+public class Timeline extends BorderPane {
 	private String title;
 	private String description;
-	private String picture ;
+	private String picture;
 	private LocalDate startDate, endDate;
 	private LocalTime startTime, endTime;
 	
 	// Observable list of events used for windows connected to modifying & removing events.
 	private final ObservableList<Event> events = FXCollections.observableArrayList();
-	
-	// List of events used by the timeline to draw and display all the events.
-	public ArrayList<Event> eventArr = new ArrayList<Event>();	
-	
-	private int span ;	
-	public ArrayList<Integer> bigArr = new ArrayList<Integer> ();
+
+	public ArrayList<Event> eventArr = new ArrayList<Event>();
+	private int span;
+	public ArrayList<Integer> bigArr = new ArrayList<Integer>();
+	public ArrayList<Integer> monthBigArr = new ArrayList<Integer>();
+	public ArrayList<Integer> yearBigArr = new ArrayList<Integer>();
 
 	public BoxLink timelineGrid;
 	public Slider timelineSlider = new Slider();
-	public EventBoxLink eventGrid ;
+	public EventBoxLink eventGrid;
 	private int index = -1;
 	private EventEditor editor;
 	
@@ -70,21 +72,35 @@ public class Timeline extends StackPane{
 	public Timeline(){
 		setId("timelineManagerTimeline");
 		timelineSlider.setId("timelineManagerTimelineSlider");
+	private Button editBtn;
+	private Boolean dayLevel = true;
+	private BorderPane timeline = new BorderPane();
+	private ScrollPane timeline_container = new ScrollPane();
+
 	}
-	
+
 	/**
 	 * Create a timeline with picture
 	 * 
-	 * @param ti timeline title
-	 * @param des timeline description
-	 * @param pic timeline picture
-	 * @param inStartDate timeline start date
-	 * @param inEndDate timeline end date
-	 * @param inStartTime timeline start time
-	 * @param inEndTime timeline end time
-	 * @param inspan the length of timeline to be shown on the screen
+	 * @param ti
+	 *            timeline title
+	 * @param des
+	 *            timeline description
+	 * @param pic
+	 *            timeline picture
+	 * @param inStartDate
+	 *            timeline start date
+	 * @param inEndDate
+	 *            timeline end date
+	 * @param inStartTime
+	 *            timeline start time
+	 * @param inEndTime
+	 *            timeline end time
+	 * @param inspan
+	 *            the length of timeline to be shown on the screen
 	 */
-	public Timeline (String ti , String des , String pic, LocalDate inStartDate , LocalDate inEndDate, LocalTime inStartTime , LocalTime inEndTime){
+	public Timeline(String ti, String des, String pic, LocalDate inStartDate, LocalDate inEndDate,
+			LocalTime inStartTime, LocalTime inEndTime) {
 		title = ti;
 		description = des ;
 		startDate = inStartDate ;
@@ -97,24 +113,31 @@ public class Timeline extends StackPane{
 		timelineSlider.setId("timelineManagerTimelineSlider");
 		
 		setTimelineView();
-	}	
-	
+	}
+
 	/**
 	 * Create a timeline without picture
 	 * 
-	 * @param ti timeline title
-	 * @param des timeline description
-	 * @param inStartDate timeline start date
-	 * @param inEndDate timeline end date
-	 * @param inStartTime timeline start time
-	 * @param inEndTime timeline end time
+	 * @param ti
+	 *            timeline title
+	 * @param des
+	 *            timeline description
+	 * @param inStartDate
+	 *            timeline start date
+	 * @param inEndDate
+	 *            timeline end date
+	 * @param inStartTime
+	 *            timeline start time
+	 * @param inEndTime
+	 *            timeline end time
 	 */
-	
-	public Timeline (String ti , String des , LocalDate inStartDate , LocalDate inEndDate , LocalTime inStartTime , LocalTime inEndTime ){
+
+	public Timeline(String ti, String des, LocalDate inStartDate, LocalDate inEndDate, LocalTime inStartTime,
+			LocalTime inEndTime) {
 		title = ti;
-		description = des ;
-		startDate = inStartDate ;
-		endDate = inEndDate ;
+		description = des;
+		startDate = inStartDate;
+		endDate = inEndDate;
 		startTime = inStartTime;
 		endTime = inEndTime;
 		
@@ -123,124 +146,147 @@ public class Timeline extends StackPane{
 		
 		setTimelineView();
 	}
-	
+
 	/**
 	 * Add a title to the timeline
-	 * @param in The timeline title
+	 * 
+	 * @param in
+	 *            The timeline title
 	 */
-	public void setTitle(String in){
-		title = in ;
+	public void setTitle(String in) {
+		title = in;
 	}
-	
+
 	/**
 	 * Add a description to the timeline
-	 * @param in The timeline description
+	 * 
+	 * @param in
+	 *            The timeline description
 	 */
-	public void setDescription(String in){
-		description = in ;
+	public void setDescription(String in) {
+		description = in;
 	}
-	
+
 	/**
 	 * Add a start date to the timeline
-	 * @param in The timeline start date
+	 * 
+	 * @param in
+	 *            The timeline start date
 	 */
-	public void setStartDate(LocalDate in){
-		startDate = in ;
+	public void setStartDate(LocalDate in) {
+		startDate = in;
 	}
-	
+
 	/**
 	 * Add an end date to the timeline
-	 * @param in The timeline end date
+	 * 
+	 * @param in
+	 *            The timeline end date
 	 */
-	public void setEndDate(LocalDate in){
-		endDate = in ;
+	public void setEndDate(LocalDate in) {
+		endDate = in;
 	}
-	
+
 	/**
 	 * Add a start time to the timeline
-	 * @param in The timeline start time
+	 * 
+	 * @param in
+	 *            The timeline start time
 	 */
-	public void setStartTime(LocalTime in){
-		startTime = in ;
+	public void setStartTime(LocalTime in) {
+		startTime = in;
 	}
-	
+
 	/**
 	 * Add an end time to the timeline
-	 * @param in The timeline end time
+	 * 
+	 * @param in
+	 *            The timeline end time
 	 */
-	public void setEndTime(LocalTime in){
-		endTime = in ;
+	public void setEndTime(LocalTime in) {
+		endTime = in;
 	}
-	
+
 	/**
 	 * Add a picture date to the timeline
-	 * @param in The timeline picture
+	 * 
+	 * @param in
+	 *            The timeline picture
 	 */
-	public void setPic (String in){
-		picture = in ;
+	public void setPic(String in) {
+		picture = in;
 	}
-	
+
 	/**
-	 *  Get the timeline title
+	 * Get the timeline title
+	 * 
 	 * @return The title
 	 */
-	public String getTitle(){
-		return title ;
+	public String getTitle() {
+		return title;
 	}
-	
+
 	/**
-	 *  Get the timeline description
+	 * Get the timeline description
+	 * 
 	 * @return The description
 	 */
-	public String getDescription(){
-		return description ;
+	public String getDescription() {
+		return description;
 	}
-	
+
 	/**
-	 *  Get the timeline start date
+	 * Get the timeline start date
+	 * 
 	 * @return The start date
 	 */
-	public LocalDate getStartDate(){
-		return startDate ;
+	public LocalDate getStartDate() {
+		return startDate;
 	}
-	
+
 	/**
-	 *  Get the timeline end date
+	 * Get the timeline end date
+	 * 
 	 * @return The end date
 	 */
-	public LocalDate getEndDate(){
-		return endDate ;
+	public LocalDate getEndDate() {
+		return endDate;
 	}
-	
+
 	/**
-	 *  Get the timeline start time
+	 * Get the timeline start time
+	 * 
 	 * @return The start time
 	 */
-	public LocalTime getStartTime(){
-		return startTime ;
+	public LocalTime getStartTime() {
+		return startTime;
 	}
-	
+
 	/**
-	 *  Get the timeline end time
+	 * Get the timeline end time
+	 * 
 	 * @return The end time
 	 */
-	public LocalTime getEndTime(){
-		return endTime ;
+	public LocalTime getEndTime() {
+		return endTime;
 	}
-	
+
 	/**
-	 *  Get the timeline picture
+	 * Get the timeline picture
+	 * 
 	 * @return The picture
 	 */
-	public String getPic (){
-		return picture ;
+	public String getPic() {
+		return picture;
 	}
-	
+
 	/**
 	 * Add an event to the timeline
-	 * @param in An event
+	 * 
+	 * @param in
+	 *            An event
 	 */
-	public void addEvent (Event in){
+	public void addEvent(Event in) {
 		eventArr.add(in);
 		
 		// Updates the observable list so is the same as the event array.
@@ -248,12 +294,14 @@ public class Timeline extends StackPane{
 		
 		this.setEventGrid();
 	}
-	
+
 	/**
 	 * Delete an event from the timeline
-	 * @param in An event
+	 * 
+	 * @param in
+	 *            An event
 	 */
-	public void deleteEvent (Event in){
+	public void deleteEvent(Event in) {
 		eventArr.remove(in);
 		
 		// Updates the observable list so is the same as the event array.
@@ -261,44 +309,49 @@ public class Timeline extends StackPane{
 		
 		this.setEventGrid();
 	}
-	
+
 	/**
 	 * Calculate the the length of the timeline by days
+	 * 
 	 * @return The number of days
 	 */
-	public long getDaysLength(){
-		return ChronoUnit.DAYS.between(startDate, endDate) + 1 ; 
+	public long getDaysLength() {
+		return ChronoUnit.DAYS.between(startDate, endDate) + 1;
 	}
-	
+
 	/**
 	 * Calculate the the length of the timeline by months
+	 * 
 	 * @return The number of months
 	 */
-	public long getMonthsLength(){
-		return ChronoUnit.MONTHS.between(startDate, endDate) +1 ;
+	public long getMonthsLength() {
+		return ChronoUnit.MONTHS.between(startDate, endDate) + 1;
 	}
-	
+
 	/**
 	 * Calculate the the length of the timeline by years
+	 * 
 	 * @return The number of years
 	 */
-	public long getYearsLength(){
-		return ChronoUnit.YEARS.between(startDate, endDate) +1 ;
+	public long getYearsLength() {
+		return ChronoUnit.YEARS.between(startDate, endDate) + 1;
 	}
-	
+
 	/**
-	 * Get the timeline start Date and Time 
-	 * @return The start Date and Time 
+	 * Get the timeline start Date and Time
+	 * 
+	 * @return The start Date and Time
 	 */
-	public LocalDateTime getStart(){
+	public LocalDateTime getStart() {
 		return this.startDate.atTime(this.startTime);
 	}
-	
+
 	/**
-	 * Get the timeline end Date and Time 
-	 * @return The end Date and Time 
+	 * Get the timeline end Date and Time
+	 * 
+	 * @return The end Date and Time
 	 */
-	public LocalDateTime getEnd(){
+	public LocalDateTime getEnd() {
 		return this.endDate.atTime(this.endTime);
 	}	
 	
@@ -308,7 +361,7 @@ public class Timeline extends StackPane{
 	 * @return String representation of the timeline object.
 	 */
 	@Override
-	public String toString(){
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("[Timeline]" + "\n");
 		sb.append("Title:" + this.getTitle() + "\n");
@@ -316,89 +369,192 @@ public class Timeline extends StackPane{
 		sb.append("Start Date:" + this.getStartDate().toString() + "\n");
 		sb.append("End Date:" + this.getEndDate().toString() + "\n");
 		sb.append("\n");
-		
+    
 		// Adds every event within the event array into the String representation.
 		for (Event e : this.eventArr) {
 			sb.append("[Event]" + "\n");
 			sb.append(e.toString());
 			sb.append("\n");
 		}
-		
+
 		return sb.toString();
-	}	
-	
+	}
+
 	/**
 	 * Add event's elements to the timeline.
 	 */
-	public void setEventGrid(){
-		eventGrid.setEventBoxLink(getStart() , span , eventArr );
-		
-		LocalDateTime temp = getStart();
-		if (this.getDaysLength() <= 14)
-			eventGrid.setEventBoxLink(getStart() , span , eventArr );
-		else{
-		timelineSlider.valueProperty().addListener(
-				property ->{
-					eventGrid.getChildren().clear();
-				int plus =  (int) Math.round(timelineSlider.getValue());
-				eventGrid.setEventBoxLink( temp.plusDays(plus) , span, eventArr );});
-		}			
-	}	
+	public void setEventGrid() {
+		if (dayLevel == true) {
+			eventGrid.setEventBoxLink(getStart(), span, dayLevel, eventArr);
+			int level1 = eventGrid.getLevel() - 5;
+			if (level1 <= 0)
+				timeline.setMinHeight(300);
+			else
+				timeline.setMinHeight(300+level1*35);
+			LocalDateTime temp = getStart();
+			if (this.getDaysLength() <= 14){
+				eventGrid.setEventBoxLink(getStart(), span, dayLevel, eventArr);
+				int leve2 = eventGrid.getLevel() - 5;
+				if (leve2 <= 0)
+					timeline.setMinHeight(300);
+				else
+					timeline.setMinHeight(300+leve2*35);
+			}
+			else {
+				timelineSlider.valueProperty().addListener(property -> {
+					int plus = (int) Math.round(timelineSlider.getValue());
+					eventGrid.setEventBoxLink(temp.plusDays(plus), span, dayLevel, eventArr);
+					int level3 = eventGrid.getLevel() - 5;
+					if (level3 <= 0)
+						timeline.setMinHeight(300);
+					else
+						timeline.setMinHeight(300+level3*35);
+				});
+			}
+		} else if (dayLevel == false) {
+			eventGrid.setEventBoxLink(getStart(), span, dayLevel, eventArr);
+			int level1 = eventGrid.getLevel() - 5;
+			if (level1 <= 0)
+				timeline.setMinHeight(300);
+			else
+				timeline.setMinHeight(300+level1*35);
+			LocalDateTime temp = getStart();
+			if (this.getMonthsLength() <= 7){
+				eventGrid.setEventBoxLink(getStart(), span, dayLevel, eventArr);
+				int level2 = eventGrid.getLevel() - 5;
+				if (level2 <= 0)
+					timeline.setMinHeight(300);
+				else
+					timeline.setMinHeight(300+level2*35);
+			}
+			else {
+				timelineSlider.valueProperty().addListener(property -> {
+					int plus = (int) Math.round(timelineSlider.getValue());
+					eventGrid.setEventBoxLink(temp.plusMonths(plus), span, dayLevel, eventArr);
+					int level3 = eventGrid.getLevel() - 5;
+					if (level3 <= 0)
+						timeline.setMinHeight(300);
+					else
+						timeline.setMinHeight(300+level3*35);
+				});
+			}
+		}
+	}
+
 	
 	/**
 	 * Create a timeline view with the scroll controller and timeline chain.
 	 */
-	public void setTimelineView() { 
-		if (this.getDaysLength() < 14){
-			span = (int) this.getDaysLength()   ;
-		}		
-		else{
-			span = 14 ;
-		}		
-		
-		
-		eventGrid = new EventBoxLink (getStart() , span );
-		StackPane.setAlignment(eventGrid, Pos.CENTER);
-			
-		this.setMinSize(300, 300);
+	public void setTimelineView() {
+		this.setMinSize(1500, 300);
 
-		long diffDays = getDaysLength() -1 ;
-		LocalDate temp = startDate ;
-		while (temp.compareTo(endDate) < 1) {
-			bigArr.add(temp.getDayOfMonth());
-			temp = temp.plusDays(1);
+		StackPane buttonsPane = new StackPane();
+		buttonsPane.setMinSize(30, 300);
+
+		Button upBtn = new Button();
+		upBtn.setOnAction(e -> {
+			dayLevel = false;
+			timeline = new BorderPane();
+			timeline.setMinSize(1000, 300);
+			setTimelineView();
+			setEventGrid();
+
+		});
+
+		StackPane.setMargin(upBtn, new Insets(0, 0, 150, 0));
+
+		Button downBtn = new Button();
+		downBtn.setOnAction(e -> {
+			dayLevel = true;
+			timeline = new BorderPane();
+			timeline.setMinSize(1000, 300);
+			setTimelineView();
+			setEventGrid();
+		});
+		
+		StackPane.setMargin(downBtn, new Insets(50, 0, 50, 0));
+
+		editBtn = new Button("Edit event");
+		StackPane.setAlignment(editBtn, Pos.BOTTOM_LEFT);
+		editBtn.setOnAction(e -> {
+			editEvent();
+		});
+		StackPane.setMargin(editBtn, new Insets(150, 0, 0, 0));
+
+		buttonsPane.getChildren().addAll(upBtn, editBtn, downBtn);
+
+		this.setRight(buttonsPane);
+
+		timeline = new BorderPane();
+		timeline.setMinSize(1000, 300);
+		this.setMinWidth(1100);
+
+		if (dayLevel == true) {
+			this.getChildren().clear();
+
+			if (this.getDaysLength() < 14) {
+				span = (int) this.getDaysLength();
+			} else {
+				span = 14;
+			}
+
+			long diffDays = getDaysLength() - 1;
+			timelineGrid = new BoxLink(0, span, dayLevel, startDate, endDate);
+			eventGrid = new EventBoxLink(getStart(), span, dayLevel);
+			timelineGrid.setGridLinesVisible(true);
+			timeline.getChildren().addAll(timelineGrid, eventGrid);
+
+			if (diffDays >= 14) {
+				timelineSlider.setMin(0);
+				timelineSlider.setMax(diffDays - span + 1);
+				timelineSlider.setMaxWidth(1000);
+				timelineSlider.valueProperty().addListener(property -> {
+							timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, dayLevel,
+									startDate, endDate);
+						});
+				this.setBottom(timelineSlider);
+			}
+			timeline_container.setContent(timeline);
+			timeline_container.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+			timeline_container.setHbarPolicy(ScrollBarPolicy.NEVER);
+			timeline_container.setPrefSize(1000, 310);
+			this.setRight(buttonsPane);
+			this.setLeft(timeline_container);
 		}
-		
-		timelineGrid = new BoxLink(0, span, bigArr);
-		StackPane.setAlignment(timelineGrid, Pos.CENTER);
-		this.getChildren().add(timelineGrid);
-		this.getChildren().add(eventGrid);	
-		if (diffDays >= 14){
-		timelineSlider.setMin(0);
-		timelineSlider.setMax(diffDays - span + 1);
-		timelineSlider.setMaxWidth(1000);
-		
-		timelineSlider.valueProperty().addListener(
-				property -> timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, bigArr));
-		this.getChildren().add(timelineSlider);
-		StackPane.setAlignment(timelineSlider, Pos.BOTTOM_CENTER);		
+
+		else if (dayLevel == false) {
+			this.getChildren().clear();
+			
+			if (this.getMonthsLength() < 7) {
+				span = (int) this.getMonthsLength();
+			} else {
+				span = 7;
+			}
+			long diffMonths = getMonthsLength() - 1;
+
+			timelineGrid = new BoxLink(0, span, dayLevel, startDate, endDate);
+			eventGrid = new EventBoxLink(getStart(), span, dayLevel);
+			timeline.getChildren().addAll(timelineGrid, eventGrid);
+
+			if (diffMonths >= 7) {
+				timelineSlider.setMin(0);
+				timelineSlider.setMax(diffMonths - span + 1);
+				timelineSlider.setMaxWidth(1000);
+				timelineSlider.valueProperty().addListener(property -> {
+					timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, dayLevel, startDate,
+							endDate);
+				});
+				this.setBottom(timelineSlider);
+			}	
+			timeline_container.setContent(timeline);
+			timeline_container.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+			timeline_container.setHbarPolicy(ScrollBarPolicy.NEVER);
+			timeline_container.setPrefSize(1000, 310);
+			this.setRight(buttonsPane);
+			this.setLeft(timeline_container);
 		}
 	}
-	
-	/**
-	 * Rebuilds the timeline view.
-	 * This is used when switching between timelines to re-draw the content.
-	 */
-	public void reDraw() {
-		this.getChildren().remove(eventGrid);
-		this.getChildren().add(eventGrid);
-		this.getChildren().remove(timelineGrid);
-		this.getChildren().add(timelineGrid);
-		this.getChildren().remove(timelineSlider);
-		this.getChildren().add(timelineSlider);
-		timelineGrid.setBoxLink((int) Math.round(timelineSlider.getValue()), span, bigArr);
-	}
-	
+
 	/**
 	 * Opens up a new window and lets you search for individual events
 	 * and choose to modify or delete them.
@@ -406,10 +562,10 @@ public class Timeline extends StackPane{
 	public void searchEvent() {
 		//Container for the entire search event window.
 		GridPane pane_container = new GridPane();
-		pane_container.setPadding(new Insets(10,10,10,10));
+		pane_container.setPadding(new Insets(10, 10, 10, 10));
 		pane_container.setHgap(10.0);
 		pane_container.setVgap(10.0);
-		
+    
 		// Container for the search bar and search button.
 		HBox search_event_name = new HBox();
 		TextField titleField = new TextField();
@@ -540,26 +696,23 @@ public class Timeline extends StackPane{
 		// Container for the editor.
 		VBox editor_container = new VBox();
 		editor_container.setPrefSize(600, 300);
-		editor = new EventEditor(null,null,null,null,null,null,null);
+		editor = new EventEditor(null, null, null, null, null, null, null);
+
 		editor_container.getChildren().add(editor);
 		StackPane.setAlignment(editor_container, Pos.CENTER);
 		
 		// Cancel button that asks for confirmation of the cancel of modifying or deleting target event.
 		cancel.setOnAction(cancelEvent -> {
-			Alert closeConfirmation = new Alert(
-					Alert.AlertType.CONFIRMATION,
+			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 					"Are you sure you want to cancel modifying an event?");
-			cancel = (Button) closeConfirmation.getDialogPane().lookupButton(
-					ButtonType.OK);
+			cancel = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (!ButtonType.OK.equals(closeResponse.get())) {
 				cancelEvent.consume();
-			}
-			else
-			{	
-				((Node)(cancelEvent.getSource())).getScene().getWindow().hide();
+			} else {
+				((Node) (cancelEvent.getSource())).getScene().getWindow().hide();
 			}
 		});
 		
@@ -624,8 +777,9 @@ public class Timeline extends StackPane{
 		StackPane.setAlignment(editor, Pos.CENTER);
 		editor_container.getChildren().add(editor);
 		
+
 		HBox buttons_container = new HBox();
-		buttons_container.setPadding(new Insets(10,10,10,10));
+		buttons_container.setPadding(new Insets(10, 10, 10, 10));
 		buttons_container.setSpacing(10);
 		buttons_container.getChildren().addAll(Changebt,delete,cancel);
 		
@@ -636,6 +790,7 @@ public class Timeline extends StackPane{
 		pane_container.add(buttons_container, 0, 1);
 		
 		// Build the window and display it.
+
 		Scene mainScene = new Scene(pane_container);
 		Stage stage = new Stage();
 		stage.setHeight(500);
@@ -644,5 +799,6 @@ public class Timeline extends StackPane{
 		stage.setTitle("Event Editor");
 		stage.setResizable(false);
 		stage.showAndWait();
+		this.setEventGrid();
 	}
 }

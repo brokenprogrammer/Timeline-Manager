@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox id="menuItem_navigationBar_container" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.timelinemanager.controller.NavigationController">
    <children>
-      <MenuBar id="menu_navigationBar" fx:id="navigationMenu">
+      <MenuBar id="menu_navigationBar" fx:id="navigationMenu" stylesheets="@style.css">
          <menus>
             <Menu id="menuItem_file" mnemonicParsing="false" text="File">
                <items>
-                  <Menu fx:id="menuItem_new" mnemonicParsing="false" text="New" >
+                  <Menu id="newMenuButton" fx:id="menuItem_new" mnemonicParsing="false" text="New">
                   	<items>
                   		<MenuItem fx:id="menuItem_newTimeline" mnemonicParsing="false" text="Timeline" />
                   		<MenuItem fx:id="menuItem_newEvent" mnemonicParsing="false" text="Event" />
                   	</items>
                   </Menu>
                   <MenuItem fx:id="menuItem_open" mnemonicParsing="false" text="Open" />
-                  <SeparatorMenuItem  />
+                  <SeparatorMenuItem />
                   <MenuItem fx:id="menuItem_save" mnemonicParsing="false" text="Save" />
                   <MenuItem fx:id="menuItem_saveAs" mnemonicParsing="false" text="Save as" />
                   <MenuItem fx:id="menuItem_close" mnemonicParsing="false" text="Close" />
-                  <SeparatorMenuItem  />
+                  <SeparatorMenuItem />
                   <MenuItem fx:id="menuItem_exit" mnemonicParsing="false" text="Exit" />
                </items>
             </Menu>
             <Menu id="menuItem_edit" mnemonicParsing="false" text="Edit">
                <items>
-                  <Menu fx:id="menuItem_timeline" mnemonicParsing="false" text="Timeline" >
+                  <Menu fx:id="menuItem_timeline" mnemonicParsing="false" text="Timeline">
                   	<items>
                   		<MenuItem fx:id="menuItem_updateTimeline" mnemonicParsing="false" text="Update Timeline" />
                   		<MenuItem fx:id="menuItem_removeTimeline" mnemonicParsing="false" text="Remove" />
                   	</items>
                   </Menu>
-                  <Menu fx:id="menuItem_event" mnemonicParsing="false" text="Event" >
+                  <Menu fx:id="menuItem_event" mnemonicParsing="false" text="Event">
                   	<items>
                   		<MenuItem fx:id="menuItem_updateEvent" mnemonicParsing="false" text="Update Event" />
                   		<MenuItem fx:id="menuItem_deleteEvent" mnemonicParsing="false" text="Delete" />
@@ -43,6 +46,7 @@
             <Menu id="menuItem_help" mnemonicParsing="false" text="Help">
                <items>
                   <MenuItem fx:id="menuItem_about" mnemonicParsing="false" text="About" />
+                  <MenuItem fx:id="menuItem_manual" mnemonicParsing="false" text="Manual" />
                </items>
             </Menu>
          </menus>

@@ -10,6 +10,7 @@ import com.timelinemanager.model.TimelineModel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -48,6 +49,8 @@ public class StageManager {
 		rootLayout.setCenter(timelineLayout);
 		
 		Scene mainScene = new Scene(rootLayout);
+		mainStage.getIcons().add(new Image("/view/img/appicon.PNG"));
+		mainScene.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 		mainStage.setOnCloseRequest(onExitCloseEverything -> System.exit(0));
 		mainStage.setScene(mainScene);
 		
