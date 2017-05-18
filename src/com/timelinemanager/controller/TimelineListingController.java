@@ -38,6 +38,7 @@ public class TimelineListingController {
 		timelineListing_anchorpane.setPrefSize(160, 500);
 		timelineListing_anchorpane.setMinSize(160, 500);
 		timelineListing_anchorpane.getChildren().add(list);
+		list.setId("timelineManagerTimelineListingList");
 		list.setPrefSize(160, 500);
 		list.setMinSize(160, 500);
 	}

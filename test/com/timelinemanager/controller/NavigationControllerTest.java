@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  * @version 0.00.00
  * @name NavigationControllerTest.java
  */
-public class NavigationControllerTest extends ApplicationTest{
+public class NavigationControllerTest extends ApplicationTest {
 	
 	Parent mainNode;
 	
@@ -55,19 +55,27 @@ public class NavigationControllerTest extends ApplicationTest{
 		moveCheckClick("File");
 		moveCheckClick("Open");
 		
+		
 		//Close open file window using ALT + F4
 		push(KeyCode.ALT, KeyCode.F4);
 		
 		moveCheckClick("File");
 		moveCheckClick("Save");
+		
 		//Close dialog window using ALT + F4
 		push(KeyCode.ALT, KeyCode.F4);
 		
 		moveCheckClick("File");
 		moveCheckClick("Save as");
 		
+		//Close dialog window using ALT + F4
+		push(KeyCode.ALT, KeyCode.F4);
+		
 		moveCheckClick("File");
 		moveCheckClick("Close");
+		
+		//Close dialog window using ALT + F4
+		push(KeyCode.ALT, KeyCode.F4);
 		
 		moveCheckClick("File");
 		
@@ -81,61 +89,48 @@ public class NavigationControllerTest extends ApplicationTest{
 		moveCheckClick("Timeline");
 		moveCheckClick("Update Timeline");
 		
+		//Close dialog window using ALT + F4
+		push(KeyCode.ALT, KeyCode.F4);
+		
 		moveCheckClick("Edit");
 		moveCheckClick("Timeline");
 		
 		moveTo("Update Timeline");
 		moveCheckClick("Remove");
 		
+		//Close dialog window using ALT + F4
+		push(KeyCode.ALT, KeyCode.F4);
+		
 		moveCheckClick("Edit");
 		moveCheckClick("Event");
 		moveCheckClick("Update Event");
+		
+		//Close dialog window using ALT + F4
+		push(KeyCode.ALT, KeyCode.F4);
 		
 		moveCheckClick("Edit");
 		moveCheckClick("Event");
 		
 		moveTo("Update Event");
 		moveCheckClick("Delete");
+		
+		//Close dialog window using ALT + F4
+		push(KeyCode.ALT, KeyCode.F4);
 	}
 	
 	@Test
 	public void allHelpButtonsClickable() {
 		moveCheckClick("Help");
 		moveCheckClick("About");
-	}
-	
-	@Test
-	public void createTimeline() {
-		moveCheckClick("File");
-		moveCheckClick("New");
-		moveCheckClick("Timeline");
 		
-		clickWriteCheckText("#timelineTitle", "My Automated Title");
-		clickWriteCheckText("#timelineDescription", "My Automated Description");
+		//Close dialog window using ALT + F4
+		push(KeyCode.ALT, KeyCode.F4);
 		
-		checkNotNullClickWrite("#datePicker_startDate", "2017-05-01");
-		checkNotNullClickWrite("#datePicker_endDate", "2017-05-31");
+		moveCheckClick("Help");
+		moveCheckClick("Manual");
 		
-		moveTo("#createTimelineButton");
-		clickOn("#createTimelineButton");
-	}
-	
-	@Test
-	public void cancelCreateTimeline() {
-		moveCheckClick("File");
-		moveCheckClick("New");
-		moveCheckClick("Timeline");
-		
-		clickWriteCheckText("#timelineTitle", "My Automated Title");
-		clickWriteCheckText("#timelineDescription", "My Automated Description");
-		
-		checkNotNullClickWrite("#datePicker_startDate", "2017-04-01");
-		checkNotNullClickWrite("#datePicker_endDate", "2017-04-26");
-		
-		moveTo("#cancelCreateTimeline");
-		clickOn("#cancelCreateTimeline");
-		moveTo("OK");
-		clickOn("OK");
+		//Close dialog window using ALT + F4
+		push(KeyCode.ALT, KeyCode.F4);
 	}
 	
 	/**
@@ -149,33 +144,5 @@ public class NavigationControllerTest extends ApplicationTest{
 		moveTo(target);
 		verifyThat(target, NodeMatchers.hasText(target));
 		clickOn(target);
-	}
-	
-	/**
-	 * Performs the actions of clicking a specified target
-	 * then writing a specified text then verifying that the text
-	 * has been added to the target. 
-	 * 
-	 * @param target - Target to click and write to.
-	 * @param text - Text to write to the target.
-	 */
-	private void clickWriteCheckText(String target, String text) {
-		clickOn(target);
-		write(text);
-		verifyThat(target, NodeMatchers.hasText(text));
-	}
-	
-	/**
-	 * Performs the actions of checking if the target UI element 
-	 * exists and not null then proceeds with clicking the target 
-	 * and writing the specified text to it.
-	 * 
-	 * @param target - To click and write to.
-	 * @param text - Text to write to the target.
-	 */
-	private void checkNotNullClickWrite(String target, String text) {
-		verifyThat(target, NodeMatchers.isNotNull());
-		clickOn(target);
-		write(text);
 	}
 }
