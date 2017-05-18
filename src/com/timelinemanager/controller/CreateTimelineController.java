@@ -110,7 +110,7 @@ public class CreateTimelineController {
 						LocalTime.now().plusHours(1));
 
 				this.timelineModel.setTimeline(newTimeline);
-        this.timelineModel.getLoadedTimelines().add(newTimeline);
+				this.timelineModel.getLoadedTimelines().add(newTimeline);
 				((Node) (createTimeline.getSource())).getScene().getWindow().hide();
 			}
 		});
