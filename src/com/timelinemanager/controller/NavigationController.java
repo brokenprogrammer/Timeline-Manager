@@ -238,7 +238,7 @@ public class NavigationController {
 		menuItem_save.setOnAction(saveTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
-						"There is no timeline to save, please create a timeline before saving.");
+						"There is no timeline to save, please open or create a timeline before saving.");
 				noTimeline.setHeaderText("No Timeline to save.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
@@ -260,7 +260,7 @@ public class NavigationController {
 		menuItem_saveAs.setOnAction(saveAsTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline1 = new Alert(Alert.AlertType.WARNING,
-						"There is no timeline to save, create a timeline before saving.");
+						"There is no timeline to save, please open or create a timeline before saving.");
 				noTimeline1.setHeaderText("No Timeline to save.");
 				noTimeline1.initModality(Modality.APPLICATION_MODAL);
 				Stage stage1 = (Stage) noTimeline1.getDialogPane().getScene().getWindow();
@@ -295,7 +295,7 @@ public class NavigationController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Timeline Error");
 				alert.setContentText(
-						"There is no currently active timeline. Please create a timeline before updating!");
+						"There is no currently active timeline. Please open or create a timeline before updating!");
 				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
 				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				alert.showAndWait();
