@@ -165,15 +165,18 @@ public class CreateEventController {
 			fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
 			File file = fileChooser.showOpenDialog(null);
-			imageURL = file.toURI().toString();
-			Image image1 = new Image(file.toURI().toString());
-			eventImage.setImage(image1);
-			eventImage.setPreserveRatio(true);
-			eventImage.setFitWidth(189.0);
-			eventImage.setFitHeight(128.0);
-			eventImage.setSmooth(true);
-			eventImage.setCache(true);
-			addImageLabel.setVisible(false);
+
+      if(file != null){
+			  imageURL = file.toURI().toString();
+			  Image image1 = new Image(file.toURI().toString());
+			  eventImage.setImage(image1);
+			  eventImage.setPreserveRatio(true);
+			  eventImage.setFitWidth(189.0);
+			  eventImage.setFitHeight(128.0);
+			  eventImage.setSmooth(true);
+			  eventImage.setCache(true);
+			  addImageLabel.setVisible(false);
+      }
 		});
 
 		// ActionEvent for the cancel button inside the "Create new event"
