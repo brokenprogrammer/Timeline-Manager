@@ -41,6 +41,10 @@ public class EventEditor extends GridPane{
 	
 	public EventEditor(String title,String description,String picture,LocalDate startDate,LocalDate endDate,LocalTime startTime,LocalTime endTime){
 		
+		eventStartDate.setId("datepickerStart");
+		eventEndDate.setId("datepickerEnd");
+		titleField.setId("eventEditorTitleField");
+		descriptionField.setId("eventEditorDescriptionField");
 		titleField.setText(title);
 		this.add(titleField, 0, 0);
 		titleField.setMinWidth(450);
@@ -48,9 +52,9 @@ public class EventEditor extends GridPane{
 
 		descriptionField.setText(description);
 		descriptionField.setMinHeight(130);
-		descriptionField.setMinWidth(220);
+		descriptionField.setMinWidth(280);
 		descriptionField.setMaxHeight(130);
-		descriptionField.setMaxWidth(220);
+		descriptionField.setMaxWidth(280);
 		GridPane.setMargin(descriptionField, new Insets(15, 0, 0, 80));
 
 		this.add(descriptionField, 0, 1);
@@ -127,7 +131,7 @@ public class EventEditor extends GridPane{
 		this.add(eventEndDate, 0, 3);
 		GridPane.setMargin(eventEndDate, new Insets(15, 0, 0, 360));
 
-		this.setStyle("-fx-background-color: whitesmoke;");
+		this.setStyle("-fx-background-color: #B0C4DE;");
 		this.setMinSize(600	, 300);
 	}
 	
