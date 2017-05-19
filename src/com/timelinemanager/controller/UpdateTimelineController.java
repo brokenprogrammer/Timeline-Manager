@@ -1,8 +1,10 @@
 package com.timelinemanager.controller;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Optional;
 
+import com.timelinemanager.Entity.Event;
 import com.timelinemanager.Entity.Timeline;
 import com.timelinemanager.model.TimelineModel;
 
@@ -117,8 +119,48 @@ public class UpdateTimelineController {
 				alert.showAndWait();
 				
 			} else {
-				this.timelineModel.setTimeline(updatedTimeline);
-				((Node) (ev.getSource())).getScene().getWindow().hide();
+				boolean eventsChecked = true;
+				Timeline t = new Timeline(updateTimelineTitle.getText(), updateTimelineDescription.getText(),
+						start, end, LocalTime.now(), LocalTime.now().plusHours(1));
+				
+				// Check so that all events are within the timespan of the new timeline.
+				for (Event e : this.timelineModel.getTimeline().getValue().eventArr) {
+					if (e.getStartDate().isBefore(t.getStartDate()) || e.getStartDate().isAfter(t.getEndDate())) {
+						eventsChecked = false;
+						
+						Alert alert = new Alert(AlertType.ERROR);
+						DialogPane dialogPane = alert.getDialogPane();
+						dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
+						alert.setTitle("Error Dialog");
+						alert.setHeaderText("Date Error");
+						alert.setContentText("All the events start dates are not within the timelines timespan!");
+						alert.showAndWait();
+					} else if (e.getEndDate().isBefore(t.getStartDate()) || e.getEndDate().isAfter(t.getEndDate())) {
+						eventsChecked = false;
+						
+						Alert alert = new Alert(AlertType.ERROR);
+						DialogPane dialogPane = alert.getDialogPane();
+						dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
+						alert.setTitle("Error Dialog");
+						alert.setHeaderText("Date Error");
+						alert.setContentText("All the events end dates are not within the timelines timespan!");
+						alert.showAndWait();
+					}
+				}
+				
+				
+				if (eventsChecked) {
+					// Add all the events to the newly constructed timeline.
+					for (Event e : this.timelineModel.getTimeline().getValue().eventArr) {
+						t.addEvent(e);
+					}
+					
+					// Update the model with the new timeline and update the list with loaded timelines as well.
+					this.timelineModel.setTimeline(t);
+					int indx = this.timelineModel.getLoadedTimelines().indexOf(updatedTimeline);
+					this.timelineModel.getLoadedTimelines().set(indx, t);
+					((Node) (ev.getSource())).getScene().getWindow().hide();
+				}
 			}
 		});
 
