@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -553,16 +554,19 @@ public class Timeline extends BorderPane {
 	public void searchEvent() {
 		//Container for the entire search event window.
 		GridPane pane_container = new GridPane();
+		pane_container.getStyleClass().add("editEventPane_Container");
 		pane_container.setPadding(new Insets(10, 10, 10, 10));
 		pane_container.setHgap(10.0);
 		pane_container.setVgap(10.0);
     
 		// Container for the search bar and search button.
 		HBox search_event_name = new HBox();
+		search_event_name.getStyleClass().add("search_event_name_HBox");
 		TextField titleField = new TextField();
 		titleField.setPromptText("Event Title");
 		search_event_name.getChildren().add(titleField);
 		Button event_search = new Button("Search");
+		event_search.getStyleClass().add("event_search_Button");
 		search_event_name.getChildren().add(event_search);
 		
 		// Make sure the observable event list is updated.
@@ -750,6 +754,8 @@ public class Timeline extends BorderPane {
 			Alert Confirmation = new Alert(
 					Alert.AlertType.CONFIRMATION,
 					"Are you sure you want to delete this event?");
+			DialogPane dialogPane = Confirmation.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			Confirmation.setHeaderText("Confirm Exit");
 			Confirmation.initModality(Modality.APPLICATION_MODAL);
 			Optional<ButtonType> Response = Confirmation.showAndWait();
@@ -770,6 +776,7 @@ public class Timeline extends BorderPane {
 		
 
 		HBox buttons_container = new HBox();
+		buttons_container.getStyleClass().add("buttons_container_HBox");
 		buttons_container.setPadding(new Insets(10, 10, 10, 10));
 		buttons_container.setSpacing(10);
 		buttons_container.getChildren().addAll(Changebt,delete,cancel);
@@ -783,6 +790,11 @@ public class Timeline extends BorderPane {
 		// Build the window and display it.
 
 		Scene mainScene = new Scene(pane_container);
+		Changebt.setId("editorButton");
+		cancel.setId("editorButton");
+		delete.setId("editorButton");
+		String style= getClass().getResource("/view/style.css").toExternalForm();
+		mainScene.getStylesheets().add(style);
 		Stage stage = new Stage();
 		stage.setHeight(500);
 		stage.setWidth(620);
