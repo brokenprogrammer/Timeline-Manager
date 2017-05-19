@@ -627,6 +627,7 @@
     -fx-background-radius: 1,2,1;
     -fx-padding: 3 12 3 12;
 	-fx-border-color:white;
+	-fx-border-width:1.2;
 }
 /*===== EVENT RECTANGLE WITH OVER 80 WIDTH====*/
 .eventRectangleOver80{
@@ -735,4 +736,68 @@
 	-fx-background-color: #087cc4;
 	-fx-border-color: #204d74;
 	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);
+}
+/************************************************************
+*	    		  EVENT EDITOR			    *
+*************************************************************/
+.editEventPane_Container{
+	-fx-background-color:#B0C4DE;
+}
+.search_event_name_HBox{
+	-fx-background-color:#B0C4DE;
+}
+.search_event_name_Textfield{
+	
+}
+.event_search_Button{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+	-fx-background-radius: 3px,3px,2px,1px;
+	-fx-background-color: #0a9bf5;
+	-fx-min-width: 90px;
+	-fx-max-width: 90px;
+	-fx-translate-x: 10;
+	-fx-min-height: 30px;
+	-fx-max-height: 30px;
+}
+.editor_container_VBox{
+	-fx-background-color:#B0C4DE;
+}
+.buttons_container_HBox{
+}
+#editorButton{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+	-fx-background-radius: 3px,3px,2px,1px;
+	-fx-background-color: #0a9bf5;
+	-fx-translate-x: -90;
+	-fx-translate-y: 40;
+	-fx-min-width: 90px;
+	-fx-max-width: 90px;
+}
+#datepickerStart{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-min-height: 30px;
+	-fx-max-height: 30px;
+	-fx-min-width: 200px;
+	-fx-max-width: 200px;
+	-fx-translate-x: -38;
+}
+#datepickerEnd{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-min-height: 30px;
+	-fx-max-height: 30px;
+	-fx-min-width: 200px;
+	-fx-max-width: 200px;
+	-fx-translate-x: -28;
+}
+#eventEditorTitleField{
+	-fx-translate-x: -30;
+}
+#eventEditorDescriptionField{
+	-fx-translate-x: -30;
 }
