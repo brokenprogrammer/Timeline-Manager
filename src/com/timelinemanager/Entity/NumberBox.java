@@ -46,6 +46,7 @@ public class NumberBox extends BorderPane{
 		this.setCenter(numText);
 		}
 		else{
+			setId("timelineManagerNumberBox");
 			temp = LocalDate.of(2014, 01, 01);
 			Text numText = new Text(temp.withMonth(num).getMonth().toString());
 //			int length = temp.withMonth(num).getMonth().length(false);
