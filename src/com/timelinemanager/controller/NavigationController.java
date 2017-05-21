@@ -403,7 +403,8 @@ public class NavigationController {
 			alert.setTitle("About TimelineManager");
 			alert.setHeaderText(null);
 			alert.setContentText("This is a timeline managing application created by Group8." + "\nWe are.. "
-					+ "\n\n\t\tMendel Oskar" + "\n\t\tAlhrazy Waeel" + "\n\t\tZhao Shizhen" + "\n\t\tModic Milan"
+					+ "\n\n\t\tMendel Oskar" + "\n\t\tNasrini Mohammed Basel"
+					+ "\n\t\tAlhrazy Waeel" + "\n\t\tZhao Shizhen" + "\n\t\tModic Milan"
 					+ "\n\t\tMironov Georgiana" + "\n\t\tArgyriou Dimitrios"
 					+ "\n\nAll resources used in the making of this application are used under a Creative Commons license. Futhermore, the application itself is under the MIT License. ");
 			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
