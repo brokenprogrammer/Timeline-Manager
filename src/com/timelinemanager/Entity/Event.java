@@ -837,9 +837,11 @@ public class Event extends StackPane {
 		this.setMaxSize(width, level);
 		
 		Rectangle rectangle = new Rectangle(width, 20, Color.DARKCYAN);
+		rectangle.getStyleClass().add("monthEventElementRect");
 
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 		Text text = new Text(this.getTitle());
+		text.setId("monthEventElementText");
 
 		setToolTip();
 		Tooltip.install(rectangle, tooltip);
@@ -852,12 +854,14 @@ public class Event extends StackPane {
 		StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
 
 		Line lineleft = new Line(0, 0, 0, level - 5);
+		lineleft.getStyleClass().add("leftLine");
 		lineleft.setStrokeWidth(2);
 		lineleft.getStrokeDashArray().addAll(6d, 15d);
 		lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 		StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
 		
 		Line lineright = new Line(width - 10, level - 5, width - 10, 0);
+		lineright.getStyleClass().add("rightLine");
 		lineright.setStrokeWidth(2);
 		lineright.getStrokeDashArray().addAll(6d, 15d);
 		lineright.setStrokeLineCap(StrokeLineCap.ROUND);
@@ -885,11 +889,13 @@ public class Event extends StackPane {
 		this.setMaxSize(width, newlevel);
 
 		Rectangle rectangle = new Rectangle(width, 20, Color.DARKCYAN);
+		rectangle.getStyleClass().add("monthEventElementWithLevel");
 		
 		this.setPickOnBounds(false);
 
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 		Text text = new Text(this.getTitle());
+		text.setId("monthEventElementWithLevelText");
 		Font font = new Font("SansSerif", 20);
 		text.setFont(font);
 		text.setFill(Color.BLACK);
@@ -901,11 +907,13 @@ public class Event extends StackPane {
 		
 		
 		Line lineleft = new Line(0, 0, 0, newlevel - 5);
+		lineleft.getStyleClass().add("leftLine");
 		lineleft.setStrokeWidth(2);
 		lineleft.getStrokeDashArray().addAll(6d, 15d);
 		lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 		StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
 		Line lineright = new Line(width - 10, newlevel - 5, width - 10, 0);
+		lineright.getStyleClass().add("rightLine");
 		lineright.setStrokeWidth(2);
 		lineright.getStrokeDashArray().addAll(6d, 15d);
 		lineright.setStrokeLineCap(StrokeLineCap.ROUND);
