@@ -46,18 +46,15 @@ public class NumberBox extends BorderPane{
 		this.setCenter(numText);
 		}
 		else{
+			setId("timelineManagerNumberBox");
 			temp = LocalDate.of(2014, 01, 01);
 			Text numText = new Text(temp.withMonth(num).getMonth().toString());
-//			int length = temp.withMonth(num).getMonth().length(false);
 			Font font = new Font("SansSerif", 20);
 			numText.setFont(font);
 			numText.setFill(Color.BLACK);
 			javafx.scene.paint.Color color = javafx.scene.paint.Color.rgb(250, 124,0, 1.0);
 			this.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
-
 			this.setMinSize(142, 40);
-			
-			
 				
 			this.setCenter(numText);
 		}

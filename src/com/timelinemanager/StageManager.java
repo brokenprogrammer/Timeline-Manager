@@ -55,9 +55,9 @@ public class StageManager {
 		mainStage.setScene(mainScene);
 		
 		// Locking window size
-		mainStage.setMinWidth(1325);
+		mainStage.setMinWidth(1280);
 		mainStage.setMinHeight(600);
-		mainStage.setMaxWidth(1325);
+		mainStage.setMaxWidth(1280);
 		mainStage.setMaxHeight(600);
         
 		mainStage.show();
