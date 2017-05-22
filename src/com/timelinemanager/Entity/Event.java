@@ -43,7 +43,7 @@ public class Event extends StackPane {
 	/**
 	 * Create an empty event
 	 */
-	public Event () {
+	public Event() {
 		setId("timelineManagerEvent");
 	}
 
@@ -66,15 +66,15 @@ public class Event extends StackPane {
 	public Event(String ti, String des, LocalDate inStartDate, LocalDate inEndDate, LocalTime inStartTime,
 			LocalTime inEndTime) {
 		title = ti;
-		description = des ;
-		startDate = inStartDate ;
-		endDate = inEndDate ;
-		startTime = inStartTime ;
-		endTime = inEndTime ;
-		
+		description = des;
+		startDate = inStartDate;
+		endDate = inEndDate;
+		startTime = inStartTime;
+		endTime = inEndTime;
+
 		setId("timelineManagerEvent");
-		
-		setEventElement() ;
+
+		setEventElement();
 	}
 
 	/**
@@ -98,15 +98,15 @@ public class Event extends StackPane {
 	public Event(String ti, String des, String pic, LocalDate inStartDate, LocalDate inEndDate, LocalTime inStartTime,
 			LocalTime inEndTime) {
 		title = ti;
-		description = des ;
-		startDate = inStartDate ;
-		endDate = inEndDate ;
-		startTime = inStartTime ;
-		endTime = inEndTime ;
-		picture = pic ;
-		
+		description = des;
+		startDate = inStartDate;
+		endDate = inEndDate;
+		startTime = inStartTime;
+		endTime = inEndTime;
+		picture = pic;
+
 		setId("timelineManagerEvent");
-    
+
 		setInformation();
 		if (inEndDate != null)
 			setEventElement();
@@ -129,13 +129,13 @@ public class Event extends StackPane {
 	 */
 	public Event(String ti, String des, LocalDate inDate, LocalTime inTime) {
 		title = ti;
-		description = des ;
-		startDate = inDate ;
-		startTime = inTime ;
-		
+		description = des;
+		startDate = inDate;
+		startTime = inTime;
+
 		setId("timelineManagerEvent");
-		
-		setEventWithoutDuraElement() ;
+
+		setEventWithoutDuraElement();
 	}
 
 	/**
@@ -154,20 +154,22 @@ public class Event extends StackPane {
 	 */
 	public Event(String ti, String des, String pic, LocalDate inDate, LocalTime inTime) {
 		title = ti;
-		description = des ;
-		picture = pic ;
-		startDate = inDate ;
-		startTime = inTime ;
-		
+		description = des;
+		picture = pic;
+		startDate = inDate;
+		startTime = inTime;
+
 		setId("timelineManagerEvent");
-		
-		setEventWithoutDuraElement() ;
+
+		setEventWithoutDuraElement();
 
 	}
 
 	/**
 	 * Create an event as a copy of the given event
-	 * @param in An event
+	 * 
+	 * @param in
+	 *            An event
 	 */
 	public Event(Event in) {
 		this.title = in.title;
@@ -178,17 +180,17 @@ public class Event extends StackPane {
 		this.endDate = in.endDate;
 		this.endTime = in.endTime;
 
-    setId("timelineManagerEvent");
-      
+		setId("timelineManagerEvent");
+
 		if (in.getEndDate() != null) {
 			setInformation();
 			this.inf_start = in.inf_start;
-			this.inf_end = in.inf_end ;
+			this.inf_end = in.inf_end;
 			setEventElement();
 		} else {
 			setInformation();
 			this.inf_start = in.inf_start;
-			this.inf_end = in.inf_end ;
+			this.inf_end = in.inf_end;
 			setEventWithoutDuraElement();
 		}
 
@@ -210,20 +212,20 @@ public class Event extends StackPane {
 		this.startTime = in.startTime;
 		if (in.picture != null)
 			this.picture = in.picture;
-    
-      setId("timelineManagerEvent");
-      
+
+		setId("timelineManagerEvent");
+
 		if (in.endDate != null) {
 			this.endDate = in.endDate;
 			this.endTime = in.endTime;
 			setInformation();
 			this.inf_start = in.inf_start;
-			this.inf_end = in.inf_end ;
+			this.inf_end = in.inf_end;
 			setElementWithLevel(l);
 		} else {
 			setInformation();
 			this.inf_start = in.inf_start;
-			this.inf_end = in.inf_end ;
+			this.inf_end = in.inf_end;
 			setElementWithoutDuraWithLevel(l);
 
 		}
@@ -242,7 +244,7 @@ public class Event extends StackPane {
 
 		setInformation();
 		this.inf_start = in.inf_start;
-		this.inf_end = in.inf_end ;
+		this.inf_end = in.inf_end;
 		setMonthEventElement();
 
 	}
@@ -258,7 +260,7 @@ public class Event extends StackPane {
 		this.endTime = in.endTime;
 		setInformation();
 		this.inf_start = in.inf_start;
-		this.inf_end = in.inf_end ;
+		this.inf_end = in.inf_end;
 		setMonthEventElementWithLevel(l);
 	}
 
@@ -273,11 +275,11 @@ public class Event extends StackPane {
 		this.endTime = in.endTime;
 		setInformation();
 		this.inf_start = in.inf_start;
-		this.inf_end = in.inf_end ;
+		this.inf_end = in.inf_end;
 		setEventWithoutDuraElement();
 	}
 
-	public Event(Event in, int l, boolean b , boolean c) {
+	public Event(Event in, int l, boolean b, boolean c) {
 		this.title = in.title;
 		this.description = in.description;
 		this.startDate = in.startDate;
@@ -288,11 +290,11 @@ public class Event extends StackPane {
 		this.endTime = in.endTime;
 		setInformation();
 		this.inf_start = in.inf_start;
-		this.inf_end = in.inf_end ;
+		this.inf_end = in.inf_end;
 		setElementWithoutDuraWithLevel(l);
 	}
-	
-	public Event(Event in,String s) {
+
+	public Event(Event in, String s) {
 		this.title = in.title;
 		this.description = in.description;
 		this.startDate = in.startDate;
@@ -539,13 +541,13 @@ public class Event extends StackPane {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Title:" + this.getTitle() + "\n");
 		sb.append("Description:" + this.getDescription() + "\n");
-		
+
 		if (this.getPic() != null) {
 			sb.append("Image:" + this.getPic() + "\n");
 		} else {
 			sb.append("Image:\n");
 		}
-		
+
 		sb.append("Start Date:" + this.getStartDate().toString() + "\n");
 
 		if (this.endDate != null) {
@@ -574,35 +576,41 @@ public class Event extends StackPane {
 		this.inf_title = title;
 		this.inf_description = description;
 		this.inf_picture = picture;
-		this.inf_start = startTime.toString().substring(0, 8) + " " + startDate.toString();
+		this.inf_start = startTime.toString().substring(0, 5) + " " + startDate.toString();
 		if (endDate != null)
-			this.inf_end = "To:     " + endTime.toString().substring(0, 8) + " " + endDate.toString();
-		else{
+			this.inf_end = "To:     " + endTime.toString().substring(0, 5) + " " + endDate.toString();
+		else {
 			this.inf_end = "";
 		}
 	}
 
 	public void set_Information(LocalDate inStartDate, LocalDate inEndDate, LocalTime inStartTime,
 			LocalTime inEndTime) {
-		this.inf_start = inStartTime.toString().substring(0, 8) + " " + inStartDate.toString();
+		this.inf_start = inStartTime.toString().substring(0, 5) + " " + inStartDate.toString();
 		if (inEndDate != null)
-			this.inf_end = "To:     " + inEndTime.toString().substring(0, 8) + " " + inEndDate.toString();
-		else{
+			this.inf_end = "To:     " + inEndTime.toString().substring(0, 5) + " " + inEndDate.toString();
+		else {
 			this.inf_end = "";
 		}
-			
+
 	}
 
 	public Tooltip setToolTip() {
 
 		String time_str;
-		if (endDate == null ) {
+		String inf_string = null;
+		if (endDate == null) {
 			time_str = "At: " + this.inf_start;
 		} else {
 			time_str = "From: " + this.inf_start + "\r\n" + this.inf_end;
 		}
 
-		String inf_string = inf_title + "\r\n" + time_str + "\r\n" + inf_description;
+		if (inf_description != null) {
+			inf_string = inf_title + "\r\n" + inf_description + "\r\n" + time_str;
+		} else if (inf_description == null) {
+			inf_string = inf_title + "\r\n" + time_str;
+		}
+
 		tooltip.setText(inf_string);
 		if (inf_picture == null)
 			;
@@ -626,201 +634,222 @@ public class Event extends StackPane {
 	/**
 	 * Create an event with duration UI element
 	 */
-	public void setEventElement(){
-		int width = 0 ;
-		
+	public void setEventElement() {
+		int width = 0;
+
 		LocalDateTime temp = this.getStart();
-		while (temp.isBefore(this.getEnd())){
+		while (temp.isBefore(this.getEnd())) {
 			temp = temp.plusHours(1);
-			width += 3 ;
+			width += 3;
 		}
-		
-				
-		if (width > 80){			
-			this.setMinSize(width,level);
-			
-			Rectangle rectangle = new Rectangle(width,20,Color.DARKCYAN);
-			rectangle.getStyleClass().add("eventRectangleOver80");
+
+		if (width > 80) {
+			this.setMinSize(width, level);
+			this.setMaxSize(width, level);
+
+			Rectangle rectangle = new Rectangle(width, 20, Color.DARKCYAN);
+
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-			
 			Text text = new Text(this.getTitle());
-			text.setId("textOver80");
+
+			setToolTip();
+			Tooltip.install(this, tooltip);
+			this.setPickOnBounds(false);
+
 			Font font = new Font("SansSerif", 20);
 			text.setFont(font);
 			text.setFill(Color.BLACK);
 			StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
-			
-			Line lineleft = new Line(0, 0,   0,   level);
-			lineleft.getStyleClass().add("leftLine");
+
+			Line lineleft = new Line(0, 0, 0, level - 5);
 			lineleft.setStrokeWidth(2);
-			lineleft.getStrokeDashArray().addAll(6d, 8d);
+			lineleft.getStrokeDashArray().addAll(6d, 15d);
 			lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 			StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
-			Line lineright = new Line(width-10, level,   width-10,   0);
-			lineright.getStyleClass().add("rightLine");
+			Line lineright = new Line(width - 10, level - 5, width - 10, 0);
 			lineright.setStrokeWidth(2);
-			lineright.getStrokeDashArray().addAll(6d, 8d);
+			lineright.getStrokeDashArray().addAll(6d, 15d);
 			lineright.setStrokeLineCap(StrokeLineCap.ROUND);
-			StackPane.setAlignment(lineright, Pos.TOP_RIGHT);		
-			this.getChildren().addAll(rectangle, text ,lineleft, lineright);
-		}
-		else{
-			this.setMinSize(width,level);
-			
-			Rectangle rectangle = new Rectangle(80,20,Color.DARKCYAN);
-			rectangle.getStyleClass().add("eventRectangleUnder80");
-			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);		
-			
+			StackPane.setAlignment(lineright, Pos.TOP_RIGHT);
+			this.getChildren().addAll(rectangle, text, lineleft, lineright);
+
+		} else {
+			this.setMinSize(width, level);
+			this.setMaxSize(width, level);
+
+			Rectangle rectangle = new Rectangle(80, 20, Color.DARKCYAN);
+
+			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 			Text text = new Text(this.getTitle());
-			text.setId("textUnder80");
+
+			setToolTip();
+			Tooltip.install(this, tooltip);
+
+			this.setPickOnBounds(false);
+
 			Font font = new Font("SansSerif", 20);
 			text.setFont(font);
 			text.setFill(Color.BLACK);
 			StackPane.setAlignment(text, Pos.BOTTOM_LEFT);
-			
-			Line  lineleft = new Line(0, 0,   0,   level);
-			lineleft.getStyleClass().add("leftLine");
+
+			Line lineleft = new Line(0, 0, 0, level - 5);
 			lineleft.setStrokeWidth(2);
-			lineleft.getStrokeDashArray().addAll(6d, 8d);
+			lineleft.getStrokeDashArray().addAll(6d, 15d);
 			lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 			StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
-			Line lineright = new Line(width-10, level,   width-10,   0);
-			lineright.getStyleClass().add("rightLine");
+			Line lineright = new Line(width - 10, level - 5, width - 10, 0);
 			lineright.setStrokeWidth(2);
-			lineright.getStrokeDashArray().addAll(6d, 8d);
+			lineright.getStrokeDashArray().addAll(6d, 15d);
 			lineright.setStrokeLineCap(StrokeLineCap.ROUND);
-			StackPane.setAlignment(lineright, Pos.TOP_RIGHT);	
-			
-			this.getChildren().addAll(rectangle, text ,lineleft, lineright);
+			StackPane.setAlignment(lineright, Pos.TOP_RIGHT);
+
+			this.getChildren().addAll(rectangle, text, lineleft, lineright);
+
 		}
-		
+
 	}
-	
+
 	/**
-	  * Create an event with duration UI element if it places at another level in the screen
-	 * @param a The level
+	 * Create an event with duration UI element if it places at another level in
+	 * the screen
+	 * 
+	 * @param a
+	 *            The level
 	 */
-	public void setElementWithLevel(int a){
-		int newlevel = level ;
-		newlevel = 70 * a + newlevel ;
-		int width = 0 ;
-		
-			LocalDateTime temp = this.getStart();
-			while (temp.isBefore(this.getEnd())){
-				temp = temp.plusHours(1);
-				width += 3 ;
-			}
-			
-					
-			if (width > 80){				
-				this.setMinSize(width,newlevel);
-				Rectangle rectangle = new Rectangle(width,20,Color.DARKCYAN);
-				rectangle.getStyleClass().add("eventRectangleOver80WithLevel");
-				StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-				
-				Text text = new Text(this.getTitle());
-				text.setId("textOver80WithLevel");
-				Font font = new Font("SansSerif", 20);
-				text.setFont(font);
-				text.setFill(Color.BLACK);
-				StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
-				
-				Line lineleft = new Line(0, 0,   0,   newlevel);
-				lineleft.getStyleClass().add("leftLine");
-				lineleft.setStrokeWidth(2);
-				lineleft.getStrokeDashArray().addAll(6d, 8d);
-				lineleft.setStrokeLineCap(StrokeLineCap.ROUND);				
-				StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
-				Line lineright = new Line(width-10, newlevel,   width-10,   0);
-				lineright.getStyleClass().add("rightLine");
-				lineright.setStrokeWidth(2);
-				lineright.getStrokeDashArray().addAll(6d, 8d);
-				lineright.setStrokeLineCap(StrokeLineCap.ROUND);
-
-				StackPane.setAlignment(lineright, Pos.TOP_RIGHT);				
-				this.getChildren().addAll(rectangle, text ,lineleft, lineright);
-			}
-			else{
-				this.setMinSize(width,newlevel);				
-				Rectangle rectangle = new Rectangle(80,20,Color.DARKCYAN);
-				rectangle.getStyleClass().add("eventRectangleUnder80WithLevel");
-				StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);				
-				
-				Text text = new Text(this.getTitle());
-				text.setId("textUnder80WithLevel");
-				Font font = new Font("SansSerif", 20);
-				text.setFont(font);
-				text.setFill(Color.BLACK);
-				StackPane.setAlignment(text, Pos.BOTTOM_LEFT);
-				
-				Line lineleft = new Line(0, 0,   0,   newlevel);
-				lineleft.getStyleClass().add("leftLine");
-				lineleft.setStrokeWidth(2);
-				lineleft.getStrokeDashArray().addAll(6d, 8d);
-				lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
-				StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
-
-				Line lineright = new Line(width-10, newlevel,   width-10,   0);
-				lineright.getStyleClass().add("rightLine");
-				lineright.setStrokeWidth(2);
-				lineright.getStrokeDashArray().addAll(6d, 8d);
-				lineright.setStrokeLineCap(StrokeLineCap.ROUND);
-				StackPane.setAlignment(lineright, Pos.TOP_RIGHT);
-				
-				this.getChildren().addAll(rectangle, text ,lineleft, lineright);
-			}
+	public void setElementWithLevel(int a) {
+		int newlevel = level;
+		newlevel = 70 * a + newlevel;
+		int width = 0;
+		LocalDateTime temp = this.getStart();
+		while (temp.isBefore(this.getEnd())) {
+			temp = temp.plusHours(1);
+			width += 3;
 		}
-	
-	/**
-	  * Create an event without duration UI element
-	 */
-	public void setEventWithoutDuraElement(){			
-			this.setMinSize(100,level);
-			
-			Rectangle rectangle = new Rectangle(130,20,Color.DARKCYAN);
-			rectangle.getStyleClass().add("eventRectangleNoDuration");
+
+		if (width > 80) {
+			this.setMinSize(width, newlevel);
+			this.setMaxSize(width, newlevel);
+
+			Rectangle rectangle = new Rectangle(width, 20, Color.DARKCYAN);
+
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-			
 			Text text = new Text(this.getTitle());
-			text.setId("textNoDuration");
 			Font font = new Font("SansSerif", 20);
 			text.setFont(font);
 			text.setFill(Color.BLACK);
 			StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
-			
-			Line lineleft = new Line(0, 0,   0,   level);
-			lineleft.getStyleClass().add("leftLine");
-			lineleft.setStrokeWidth(4);
-			StackPane.setAlignment(lineleft, Pos.TOP_LEFT);			
-			this.getChildren().addAll(rectangle, text ,lineleft);
+
+			setToolTip();
+			Tooltip.install(this, tooltip);
+			this.setPickOnBounds(false);
+
+			Line lineleft = new Line(0, 0, 0, newlevel - 5);
+			lineleft.setStrokeWidth(2);
+			lineleft.getStrokeDashArray().addAll(6d, 15d);
+			lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
+			StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
+			Line lineright = new Line(width - 10, newlevel - 5, width - 10, 0);
+			lineright.setStrokeWidth(2);
+			lineright.getStrokeDashArray().addAll(6d, 15d);
+			lineright.setStrokeLineCap(StrokeLineCap.ROUND);
+
+			StackPane.setAlignment(lineright, Pos.TOP_RIGHT);
+			this.getChildren().addAll(rectangle, text, lineleft, lineright);
+
+		} else {
+			this.setMinSize(width, newlevel);
+			this.setMaxSize(width, newlevel);
+
+			Rectangle rectangle = new Rectangle(80, 20, Color.DARKCYAN);
+
+			this.setPickOnBounds(false);
+
+			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
+			Text text = new Text(this.getTitle());
+			Font font = new Font("SansSerif", 20);
+			text.setFont(font);
+			text.setFill(Color.BLACK);
+			StackPane.setAlignment(text, Pos.BOTTOM_LEFT);
+
+			setToolTip();
+			Tooltip.install(this, tooltip);
+
+			Line lineleft = new Line(0, 0, 0, newlevel - 5);
+			lineleft.setStrokeWidth(2);
+			lineleft.getStrokeDashArray().addAll(6d, 15d);
+			lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
+			StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
+
+			Line lineright = new Line(width - 10, newlevel - 5, width - 10, 0);
+			lineright.setStrokeWidth(2);
+			lineright.getStrokeDashArray().addAll(6d, 15d);
+			lineright.setStrokeLineCap(StrokeLineCap.ROUND);
+			StackPane.setAlignment(lineright, Pos.TOP_RIGHT);
+
+			this.getChildren().addAll(rectangle, text, lineleft, lineright);
+
 		}
-	
+	}
+
 	/**
-	  * Create an event without duration UI element if it places at another level in the screen
-	 * @param a The level
+	 * Create an event without duration UI element
 	 */
-	public void setElementWithoutDuraWithLevel(int a){
-				int newlevel = level ;
-				newlevel = 70 * a + newlevel ;
-				this.setMinSize(100,newlevel);
-				
-				Rectangle rectangle = new Rectangle(130,20,Color.DARKCYAN);
-				rectangle.getStyleClass().add("eventRectangleNoDurationWithLevel");
-				StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-				
-				Text text = new Text(this.getTitle());
-				text.setId("textNoDurationWithLevel");
-				Font font = new Font("SansSerif", 20);
-				text.setFont(font);
-				text.setFill(Color.BLACK);
-				StackPane.setAlignment(text, Pos.BOTTOM_LEFT);
-				
-				Line lineleft = new Line(0, 0,   0,   newlevel);
-				lineleft.getStyleClass().add("leftLine");
-				lineleft.setStrokeWidth(4);				
-				StackPane.setAlignment(lineleft, Pos.TOP_LEFT);				
-				this.getChildren().addAll(rectangle, text ,lineleft);
-			}
+	public void setEventWithoutDuraElement() {
+		this.setMinSize(100, level);
+		this.setMaxSize(100, level);
+
+		Rectangle rectangle = new Rectangle(130, 20, Color.DARKCYAN);
+
+		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
+		Text text = new Text(this.getTitle());
+		Font font = new Font("SansSerif", 20);
+		text.setFont(font);
+		text.setFill(Color.BLACK);
+		StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
+
+		setToolTip();
+		Tooltip.install(this, tooltip);
+		this.setPickOnBounds(false);
+
+		Line lineleft = new Line(0, 0, 0, level - 5);
+		lineleft.setStrokeWidth(4);
+		StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
+		this.getChildren().addAll(rectangle, text, lineleft);
+
+	}
+
+	/**
+	 * Create an event without duration UI element if it places at another level
+	 * in the screen
+	 * 
+	 * @param a
+	 *            The level
+	 */
+	public void setElementWithoutDuraWithLevel(int a) {
+		int newlevel = level;
+		newlevel = 70 * a + newlevel;
+		this.setMinSize(100, newlevel);
+		this.setMaxSize(100, newlevel);
+
+		Rectangle rectangle = new Rectangle(130, 20, Color.DARKCYAN);
+		this.setPickOnBounds(false);
+
+		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
+		Text text = new Text(this.getTitle());
+		Font font = new Font("SansSerif", 20);
+		text.setFont(font);
+		text.setFill(Color.BLACK);
+		StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
+
+		setToolTip();
+		Tooltip.install(this, tooltip);
+
+		Line lineleft = new Line(0, 0, 0, newlevel - 5);
+		lineleft.setStrokeWidth(4);
+		StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
+		this.getChildren().addAll(rectangle, text, lineleft);
+
+	}
 
 	public void setMonthEventElement() {
 		double width = 0;
@@ -835,17 +864,14 @@ public class Event extends StackPane {
 		}
 		this.setMinSize(width, level);
 		this.setMaxSize(width, level);
-		
+
 		Rectangle rectangle = new Rectangle(width, 20, Color.DARKCYAN);
-		rectangle.getStyleClass().add("monthEventElementRect");
 
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 		Text text = new Text(this.getTitle());
-		text.setId("monthEventElementText");
 
 		setToolTip();
-		Tooltip.install(rectangle, tooltip);
-		Tooltip.install(text, tooltip);
+		Tooltip.install(this, tooltip);
 		this.setPickOnBounds(false);
 
 		Font font = new Font("SansSerif", 20);
@@ -854,14 +880,12 @@ public class Event extends StackPane {
 		StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
 
 		Line lineleft = new Line(0, 0, 0, level - 5);
-		lineleft.getStyleClass().add("leftLine");
 		lineleft.setStrokeWidth(2);
 		lineleft.getStrokeDashArray().addAll(6d, 15d);
 		lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 		StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
-		
+
 		Line lineright = new Line(width - 10, level - 5, width - 10, 0);
-		lineright.getStyleClass().add("rightLine");
 		lineright.setStrokeWidth(2);
 		lineright.getStrokeDashArray().addAll(6d, 15d);
 		lineright.setStrokeLineCap(StrokeLineCap.ROUND);
@@ -889,31 +913,25 @@ public class Event extends StackPane {
 		this.setMaxSize(width, newlevel);
 
 		Rectangle rectangle = new Rectangle(width, 20, Color.DARKCYAN);
-		rectangle.getStyleClass().add("monthEventElementWithLevel");
-		
+
 		this.setPickOnBounds(false);
 
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 		Text text = new Text(this.getTitle());
-		text.setId("monthEventElementWithLevelText");
 		Font font = new Font("SansSerif", 20);
 		text.setFont(font);
 		text.setFill(Color.BLACK);
 		StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
-		
+
 		setToolTip();
-		Tooltip.install(rectangle, tooltip);
-		Tooltip.install(text, tooltip);
-		
-		
+		Tooltip.install(this, tooltip);
+
 		Line lineleft = new Line(0, 0, 0, newlevel - 5);
-		lineleft.getStyleClass().add("leftLine");
 		lineleft.setStrokeWidth(2);
 		lineleft.getStrokeDashArray().addAll(6d, 15d);
 		lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 		StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
 		Line lineright = new Line(width - 10, newlevel - 5, width - 10, 0);
-		lineright.getStyleClass().add("rightLine");
 		lineright.setStrokeWidth(2);
 		lineright.getStrokeDashArray().addAll(6d, 15d);
 		lineright.setStrokeLineCap(StrokeLineCap.ROUND);

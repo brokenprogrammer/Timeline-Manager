@@ -75,7 +75,9 @@ public class EventBoxLink extends GridPane {
 	 *            Array that holds the events
 	 */
 	public void setEventBoxLink(LocalDateTime start, int span, boolean dayLevel, ArrayList<Event> inbigArr) {
+		
 		ArrayList<Event> tem = new ArrayList<Event>();
+
 		if (inbigArr.size()>0){
 			for(int i=0;i<inbigArr.size();i++){
 				tem.add(new Event(inbigArr.get(i),"initial"));
@@ -131,25 +133,25 @@ public class EventBoxLink extends GridPane {
 					tempEve.setEndTime(end.toLocalTime());
 					tempEve.setEndDate(end.toLocalDate());
 					arr.add(tempEve);
-//					tempEve = null;
+					tempEve = null;
 				} else if (a && f || e || d) {
 					Event tempEve = copyBigArr.get(m);
 					tempEve.setStartTime(start.toLocalTime());
 					tempEve.setStartDate(start.toLocalDate());
 					arr.add(tempEve);
-//					tempEve = null;
+					tempEve = null;
 				} else if (f && a || b) {
 					Event tempEve = copyBigArr.get(m);
 					tempEve.setEndTime(end.toLocalTime());
 					tempEve.setEndDate(end.toLocalDate());
 					arr.add(tempEve);
-//					tempEve = null;
+					tempEve = null;
 				} else if (f && c || e) {
 					Event tempEve = copyBigArr.get(m);
 					tempEve.setEndTime(end.toLocalTime());
 					tempEve.setEndDate(end.toLocalDate());
 					arr.add(tempEve);
-//					tempEve = null;
+					tempEve = null;
 				}
 			}
 
@@ -280,19 +282,21 @@ public class EventBoxLink extends GridPane {
 			}
 
 			int withoutLevel = 0;
-
+			
 			for (int m = 0; m < shortEvent.size(); m++) {
 				LocalDateTime temp1 = start.withDayOfMonth(1);
 				Event a = new Event(shortEvent.get(m), dayLevel, dayLevel);
 
-				if (a.getStart().isAfter(start) && a.getStart().isBefore(end)) {
+				if (a.getStartDate().isAfter(start.toLocalDate()) && a.getStartDate().isBefore(end.toLocalDate()) || a.getStartDate().isEqual(start.toLocalDate()) || a.getStartDate().isEqual(end.toLocalDate()) ) {
 					double wPos = 0;
+
 					while (temp1.isBefore(a.getStart())) {
 						double monthLength = temp1.getMonth().length(temp1.toLocalDate().isLeapYear());
 						double plusPos = 145 / monthLength;
 						wPos += plusPos;
 						temp1 = temp1.plusDays(1);
 					}
+
 					Event b = new Event(a, ++withoutLevel, dayLevel, dayLevel);
 					GridPane.setMargin(b, new Insets(0, 0, 0, wPos));
 					this.add(b, 0, 0);
@@ -403,6 +407,7 @@ public class EventBoxLink extends GridPane {
 			}
 		}
 	}
+	
 	public int getLevel(){
 		return level;
 	}
