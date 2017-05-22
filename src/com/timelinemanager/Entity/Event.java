@@ -648,9 +648,11 @@ public class Event extends StackPane {
 			this.setMaxSize(width, level);
 
 			Rectangle rectangle = new Rectangle(width, 20, Color.DARKCYAN);
+			rectangle.getStyleClass().add("eventRectangleOver80");
 
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 			Text text = new Text(this.getTitle());
+			text.setId("textOver80");
 
 			setToolTip();
 			Tooltip.install(this, tooltip);
@@ -661,14 +663,16 @@ public class Event extends StackPane {
 			text.setFill(Color.BLACK);
 			StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
 
-			Line lineleft = new Line(0, 0, 0, level - 5);
+			Line lineleft = new Line(0, 0, 0, level);
+			lineleft.getStyleClass().add("leftLine");
 			lineleft.setStrokeWidth(2);
-			lineleft.getStrokeDashArray().addAll(6d, 15d);
+			lineleft.getStrokeDashArray().addAll(6d, 8d);
 			lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 			StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
-			Line lineright = new Line(width - 10, level - 5, width - 10, 0);
+			Line lineright = new Line(width - 10, level, width - 10, 0);
+			lineright.getStyleClass().add("rightLine");
 			lineright.setStrokeWidth(2);
-			lineright.getStrokeDashArray().addAll(6d, 15d);
+			lineright.getStrokeDashArray().addAll(6d, 8d);
 			lineright.setStrokeLineCap(StrokeLineCap.ROUND);
 			StackPane.setAlignment(lineright, Pos.TOP_RIGHT);
 			this.getChildren().addAll(rectangle, text, lineleft, lineright);
@@ -678,9 +682,10 @@ public class Event extends StackPane {
 			this.setMaxSize(width, level);
 
 			Rectangle rectangle = new Rectangle(80, 20, Color.DARKCYAN);
-
+			rectangle.getStyleClass().add("eventRectangleUnder80");
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 			Text text = new Text(this.getTitle());
+			text.setId("textUnder80");
 
 			setToolTip();
 			Tooltip.install(this, tooltip);
@@ -692,14 +697,16 @@ public class Event extends StackPane {
 			text.setFill(Color.BLACK);
 			StackPane.setAlignment(text, Pos.BOTTOM_LEFT);
 
-			Line lineleft = new Line(0, 0, 0, level - 5);
+			Line lineleft = new Line(0, 0, 0, level);
+			lineleft.getStyleClass().add("leftLine");
 			lineleft.setStrokeWidth(2);
-			lineleft.getStrokeDashArray().addAll(6d, 15d);
+			lineleft.getStrokeDashArray().addAll(6d, 8d);
 			lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 			StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
-			Line lineright = new Line(width - 10, level - 5, width - 10, 0);
+			Line lineright = new Line(width - 10, level, width - 10, 0);
+			lineright.getStyleClass().add("rightLine");
 			lineright.setStrokeWidth(2);
-			lineright.getStrokeDashArray().addAll(6d, 15d);
+			lineright.getStrokeDashArray().addAll(6d, 8d);
 			lineright.setStrokeLineCap(StrokeLineCap.ROUND);
 			StackPane.setAlignment(lineright, Pos.TOP_RIGHT);
 
@@ -731,9 +738,11 @@ public class Event extends StackPane {
 			this.setMaxSize(width, newlevel);
 
 			Rectangle rectangle = new Rectangle(width, 20, Color.DARKCYAN);
-
+			rectangle.getStyleClass().add("eventRectangleOver80WithLevel");
+			
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 			Text text = new Text(this.getTitle());
+			text.setId("textOver80WithLevel");
 			Font font = new Font("SansSerif", 20);
 			text.setFont(font);
 			text.setFill(Color.BLACK);
@@ -743,12 +752,14 @@ public class Event extends StackPane {
 			Tooltip.install(this, tooltip);
 			this.setPickOnBounds(false);
 
-			Line lineleft = new Line(0, 0, 0, newlevel - 5);
+			Line lineleft = new Line(0, 0, 0, newlevel);
+			lineleft.getStyleClass().add("leftLine");
 			lineleft.setStrokeWidth(2);
-			lineleft.getStrokeDashArray().addAll(6d, 15d);
+			lineleft.getStrokeDashArray().addAll(6d, 8d);
 			lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 			StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
-			Line lineright = new Line(width - 10, newlevel - 5, width - 10, 0);
+			Line lineright = new Line(width - 10, newlevel, width - 10, 0);
+			lineright.getStyleClass().add("rightLine");
 			lineright.setStrokeWidth(2);
 			lineright.getStrokeDashArray().addAll(6d, 15d);
 			lineright.setStrokeLineCap(StrokeLineCap.ROUND);
@@ -761,11 +772,13 @@ public class Event extends StackPane {
 			this.setMaxSize(width, newlevel);
 
 			Rectangle rectangle = new Rectangle(80, 20, Color.DARKCYAN);
+			rectangle.getStyleClass().add("eventRectangleUnder80WithLevel");
 
 			this.setPickOnBounds(false);
 
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 			Text text = new Text(this.getTitle());
+			text.setId("textUnder80WithLevel");
 			Font font = new Font("SansSerif", 20);
 			text.setFont(font);
 			text.setFill(Color.BLACK);
@@ -774,15 +787,17 @@ public class Event extends StackPane {
 			setToolTip();
 			Tooltip.install(this, tooltip);
 
-			Line lineleft = new Line(0, 0, 0, newlevel - 5);
+			Line lineleft = new Line(0, 0, 0, newlevel);
+			lineleft.getStyleClass().add("leftLine");
 			lineleft.setStrokeWidth(2);
-			lineleft.getStrokeDashArray().addAll(6d, 15d);
+			lineleft.getStrokeDashArray().addAll(6d, 8d);
 			lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 			StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
 
-			Line lineright = new Line(width - 10, newlevel - 5, width - 10, 0);
+			Line lineright = new Line(width - 10, newlevel, width - 10, 0);
+			lineright.getStyleClass().add("rightLine");
 			lineright.setStrokeWidth(2);
-			lineright.getStrokeDashArray().addAll(6d, 15d);
+			lineright.getStrokeDashArray().addAll(6d, 8d);
 			lineright.setStrokeLineCap(StrokeLineCap.ROUND);
 			StackPane.setAlignment(lineright, Pos.TOP_RIGHT);
 
@@ -799,9 +814,11 @@ public class Event extends StackPane {
 		this.setMaxSize(100, level);
 
 		Rectangle rectangle = new Rectangle(130, 20, Color.DARKCYAN);
-
+		rectangle.getStyleClass().add("eventRectangleNoDuration");
+		
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 		Text text = new Text(this.getTitle());
+		text.setId("textNoDuration");
 		Font font = new Font("SansSerif", 20);
 		text.setFont(font);
 		text.setFill(Color.BLACK);
@@ -811,7 +828,8 @@ public class Event extends StackPane {
 		Tooltip.install(this, tooltip);
 		this.setPickOnBounds(false);
 
-		Line lineleft = new Line(0, 0, 0, level - 5);
+		Line lineleft = new Line(0, 0, 0, level);
+		lineleft.getStyleClass().add("leftLine");
 		lineleft.setStrokeWidth(4);
 		StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
 		this.getChildren().addAll(rectangle, text, lineleft);
@@ -832,10 +850,12 @@ public class Event extends StackPane {
 		this.setMaxSize(100, newlevel);
 
 		Rectangle rectangle = new Rectangle(130, 20, Color.DARKCYAN);
+		rectangle.getStyleClass().add("eventRectangleNoDurationWithLevel");
 		this.setPickOnBounds(false);
 
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 		Text text = new Text(this.getTitle());
+		text.setId("textNoDurationWithLevel");
 		Font font = new Font("SansSerif", 20);
 		text.setFont(font);
 		text.setFill(Color.BLACK);
@@ -844,7 +864,8 @@ public class Event extends StackPane {
 		setToolTip();
 		Tooltip.install(this, tooltip);
 
-		Line lineleft = new Line(0, 0, 0, newlevel - 5);
+		Line lineleft = new Line(0, 0, 0, newlevel);
+		lineleft.getStyleClass().add("leftLine");
 		lineleft.setStrokeWidth(4);
 		StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
 		this.getChildren().addAll(rectangle, text, lineleft);
@@ -866,9 +887,11 @@ public class Event extends StackPane {
 		this.setMaxSize(width, level);
 
 		Rectangle rectangle = new Rectangle(width, 20, Color.DARKCYAN);
+		rectangle.getStyleClass().add("monthEventElementRect");
 
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 		Text text = new Text(this.getTitle());
+		text.setId("monthEventElementText");
 
 		setToolTip();
 		Tooltip.install(this, tooltip);
@@ -879,13 +902,15 @@ public class Event extends StackPane {
 		text.setFill(Color.BLACK);
 		StackPane.setAlignment(text, Pos.BOTTOM_CENTER);
 
-		Line lineleft = new Line(0, 0, 0, level - 5);
+		Line lineleft = new Line(0, 0, 0, level);
+		lineleft.getStyleClass().add("leftLine");
 		lineleft.setStrokeWidth(2);
-		lineleft.getStrokeDashArray().addAll(6d, 15d);
+		lineleft.getStrokeDashArray().addAll(6d, 8d);
 		lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 		StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
 
-		Line lineright = new Line(width - 10, level - 5, width - 10, 0);
+		Line lineright = new Line(width - 10, level, width - 10, 0);
+		lineright.getStyleClass().add("rightLine");
 		lineright.setStrokeWidth(2);
 		lineright.getStrokeDashArray().addAll(6d, 15d);
 		lineright.setStrokeLineCap(StrokeLineCap.ROUND);
@@ -913,11 +938,13 @@ public class Event extends StackPane {
 		this.setMaxSize(width, newlevel);
 
 		Rectangle rectangle = new Rectangle(width, 20, Color.DARKCYAN);
+		rectangle.getStyleClass().add("monthEventElementWithLevel");
 
 		this.setPickOnBounds(false);
 
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
 		Text text = new Text(this.getTitle());
+		text.setId("monthEventElementWithLevelText");
 		Font font = new Font("SansSerif", 20);
 		text.setFont(font);
 		text.setFill(Color.BLACK);
@@ -926,14 +953,16 @@ public class Event extends StackPane {
 		setToolTip();
 		Tooltip.install(this, tooltip);
 
-		Line lineleft = new Line(0, 0, 0, newlevel - 5);
+		Line lineleft = new Line(0, 0, 0, newlevel);
+		lineleft.getStyleClass().add("leftLine");
 		lineleft.setStrokeWidth(2);
-		lineleft.getStrokeDashArray().addAll(6d, 15d);
+		lineleft.getStrokeDashArray().addAll(6d, 8d);
 		lineleft.setStrokeLineCap(StrokeLineCap.ROUND);
 		StackPane.setAlignment(lineleft, Pos.TOP_LEFT);
-		Line lineright = new Line(width - 10, newlevel - 5, width - 10, 0);
+		Line lineright = new Line(width - 10, newlevel, width - 10, 0);
+		lineright.getStyleClass().add("rightLine");
 		lineright.setStrokeWidth(2);
-		lineright.getStrokeDashArray().addAll(6d, 15d);
+		lineright.getStrokeDashArray().addAll(6d, 8d);
 		lineright.setStrokeLineCap(StrokeLineCap.ROUND);
 
 		StackPane.setAlignment(lineright, Pos.TOP_RIGHT);
