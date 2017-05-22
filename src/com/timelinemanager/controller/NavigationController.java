@@ -495,10 +495,8 @@ public class NavigationController {
 					} else {
 						this.timelineModel.saveTimeline();
 						System.exit(0);
-					
-				} else {
-					System.exit(0);
-				}
+					} 
+				}	
 			}
 		});
 	}
