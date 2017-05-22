@@ -56,7 +56,7 @@ public class TimelineConverter {
 				t.addEvent(readEvent(content, x + 1));
 			}
 		}
-
+		
 		return t;
 	}
 
@@ -143,20 +143,30 @@ public class TimelineConverter {
 		String[] s = new String[EVENT_FIELDS.length - 1];
 		int counter = pos;
 		int i = 0;
-
+		
 		while (counter < content.length && i + 1 < EVENT_FIELDS.length) {
 			String tmp = content[counter];
-
-			s[i] = tmp.substring(EVENT_FIELDS[i + 1].length());
-
-			counter++;
-			i++;
+			
+			if (i == 1) {
+				s[i] = "";
+				while (!tmp.contains(EVENT_FIELDS[i+2])) {
+					s[i] += tmp;
+					counter++;
+					tmp = content[counter];
+				}
+				i++;
+			} else {
+				s[i] = tmp.substring(EVENT_FIELDS[i + 1].length());
+	
+				counter++;
+				i++;
+			}
 		}
 
 		// Populate event object with data
 		Event newEvent = new Event();
 		newEvent.setTitle(s[0]);
-		newEvent.setDescription(s[1]);
+		newEvent.setDescription(s[1].substring(EVENT_FIELDS[2].length()));
 		newEvent.setStartDate(LocalDate.parse(s[3]));
 		
 		// Checks for the temprary fields, adding them if they are present.
@@ -172,7 +182,7 @@ public class TimelineConverter {
 		if (!s[6].equals("") && s[6] != null) {
 			newEvent.setEndTime(LocalTime.parse(s[6]));		
 		}
-
+		
 		return newEvent;
 	}
 }
