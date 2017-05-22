@@ -1,0 +1,20 @@
+[Timeline]
+Title:Test Timeline
+Description:lol
+Start Date:2016-05-01
+End Date:2018-05-01
+
+[Event]
+Title:Test Event
+Description:Event description
+Perhaps a list:
+1. something
+2. something
+3. something
+Image:
+Start Date:2017-05-23
+End Date:2017-05-24
+Start Time:23:30:39.128
+End Time:23:30:39.128
+
+

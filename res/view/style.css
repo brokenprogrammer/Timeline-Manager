@@ -1,0 +1,872 @@
+/************************************************************
+*	Style sheet for 'Timeline Manager'		    *
+*	version: 0.0					    *
+*	last modified: 15/5/2017			    *
+*	author: Dimitris Argyriou			    *
+*							    *
+************************************************************/
+
+/************************************************************
+*		NAVIGATION MENU BAR	    		    *
+*************************************************************/
+
+#menu_navigationBar{
+	-fx-background-color: #B0C4DE;
+	-fx-border-width: 0.3 0.3 0.3 0.3; 
+	-fx-border-color: transparent transparent #0a9bf5 transparent;
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	
+}
+
+.menu-item{
+	-fx-text-fill: white;
+	-fx-font-weight:bold;
+	-fx-font-color:white;
+
+}
+.menu-item:focused {
+     -fx-background-color: #0a9bf5;
+}
+.menu-item:focused .label {
+    -fx-text-fill: white;
+}
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color: #B0C4DE;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+/*  -fx-padding: 0.666667em 0.083333em 0.666667em 0.083333em;  8 1 8 1 */
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em; /* 4 1 8 1 */
+}
+
+.menu-bar .container .menu:openvertically .label .text{
+	-fx-background-color: #339fd6,linear-gradient(to bottom,#08c,#04c);
+	-fx-border-color: #0062b8 #0062b8 #005299 #0062b8;
+	-fx-fill:white;
+}
+
+.menu-bar .container .menu:openvertically
+{
+	-fx-fill:white;
+}
+
+
+/************************************************************
+*			LABELS				    *
+*************************************************************/
+
+/*========add event label opacity, weight and size==========*/
+#addeventlabel{
+	-fx-opacity:0.78;
+	-fx-font-weight:bold;
+	-fx-font-size:16;
+	-fx-text-fill: white;
+}
+.button .text{
+	-fx-font-weight:bold;
+}
+#TimelinesTitle .text{
+	-fx-fill:linear-gradient(to bottom,#FFF5EE,white);
+	-fx-font-family:calibri light;
+	-fx-font-size:20;
+	-fx-font-weight:bold;
+}
+
+/**************************************************************
+*	 		BUTTONS	 			      *
+***************************************************************/
+.button:focused
+{
+	-fx-effect: dropshadow(gaussian, #b4d1f3, 3, 3, 0, 0);
+}
+/*====================ADD EVENT BUTTON========================*/
+#addeventbutton{
+	-fx-background-radius: 32em;
+    -fx-min-width: 5px;
+    -fx-min-height: 5px;
+    -fx-max-width: 32px;
+    -fx-max-height: 32px;
+}
+/*====================hover state=============================*/
+#addeventbutton:hover{
+	-fx-background-color: #087cc4;
+}
+/*====================pressed state===========================*/
+#addeventbutton:pressed{
+	-fx-background-color: #087cc4;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);
+}
+#addeventbutton,#newEventCreateButton,#newEventCancelButton,#upButton,#downButton,#datePickerButton,.date-picker:editable
+,#newTimelineCreateButton, #newTimelineCancelButton, #timelineEditButton,#timelineCancelButton,.dialog-pane > .button-bar > .container > .button{
+	-fx-background-color: #0a9bf5;
+}
+/*====================ADD EVENT BUTTON========================*/
+#newEventCreateButton{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+}
+/*=====================hover state============================*/
+#newEventCreateButton:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;	
+}
+/*=====================pressed state==========================*/
+#newEventCreateButton:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);	
+}
+/*====================EVENT CANCEL BUTTON=====================*/
+#newEventCancelButton{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+}
+/*=====================hover state============================*/
+#newEventCancelButton:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;	
+}
+/*=====================pressed state==========================*/
+#newEventCancelButton:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);	
+}
+/*====================ADD TIMELINE BUTTON=====================*/
+#newTimelineCreateButton{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+}
+/*=====================hover state============================*/
+#newTimelineCreateButton:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;		
+}
+/*=====================pressed state==========================*/
+#newTimelineCreateButton:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);	
+}
+/*====================TIMELINE CANCEL BUTTON==================*/
+#newTimelineCancelButton{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+}
+/*=====================hover state============================*/
+#newTimelineCancelButton:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;	
+}
+/*=====================pressed state==========================*/
+#newTimelineCancelButton:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);
+}
+#timelineEditButton{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+}
+/*=====================hover state============================*/
+#timelineEditButton:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;
+}
+/*=====================pressed state==========================*/
+#timelineEditButton:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);
+}
+#timelineCancelButton{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+}
+/*=====================hover state============================*/
+#timelineCancelButton:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;
+}
+/*=====================pressed state==========================*/
+#timelineCancelButton:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);
+}
+
+
+/*==NEW MENU BUTTON (button from within the navigation bar) ==*/
+#newMenuButton{
+	-fx-text-color: white;
+}
+.menu .label .text
+{
+	-fx-fill: white;
+}
+
+.menu-bar .container .menu:openvertically .arrow-button .arrow
+{
+	-fx-background-color: #087cc4;
+}
+
+/************************************************************
+*			DATEPICKER 			    *
+*************************************************************/
+.date-picker:editable{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-min-height: 5px;
+	-fx-max-height: 33px;
+
+}
+.date-picker:editable:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;	
+}
+.date-picker:editable:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);	
+}
+.date-picker:editable .arrow-button{
+		-fx-background-color: #0a9bf5;
+		-fx-font-size: 17pt;
+}
+.date-picker-popup {
+     -fx-background-color:#0a9bf5;
+    -fx-background-insets: 0, 1;
+    -fx-background-radius: 0;
+    -fx-alignment: CENTER; /* VBox */
+    -fx-spacing: 0; /* VBox */
+    -fx-padding: 0.083333em; /* 1 1 1 1 */
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.2) , 12, 0.0 , 0 , 8 );
+}
+/*=====================MONTH YEAR PANE=========================*/
+.date-picker-popup > .month-year-pane {
+    -fx-padding: 0.588883em 0.5em 0.666667em 0.5em; /* 7 6 8 6 */
+    -fx-background-color:#1a73a8;
+    -fx-background-insets: 0 0 0 0, 0 0 1 0;
+}
+.date-picker-popup > * > .spinner {
+    -fx-spacing: 0.25em; /* 3 */
+    -fx-alignment: CENTER;
+    -fx-fill-height: false;
+    -fx-background-color: #B0C4DE;
+}
+.date-picker-popup > * > .spinner > .button {
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-color: #88a6cc;
+    -fx-background-radius: 0;
+}
+.date-picker-popup > * > .spinner > .button:focused {
+    -fx-background-color: #8ebedb;
+    -fx-color: -fx-hover-base;
+    -fx-background-insets: -0.2, 1, 2, -1.4, 2.6;
+}
+.date-picker-popup > * > .spinner > .button:hover {
+    -fx-color: #B0C4DE;
+}
+.date-picker-popup > * > .spinner > .button:armed {
+    -fx-color: #B0C4DE;
+}
+.date-picker-popup > * > .spinner > .left-button {
+    -fx-padding: 0 0.333333em 0 0.25em; /* 0 4 0 3 */
+}
+.date-picker-popup > * > .spinner > .right-button {
+    -fx-padding: 0 0.25em 0 0.333333em; /* 0 3 0 4 */
+}
+.date-picker-popup > * > .spinner > .button > .left-arrow,
+.date-picker-popup > * > .spinner > .button > .right-arrow {
+    -fx-background-color: white;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.333333em 0.166667em 0.333333em 0.166667em; /* 4 2 4 2 */
+    -fx-effect: dropshadow(two-pass-box , -fx-shadow-highlight-color, 1, 0.0 , 0, 1.4);
+}
+.date-picker-popup > * > .spinner > .button:hover > .left-arrow,
+.date-picker-popup > * > .spinner > .button:hover > .right-arrow {
+    -fx-background-color: white;
+}
+.date-picker-popup > * > .spinner > .button:pressed > .left-arrow,
+.date-picker-popup > * > .spinner > .button:pressed > .right-arrow {
+    -fx-background-color: white;
+}
+.date-picker-popup > * > .spinner > .button > .left-arrow {
+    -fx-padding: 0.333333em 0.25em 0.333333em 0.166667em; /* 4 3 4 2 */
+    -fx-shape: "M5.997,5.072L5.995,6.501l-2.998-4l2.998-4l0.002,1.43l-1.976,2.57L5.997,5.072z";
+    -fx-scale-shape: true;
+}
+.date-picker-popup > * > .spinner > .button > .right-arrow {
+    -fx-padding: 0.333333em 0.25em 0.333333em 0.166667em; /* 4 3 4 2 */
+    -fx-shape: "M2.998-0.07L3-1.499l2.998,4L3,6.501l-0.002-1.43l1.976-2.57L2.998-0.07z";
+    -fx-scale-shape: true;
+}
+.date-picker-popup > * > .spinner > .label {
+    -fx-alignment: CENTER;
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+}
+.date-picker-popup > .month-year-pane > .secondary-label {
+    -fx-alignment: BASELINE_CENTER;
+    -fx-padding: 0.5em 0 0 0; /* 6 0 0 0 */
+    -fx-text-fill: white;
+}
+
+.date-picker-popup > .calendar-grid {
+    -fx-background-color: #0a9bf5;
+    /*-fx-background-insets: 1 0 0 0;*/
+    -fx-padding: 0;
+}
+/*===========DATE CELLS (MON/TUE..ETC..)==*/
+.date-picker-popup > * > .date-cell {
+    -fx-background-color: #024d7a;
+    -fx-background-insets: 1, 2;
+    -fx-padding: 0;
+    -fx-alignment: BASELINE_CENTER;
+    -fx-opacity: 1.0;
+	-fx-text-fill:white;
+	-fx-font-weight:bold;
+	-fx-font-style: italic;
+}
+.date-picker-popup > * > .day-name-cell,
+.date-picker-popup > * > .week-number-cell {
+    -fx-font-size: 0.916667em;
+}
+.date-picker-popup > * > .week-number-cell {
+    -fx-padding: 0.333333em 0.583333em 0.333333em 0.583333em; /* 4 7 4 7 */
+    -fx-border-color: -fx-control-inner-background;
+    -fx-border-width: 1px;
+    -fx-background: -fx-control-inner-background;
+    -fx-background-color: -fx-background;
+    -fx-text-fill: -fx-accent;
+}
+.date-picker-popup > * > .day-cell {
+    -fx-padding: 0.333333em 0.583333em 0.333333em 0.583333em; /* 4 7 4 7 */
+    -fx-border-color: derive(-fx-selection-bar-non-focused, 60%);
+    -fx-border-width: 1px;
+    -fx-font-size: 1em;
+    -fx-background: -fx-control-inner-background;
+    -fx-background-color: #B0C4DE;/**/
+    -fx-text-fill: white;
+	-fx-font-weight:bold;
+}
+.date-picker-popup > * > .hijrah-day-cell {
+    -fx-alignment: TOP_LEFT;
+    -fx-padding: 0.083333em 0.333333em 0.083333em 0.333333em; /* 1 4 1 4 */
+    -fx-cell-size: 2.75em;
+}
+.date-picker-popup > * > .day-cell > .secondary-text {
+    -fx-fill: #78c2ed;
+}
+.date-picker-popup > * > .today {
+    -fx-background-color: #78c2ed;
+    -fx-background-insets: 1, 2, 3;
+}
+.date-picker-popup > * > .day-cell:hover,
+.date-picker-popup > * > .selected,
+.date-picker-popup > * > .previous-month.selected,
+.date-picker-popup > * > .next-month.selected {
+    -fx-background: -fx-selection-bar;
+	-fx-background-color: #78c2ed
+}
+.date-picker-popup > * > .previous-month:hover,
+.date-picker-popup > * > .next-month:hover {
+    -fx-background: -fx-selection-bar-non-focused;
+	-fx-background-color: #1191db;
+}
+.date-picker-popup > * > .today:hover,
+.date-picker-popup > * > .today.selected {
+    -fx-background-color: #1271aa;
+}
+.date-picker-popup > * > .day-cell:focused,
+.date-picker-popup > * > .today:focused {
+    -fx-background-color: #78c2ed;
+    -fx-background-insets: 1, 2, 3;
+}
+/*===========when the day is pressed ==========*/
+.date-picker-popup > * > .day-cell:focused:hover,
+.date-picker-popup > * > .today:focused:hover,
+.date-picker-popup > * > .selected:focused,
+.date-picker-popup > * > .today.selected:focused {
+    -fx-background-color: #01283f;
+}
+/*===========the days that are not from this month==========*/
+.date-picker-popup > * > .previous-month,
+.date-picker-popup > * > .next-month {
+    -fx-background: derive(-fx-control-inner-background, -4%);
+	-fx-background-color: #5186a5;
+}
+.date-picker-popup > * > .day-cell:hover > .secondary-text,
+.date-picker-popup > * > .previous-month > .secondary-text,
+.date-picker-popup > * > .next-month > .secondary-text,
+.date-picker-popup > * > .selected > .secondary-text {
+    -fx-fill: #1271aa;/**/
+}
+.date-picker-popup > * > .previous-month.today,
+.date-picker-popup > * > .next-month.today {
+    -fx-background-color: #1271aa;/**/
+}
+
+.date-picker-popup > * > .previous-month.today:hover,
+.date-picker-popup > * > .next-month.today:hover {
+    -fx-background-color: #B0C4DE;
+}
+
+/************************************************************
+*			TEXT AREAS		 	    *
+*************************************************************/
+#newEventDescription{
+		-fx-border-color: #0a9bf5;
+		-fx-border-width: 2;
+}
+#newEventTitleTextArea{
+		-fx-border-color: #0a9bf5;
+		-fx-border-width: 2;
+}
+
+
+
+/************************************************************
+*			PANES				    *
+*************************************************************/
+#upperAnchorpane{
+	-fx-background-color: #B0C4DE;
+}
+#lowerAnchorpane{
+	-fx-background-color: #B0C4DE;
+}
+#timelineContainer{
+	-fx-background-color: #FFFAFA;
+}
+#t_listings_container_anchorpane{
+	-fx-background-color: #B0C4DE;
+}
+#timelineListing_anchorpane{
+	-fx-background-color: #FFFAFA;
+}
+#newEventAnchorpaneBg{
+	-fx-background-color:linear-gradient(to bottom right,#B0C4DE,#88a6cc);
+}
+#newTimelineAnchorPane{
+	-fx-background-color:linear-gradient(to bottom right,#B0C4DE,#88a6cc);
+}
+#updateTimelineAnchorPane{
+	-fx-background-color:linear-gradient(to bottom right,#B0C4DE,#88a6cc);
+}
+#rootPane{
+	-fx-background-color: #B0C4DE;
+}
+
+/************************************************************
+*		SCROLLBAR				    *
+*************************************************************/
+.scroll-bar {
+	-fx-background-color: #fafafa;
+	-fx-background-radius: 0;
+	-fx-block-increment: 50;
+}
+
+.corner {
+	-fx-background-color: transparent;
+}
+
+.scroll-bar .decrement-button, .scroll-bar .decrement-arrow {
+	visibility: hidden;
+	-fx-pref-height: 1;
+	-fx-pref-width: 1;
+}
+
+.scroll-bar .increment-button, .scroll-bar .increment-arrow {
+	visibility: hidden;
+	-fx-pref-height: 1;
+	-fx-pref-width: 1;
+}
+
+.scroll-bar:vertical {
+	-fx-pref-width: 12;
+}
+
+.scroll-bar:horizontal {
+	-fx-pref-height: 10;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+	-fx-background-radius: 5;
+}
+
+.scroll-bar:vertical .track-background,
+.scroll-bar:horizontal .track-background {
+	-fx-background-color: transparent;
+	-fx-background-insets: 0;
+	-fx-background-radius: 5;
+}
+
+.scroll-bar:horizontal .thumb {
+	-fx-background-color: #0a9bf5;
+	-fx-background-insets: 0 2 0 2;
+	-fx-background-radius: 5;
+}
+
+.scroll-bar:vertical .thumb {
+	-fx-background-color: #0a9bf5;
+	-fx-background-insets: 0 2 0 2;
+	-fx-background-radius: 5;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+	-fx-background-color: #076cab;
+}
+
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
+	-fx-background-color: #076cab;
+}
+
+.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+	-fx-background-color: transparent;
+	-fx-background-radius: 5;
+	-fx-padding: 5;
+}
+
+.scroll-bar:horizontal .increment-button, .scroll-bar:horizontal .decrement-button {
+	-fx-background-color: transparent;
+	-fx-background-radius: 5;
+	-fx-padding: 5;
+}
+
+.scroll-bar:vertical:focused,
+.scroll-bar:horizontal:focused {
+	-fx-background-color: transparent, rgb(96, 96, 96), rgb(96, 96, 96);
+}
+
+/************************************************************
+*			SLIDERS				    *
+*************************************************************/
+
+.slider .thumb{
+	-fx-background-color: #dad9da, white, #3fbadf;
+	-fx-background-insets: 0, 1, 5;
+	-fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.2), 5, 0.0 , 0, 0);
+	-fx-background-position:bottom;
+
+}
+
+.slider .thumb:hover {
+	-fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.4), 5, 0.0 , 0, 0);
+
+}
+.slider .track {
+	-fx-background-color: #dad9da, white;
+	-fx-background-insets: -1, 0, 1;
+	-fx-pref-height: 5;
+}
+.slider:vertical .track {
+	-fx-pref-width: 5;
+	
+}
+/*====================== TIMELINE SLIDER ====================*/
+
+#timelineManagerTimelineSlider.slider .thumb{
+	-fx-background-color: #dad9da, white, #3fbadf;
+	-fx-background-insets: 0, 1, 5;
+	-fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.2), 5, 0.0 , 0, 0);
+}
+#timelineManagerTimelineSlider.slider .thumb:hover {
+	-fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.4), 5, 0.0 , 0, 0);
+}
+#timelineManagerTimelineSlider.slider .track {
+	-fx-background-color: #dad9da, white;
+	-fx-background-insets: -1, 0, 1;
+	-fx-pref-height: 5;
+
+}
+#timelineManagerTimelineSlider.slider:vertical .track {
+	-fx-pref-width: 5;
+}
+
+/*.scroll-pane .scroll-bar:vertical .thumb {
+	-fx-background-color: #dad9da, white, #3fbadf;
+	-fx-background-insets: 0, 1, 5;
+	-fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.2), 5, 0.0 , 0, 0);
+	-fx-padding:0.58333em;
+	-fx-background-radius:1em;
+}
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+	-fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.4), 5, 0.0 , 0, 0);
+}
+.scroll-pane:vertical .track {
+	-fx-background-color: #dad9da, white;
+	-fx-background-insets: -1, 0, 1;
+	-fx-pref-height: 5;
+}
+.scroll-pane:vertical .track {
+	-fx-pref-width: 5;
+}*/
+
+/************************************************************
+*	    		  THE TIMELINE			    *
+*************************************************************/
+#timelineManagerTimeline{
+	-fx-pref-height:460;
+}
+#timelineManagerNumberBox{
+ -fx-background-color: #FF7F50;
+    -fx-background-insets: 0,1,1;
+    -fx-background-radius: 1,2,1;
+    -fx-padding: 3 12 3 12;
+	-fx-border-color:white;
+	-fx-border-width:1.2;
+}
+/*===== EVENT RECTANGLE WITH OVER 80 WIDTH====*/
+.eventRectangleOver80{
+	-fx-fill:#FFDAB9;
+	-fx-scale-y:1.5;
+}
+/*=========(over 80 width text)=========*/
+#textOver80{
+}
+/*===== EVENT RECTANGLE WITH UNDER 80 WIDTH====*/
+.eventRectangleUnder80{
+	-fx-scale-y:1.5;
+	-fx-fill:#A0522D;
+	
+}
+/*=========(under 80 width text)=========*/
+#textUnder80{
+	-fx-fill:white;
+}
+/*=== EVENT RECTANGLE WITH OVER 80 WIDTH AND LEVEL====*/
+.eventRectangleOver80WithLevel{
+	-fx-fill:#D2691E;
+	-fx-scale-y:1.5;
+}
+/*=========(over 80 width with level text)=========*/
+#textOver80WithLevel{
+	-fx-fill:white;
+}
+/*=== EVENT RECTANGLE WITH UNDER 80 WIDTH AND LEVEL====*/
+.eventRectangleUnder80WithLevel,.monthEventElementWithLevel{
+	-fx-fill:#F4A460;
+	-fx-scale-y:1.5;
+}
+/*=========(under 80 width with level text)=========*/
+#textUnder80WithLevel{
+}
+
+/*===== EVENT RECTANGLE WITH NO DURATION====*/
+.eventRectangleNoDuration{
+	-fx-fill:#4169E1;
+	-fx-scale-y:1.5;
+}
+/*=========(no duration text)=========*/
+.textNoDuration,.monthEventElementText,.monthEventElementWithLevelText{
+	-fx-text-fill:white;
+}
+
+/*===== EVENT RECTANGLE WITH NO DURATION WITH LEVEL====*/
+.eventRectangleNoDurationWithLevel,.monthEventElementRect{
+	-fx-fill:#E9967A;
+	-fx-scale-y:1.5;
+	
+}
+#textNoDurationWithLevel{
+	-fx-fill:white;
+	-fx-font-size: 22;	
+}
+
+.leftLine,.rightLine{
+	-fx-scale-x:0.5;
+}
+
+#upButton{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+	-fx-border-radius:10;
+}
+/*=====================hover state============================*/
+#upButton:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;	
+}
+/*=====================pressed state==========================*/
+#upButton:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);	
+}
+#downButton{
+	-fx-border-radius:10;
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+}
+/*=====================hover state============================*/
+#downButton:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;	
+}
+/*=====================pressed state==========================*/
+#downButton:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);	
+}
+
+
+
+
+/************************************************************
+*	    		  DIALOG PANES			    *
+*************************************************************/
+
+.dialog-pane, .dialogPane1 {
+    -fx-background-color:#B0C4DE;
+}
+.dialog-pane:header .header-panel {
+    /*-fx-padding: 0.833em 1.166em 0.833em 1.166em; *//* 10px 14px 10px 14px */
+    -fx-padding: 0.833em; /* 10px */
+    -fx-background-color:#B0C4DE;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+.dialog-pane > .button-bar > .container > .details-button {
+  -fx-alignment: baseline-left;
+  -fx-focus-traversable: false;
+  -fx-padding: 0.416em; /* 5px */
+}
+
+.dialog-pane:header .header-panel .label {
+    -fx-font-size: 1.167em; /* 14px */
+    -fx-wrap-text: true;
+	-fx-fill:white;
+	-fx-text-color:white;
+}
+.dialog-pane > .button-bar > .container > .button{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+	-fx-background-radius: 3px,3px,2px,1px;
+    -fx-min-width: 55;
+    -fx-min-height: 30;
+    -fx-max-width: 55;
+    -fx-max-height: 30;
+	-fx-padding:0.3, 0.6, 0.3, 0.6;
+}
+.dialog-pane > .button-bar > .container > .button:hover{
+	-fx-border-color: #204d74;
+	-fx-background-color: #087cc4;
+}
+.dialog-pane > .button-bar > .container > .button:pressed{
+	-fx-background-color: #087cc4;
+	-fx-border-color: #204d74;
+	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);
+}
+/************************************************************
+*	    		  EVENT EDITOR			    *
+*************************************************************/
+.editEventPane_Container{
+	-fx-background-color:#B0C4DE;
+}
+.search_event_name_HBox{
+	-fx-background-color:#B0C4DE;
+}
+.search_event_name_Textfield{
+	
+}
+.event_search_Button{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+	-fx-background-radius: 3px,3px,2px,1px;
+	-fx-background-color: #0a9bf5;
+	-fx-min-width: 70px;
+	-fx-max-width: 70px;
+	-fx-translate-x: 5;
+	-fx-min-height: 30px;
+	-fx-max-height: 30px;
+}
+.editor_container_VBox{
+	-fx-background-color:#B0C4DE;
+}
+.buttons_container_HBox{
+}
+#editorButton{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+	-fx-background-radius: 3px,3px,2px,1px;
+	-fx-background-color: #0a9bf5;
+	-fx-translate-x: -90;
+	-fx-translate-y: 40;
+	-fx-min-width: 90px;
+	-fx-max-width: 90px;
+}
+#datepickerStart{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-min-height: 30px;
+	-fx-max-height: 30px;
+	-fx-min-width: 200px;
+	-fx-max-width: 200px;
+	-fx-translate-x: -38;
+}
+#datepickerEnd{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-min-height: 30px;
+	-fx-max-height: 30px;
+	-fx-min-width: 200px;
+	-fx-max-width: 200px;
+	-fx-translate-x: -28;
+}
+#eventEditorTitleField{
+	-fx-translate-x: -30;
+}
+#eventEditorDescriptionField{
+	-fx-translate-x: -30;
+}
+#okButtonSearchEvent{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+	-fx-background-radius: 3px,3px,2px,1px;
+	-fx-background-color: #0a9bf5;
+	-fx-min-width: 70px;
+	-fx-max-width: 70px;
+	-fx-translate-x: -8;
+	-fx-min-height: 30px;
+	-fx-max-height: 30px;
+}
+#cancelButtonSearchEvent{
+	-fx-border-color: #0a9bf5;
+	-fx-text-fill: white;
+	-fx-border-color: #0a9bf5;
+	-fx-background-radius: 3px,3px,2px,1px;
+	-fx-background-color: #0a9bf5;
+	-fx-min-width: 70px;
+	-fx-max-width: 70px;
+	-fx-translate-x: 50;
+	-fx-min-height: 30px;
+	-fx-max-height: 30px;
+}
+.buttonsContainerSearchEvent{
+		-fx-background-color: #B0C4DE;
+}
+.editEventPane_Container{
+		-fx-background-color: #B0C4DE;
+}
+.search_event_name_HBox{
+		-fx-background-color: #B0C4DE;
+}

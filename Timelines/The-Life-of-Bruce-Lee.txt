@@ -1,0 +1,234 @@
+[Timeline]
+Title:The Life of Bruce Lee
+Description:
+Start Date:1940-10-12
+End Date:1973-07-20
+
+[Event]
+Title:Bruce was born
+Description:"Lee Jun-Fan" was born in San Francisco, USA to parents Lee Hoi-Chuen (Father) and Grace Ho (Mother).
+He had 3 older siblings and would later have a younger brother. Shortly after his birth, Bruce and family move back to China.
+Image:file:/C:/Users/wael/Pictures/bruce_lee_childhood_photos-%7B3%7D.jpg
+Start Date:1940-11-27
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce starts school
+Description:After attending Tak Sun school at an early age, Bruce enrolls at La Salle Primary School at the age of 12. *Exact date unknown
+Image:
+Start Date:1952-06-01
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce begins his training
+Description:Bruce is introduced to martial arts by his father at a young age. His father taught him the fundamentals of Wu Shu Tai Chi Chuan.
+At the age of 13, Bruce begins his extensive martial arts training and studies the art of Wing Chun under private tuition from his instructor Yip Man. *Exact date unknown
+Image:file:/C:/Users/wael/Pictures/bruce%20lee/hqdefault.jpg
+Start Date:1954-06-01
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce moves to Seattle, Washington
+Description:After living for several months in San Fransisco, Bruce moves to Seattle to continue his High School education. He works as a live-in waiter for Ruby Chow, her husband was a friend of Bruce's father. *Exact date unknown
+Image:file:/C:/Users/wael/Pictures/bruce%20lee/123bruce_lee.jpg
+Start Date:1959-06-01
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce begins teaching Martial Arts
+Description:Bruce begins teaching Martial Arts in the US.
+He teaches his own style he calls "Jun Fan Gung Fu" which literaly translated as "Bruce Lee's Kung Fu". It can be described as a modified variation of Wing Chun.
+He later opened his first martial arts school in Seattle, named the "Jun Fan Gung Fu Institute"
+Image:
+Start Date:1959-06-01
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce moves back to San Fransisco
+Description:In April 1959, Bruce moves to San Fransisco to live with his older sister Agnes
+Image:
+Start Date:1959-04-15
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce graduates from High School
+Description:Bruce completes his high school education and receives his diploma from Edison Technical School in Seattle. *Exact date unknown
+
+Image:file:/C:/Users/wael/Pictures/bruce%20lee/bruce-lee1.jpg
+Start Date:1960-12-01
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce at University
+Description:Bruce enrolls at the University of Washington.
+He majored in Drama, but also studied Philosophy and Psychology and various other subjects.
+It was at the university that he met his future wife, Linda Emery.
+Image:file:/C:/Users/wael/Pictures/bruce%20lee/bruce-lee-bruce-lee-32792024-452-600.jpg
+Start Date:1961-05-01
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce proves himself
+Description:In 1962, it is recorded by close friends and associates of Bruce, that he was challenged to a fight contest by a rival with a serious grudge against him.
+What is particularly interesting about this fight is how quickly it lasted, exactly 11 seconds!
+Bruce was able to knock out his opponent with a flurry of fast fore-arm blocks and punches to quickly gain the upper hand.
+Image:file:/C:/Users/wael/Pictures/bruce%20lee/bruce-lee-bruce-lee-32792002-610-600.jpg
+Start Date:1962-01-01
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce moves to Oakland
+Description:Bruce drops out of University and moves to Oakland.
+He moves in with a well know martial arts instructor named James Yimm Lee (no relation)
+Together they open a new martial arts school in Oakland, California. *Exact date unknown
+Image:
+Start Date:1964-01-01
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce gives a demonstration
+Description:In 1964, Bruce is invited to attend the Long Beach International Karate Championships in Long beach, California.
+It was here that he gave a demonstration of some of his famous training and fighting techniques, such as his Two-finger push-ups and the impressive "One-Inch Punch"
+Image:file:/C:/Users/wael/Pictures/bruce%20lee/Bruce-Lee-bruce-lee-27136813-1023-1024.jpg
+Start Date:1964-01-15
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce becomes "Kato"
+Description:Bruce is invited by a hollywood contact to audition for one of his most famous TV roles.
+He successfully auditions for the role of "Kato" for the popular action series "The Green Hornet"
+Unfortunately, the series only lasted for one series, but Bruce's popularity increased considerably.
+Image:file:/C:/Users/wael/Pictures/bruce%20lee/Bruce%20lee%20Hd%20Wallpapers_4.jpg
+Start Date:1964-11-20
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce creates "Jeet Kune Do"
+Description:It was in 1967 during his first season of "The Green Hornet" that inspired Bruce to create his own iconic martial art style he called "Jeet Kune Do"
+He felt that his traditional style of Wing Chun wasn't suited for the chaotic street fight scenes he was used to performing in film and TV.
+His new style focused more on speed, flexibility, practicality and efficiency. "Jeet June Do" translates as "The way of the Intercepting Fist" 
+Image:
+Start Date:1967-01-01
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce VS Hollywood
+Description:Bruce spent a great deal being invloved in various film and TV productions either in supporting roles or as fight scene choreographer.
+Frustrated that he was unable to obtain a strarring role and establish himself, Bruce decided to return to China
+Image:file:/C:/Users/wael/Pictures/bruce%20lee/160718114913-08-mind-of-bruce-lee-super-169.jpg
+Start Date:1970-01-14
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce becomes big in Hong Kong
+Description:Bruce returned to China after struggling to make it big in Hollywood. He did however become a huge success when moving to Hong Kong.
+Nearly straight away, he was signed up to star in two of his iconic films "The Big Boss" and "Fist of Fury" which were hugely successful in Asian cinema.
+Image:file:/C:/Users/wael/Pictures/bruce%20lee/bf9c0c9281164382d2485496c4eb73e1.jpg
+Start Date:1971-05-03
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce's Highlight
+Description:The highlight of Bruce's career came in 1972, when at the peak of his global popularity; He wrote, directed and starred in his biggest hit film "The Way of The Dragon".
+Considered to be Bruce's best work, the film included an end fight scene with action star Chuck Norris and Bruce's characters fighting to the death in the Colosseum in Rome.
+This scene is still considered one of the very best fight scenes ever filmed. 
+Image:
+Start Date:1972-06-07
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce's Final Year
+Description:After his hit film "The Way of The Dragon" catapulting Bruce to global stardom, he set his next film in motion.
+His next film "The Game of Death" was put on hold after receiving the call from Hollywood asking him to star in another martial arts epic.
+Bruce agreed and starred in "Enter The Dragon" in which he would play the lead in what would be his most famous film, but unfortunately would also be his last
+Image:
+Start Date:1973-04-09
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce's health concerns
+Description:Bruce was rushed to hospital after collapsing during post-production work on "Enter The Dragon"
+He had suffered from headaches and seizures due to swelling of the brain.
+Image:
+Start Date:1973-05-10
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce Lee dies
+Description:Bruce was due to meet with former James Bond star George Lazenby and producer Raymond Chow to discuss working on a new film together.
+Bruce had been suffering with headaches and was given various pain-killers.
+Bruce went to rest, but did not turn up to the meeting as planned. Concerned, they found Bruce but were unable to wake him.
+Bruce was unable to be revived and was later pronounced dead before arriving in hospital.
+It is believed that Bruce may have suffered an allergic reaction.
+Image:
+Start Date:1973-07-20
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+
+[Event]
+Title:Bruce's Funeral
+Description:Bruce was buried at Lakeview Cemetery, Seattle in his wife Linda's hometown and the location in which they first met.
+His funeral was attended by many famous people such as; Steve McQueen, George Lazenby, James Coburn and Chuck Norris.
+Image:
+Start Date:1973-07-31
+End Date:
+Start Time:00:20:25.967
+End Time:00:20:25.967
+
+

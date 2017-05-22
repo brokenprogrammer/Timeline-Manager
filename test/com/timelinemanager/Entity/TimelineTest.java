@@ -317,50 +317,6 @@ public class TimelineTest {
 	}
 
 	/**
-	 * Test method for {@link com.timelinemanager.Entity.Timeline#addEvent(com.timelinemanager.Entity.Event)}.
-	 */
-	@Test
-	public final void testAddEvent() {
-		Timeline t = new Timeline();
-		
-		LocalDate currentDate = LocalDate.now();
-		LocalTime currentTime = LocalTime.now();
-		Event e = new Event("Example event", "Example descritpion", currentDate , currentTime);
-		Event e2 = new Event("Example event2", "Example descritpion2", 
-				currentDate.plusDays(1) , currentTime.plusHours(1));
-		
-		
-		//TODO: Create some method in Timeline to test this, example size(), getEvents()
-		t.addEvent(e);
-		t.addEvent(e2);
-		
-		t.deleteEvent(e);
-		t.deleteEvent(e2);
-	}
-
-	/**
-	 * Test method for {@link com.timelinemanager.Entity.Timeline#deleteEvent(com.timelinemanager.Entity.Event)}.
-	 */
-	@Test
-	public final void testDeleteEvent() {
-		Timeline t = new Timeline();
-		
-		LocalDate currentDate = LocalDate.now();
-		LocalTime currentTime = LocalTime.now();
-		Event e = new Event("Example event", "Example descritpion", currentDate , currentTime);
-		Event e2 = new Event("Example event2", "Example descritpion2", 
-				currentDate.plusDays(1) , currentTime.plusHours(1));
-		
-		
-		//TODO: Create some method in Timeline to test this, example size(), getEvents()
-		t.addEvent(e);
-		t.addEvent(e2);
-		
-		t.deleteEvent(e);
-		t.deleteEvent(e2);
-	}
-
-	/**
 	 * Test method for {@link com.timelinemanager.Entity.Timeline#getDaysLength()}.
 	 */
 	@Test

@@ -22,6 +22,7 @@ import javafx.collections.ObservableList;
  */
 public class TimelineModel {
 	private ObjectProperty<Timeline> activeTimeline = new SimpleObjectProperty<>();
+	private final ObservableList<Timeline> loadedTimelines = FXCollections.observableArrayList();
 	private final ObservableList<Event> activeTimelineEvents = FXCollections.observableArrayList();
 
 	private final String savePath = "";
@@ -42,6 +43,26 @@ public class TimelineModel {
 	 */
 	public void setTimeline(Timeline t) {
 		this.activeTimeline.set(t);
+	}
+	
+	/**
+	 * Gets the list of currently loaded timelines.
+	 * 
+	 * @return observable list of loaded timelines.
+	 */
+	public ObservableList<Timeline> getLoadedTimelines() {
+		return this.loadedTimelines;
+	}
+	
+	/**
+	 * Sets the list of currently loaded timelines.
+	 * 
+	 * @param timelines - List of loaded timelines
+	 */
+	public void setLoadedTimelines(List<Timeline> timelines) {
+		this.loadedTimelines.clear();
+		
+		this.loadedTimelines.addAll(timelines);
 	}
 	
 	/**
@@ -72,6 +93,7 @@ public class TimelineModel {
 	 */
 	public void loadTimeline(String path) {
 		this.activeTimeline.set(TimelineConverter.convert(FileManager.load(path)));
+		this.loadedTimelines.add(this.activeTimeline.getValue());
 	}
 
 	/**
