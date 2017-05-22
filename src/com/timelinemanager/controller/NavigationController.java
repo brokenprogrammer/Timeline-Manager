@@ -4,8 +4,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Optional;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -429,9 +431,15 @@ public class NavigationController {
 
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == manual) {
-				// open external pdf
-			} else {
-			}
+				if(Desktop.isDesktopSupported())
+		        	{
+		            		try {
+		                		Desktop.getDesktop().browse(new URI("https://github.com/brokenprogrammer/Timeline-Manager/blob/master/documentation/Manual%20v0.1.pdf"));
+		            		} catch (Exception e1) {
+		                		e1.printStackTrace();
+		            		}
+		        	}
+			} 
 		});
 
 		// ActionEvent for the exit button.
