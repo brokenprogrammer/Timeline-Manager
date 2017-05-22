@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -65,6 +66,8 @@ public class UpdateTimelineController {
 
 			if (updateTimelineTitle.getText().length() == 0 && start == null && end == null) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("The required fields are empty, please fill them to create a Timeline!");
@@ -72,6 +75,8 @@ public class UpdateTimelineController {
 				
 			} else if (updateTimelineTitle.getText().length() == 0) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Title is missing, please enter a title to create a Timeline!");
@@ -79,6 +84,8 @@ public class UpdateTimelineController {
 				
 			} else if (start == null || end == null) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("Date is missing, please enter a start and end date to create a Timeline!");
@@ -86,6 +93,8 @@ public class UpdateTimelineController {
 				
 			} else if (updateTimelineTitle.getText().length() > 50) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Max 50 characters only!");
@@ -93,6 +102,8 @@ public class UpdateTimelineController {
 				
 			} else if (updateTimelineDescription.getText().length() > 500) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Max 500 characters only!");
@@ -100,6 +111,8 @@ public class UpdateTimelineController {
 				
 			} else if (start.isAfter(end)) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("Please type date in the correct date format!");
@@ -116,6 +129,8 @@ public class UpdateTimelineController {
 						eventsChecked = false;
 						
 						Alert alert = new Alert(AlertType.ERROR);
+						DialogPane dialogPane = alert.getDialogPane();
+						dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 						alert.setTitle("Error Dialog");
 						alert.setHeaderText("Date Error");
 						alert.setContentText("All the events start dates are not within the timelines timespan!");
@@ -124,6 +139,8 @@ public class UpdateTimelineController {
 						eventsChecked = false;
 						
 						Alert alert = new Alert(AlertType.ERROR);
+						DialogPane dialogPane = alert.getDialogPane();
+						dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 						alert.setTitle("Error Dialog");
 						alert.setHeaderText("Date Error");
 						alert.setContentText("All the events end dates are not within the timelines timespan!");
@@ -154,6 +171,8 @@ public class UpdateTimelineController {
 
 			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 					"Are you sure you want to cancel editing the timeline?");
+			DialogPane dialogPane = closeConfirmation.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			updateCancelEditTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);

@@ -15,12 +15,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -445,10 +448,12 @@ public class Timeline extends BorderPane {
 		this.setMaxWidth(1020);
 
 		StackPane buttonsPane = new StackPane();
-		buttonsPane.setMinSize(20, 300);
+		buttonsPane.setMinSize(30, 300);
+		Image upImg = new Image(getClass().getResourceAsStream("/view/img/Up.png"));
 		buttonsPane.setMaxSize(20, 300);
-
 		Button upBtn = new Button();
+		upBtn.setId("upButton");
+		upBtn.setGraphic(new ImageView(upImg));
 		upBtn.setOnAction(e -> {
 			dayLevel = false;
 			timeline = new BorderPane();
@@ -457,9 +462,13 @@ public class Timeline extends BorderPane {
 			setEventGrid();
 		});
 
-		StackPane.setMargin(upBtn, new Insets(0, 0, 150, 50));
-
+		StackPane.setMargin(upBtn, new Insets(0, 0, 150, 0));
+		
+		Image downImg = new Image(getClass().getResourceAsStream("/view/img/Down.png"));
 		Button downBtn = new Button();
+		downBtn.setId("downButton");
+		downBtn.setGraphic(new ImageView(downImg));
+
 		downBtn.setOnAction(e -> {
 			dayLevel = true;
 			timeline = new BorderPane();
@@ -550,16 +559,19 @@ public class Timeline extends BorderPane {
 	public void searchEvent() {
 		// Container for the entire search event window.
 		GridPane pane_container = new GridPane();
+		pane_container.getStyleClass().add("editEventPane_Container");
 		pane_container.setPadding(new Insets(10, 10, 10, 10));
 		pane_container.setHgap(10.0);
 		pane_container.setVgap(10.0);
 
 		// Container for the search bar and search button.
 		HBox search_event_name = new HBox();
+		search_event_name.getStyleClass().add("search_event_name_HBox");
 		TextField titleField = new TextField();
 		titleField.setPromptText("Event Title");
 		search_event_name.getChildren().add(titleField);
 		Button event_search = new Button("Search");
+		event_search.getStyleClass().add("event_search_Button");
 		search_event_name.getChildren().add(event_search);
 
 		// Make sure the observable event list is updated.
@@ -618,6 +630,7 @@ public class Timeline extends BorderPane {
 		// The ok button is used to initiate the modify event action on target
 		// event.
 		Button okButton = new Button("Ok");
+		okButton.setId("okButtonSearchEvent");
 		okButton.setOnAction(e -> {
 			if (eventList.getSelectionModel().getSelectedItem() != null) {
 				// Get the event that is currently selected in the event list.
@@ -629,10 +642,14 @@ public class Timeline extends BorderPane {
 		// Cancel button handler, asks if the user really want to stop the
 		// selection of an event.
 		Button cancelButton = new Button("Cancel");
+		cancelButton.setId("cancelButtonSearchEvent");
 		cancelButton.setOnAction(e -> {
 			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 					"Are you sure you want to cancel selecting an event?");
-			cancel = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
+			DialogPane dialogPane = closeConfirmation.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
+			cancel = (Button) closeConfirmation.getDialogPane().lookupButton(
+					ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Cancel");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
@@ -645,7 +662,8 @@ public class Timeline extends BorderPane {
 
 		// Container for all the buttons.
 		HBox buttons_container = new HBox();
-		buttons_container.setPadding(new Insets(10, 10, 10, 10));
+		buttons_container.getStyleClass().add("buttonsContainerSearchEvent");
+		buttons_container.setPadding(new Insets(10,10,10,10));
 		buttons_container.setSpacing(10);
 		buttons_container.getChildren().addAll(okButton, cancelButton);
 
@@ -658,6 +676,8 @@ public class Timeline extends BorderPane {
 
 		// Build the window and display it.
 		Scene mainScene = new Scene(pane_container);
+		String style= getClass().getResource("/view/style.css").toExternalForm();
+		mainScene.getStylesheets().add(style);
 		Stage stage = new Stage();
 		stage.setHeight(550);
 		stage.setWidth(240);
@@ -676,7 +696,8 @@ public class Timeline extends BorderPane {
 	public void editEvent(Event e) {
 		// Container for the entire search event window.
 		GridPane pane_container = new GridPane();
-		pane_container.setPadding(new Insets(10, 10, 10, 10));
+		pane_container.getStyleClass().add("editEventPane_Container");
+		pane_container.setPadding(new Insets(10,10,10,10));
 		pane_container.setHgap(10.0);
 		pane_container.setVgap(10.0);
 
@@ -685,6 +706,7 @@ public class Timeline extends BorderPane {
 
 		// Container for the editor.
 		VBox editor_container = new VBox();
+		editor_container.getStyleClass().add("editEventPane_Container");
 		editor_container.setPrefSize(600, 300);
 		editor = new EventEditor(null, null, null, null, null, null, null);
 
@@ -696,6 +718,8 @@ public class Timeline extends BorderPane {
 		cancel.setOnAction(cancelEvent -> {
 			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 					"Are you sure you want to cancel modifying an event?");
+			DialogPane dialogPane = closeConfirmation.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			cancel = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
@@ -724,6 +748,8 @@ public class Timeline extends BorderPane {
 			editor.setEndTime();
 			Alert closeConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 					"Are you sure you want to modify this event?");
+			DialogPane dialogPane = closeConfirmation.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
@@ -745,10 +771,13 @@ public class Timeline extends BorderPane {
 			}
 		});
 
+
 		// Delete button that confirms if the user really want to delete the
 		// target event.
 		delete.setOnAction(deleteEvent -> {
 			Alert Confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this event?");
+      DialogPane dialogPane = Confirmation.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			Confirmation.setHeaderText("Confirm Exit");
 			Confirmation.initModality(Modality.APPLICATION_MODAL);
 			Optional<ButtonType> Response = Confirmation.showAndWait();
@@ -766,6 +795,7 @@ public class Timeline extends BorderPane {
 		editor_container.getChildren().add(editor);
 
 		HBox buttons_container = new HBox();
+		buttons_container.getStyleClass().add("buttons_container_HBox");
 		buttons_container.setPadding(new Insets(10, 10, 10, 10));
 		buttons_container.setSpacing(10);
 		buttons_container.getChildren().addAll(Changebt, delete, cancel);
@@ -779,6 +809,11 @@ public class Timeline extends BorderPane {
 		// Build the window and display it.
 
 		Scene mainScene = new Scene(pane_container);
+		Changebt.setId("editorButton");
+		cancel.setId("editorButton");
+		delete.setId("editorButton");
+		String style= getClass().getResource("/view/style.css").toExternalForm();
+		mainScene.getStylesheets().add(style);
 		Stage stage = new Stage();
 		stage.setHeight(500);
 		stage.setWidth(620);

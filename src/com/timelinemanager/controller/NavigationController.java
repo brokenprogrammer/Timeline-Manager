@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -165,6 +166,8 @@ public class NavigationController {
 				} else {
 					Alert closeConfirmation = new Alert(Alert.AlertType.WARNING,
 							"The specified file is not a valid Timeline file. \n" + "Please select a valid file.");
+					DialogPane dialogPane = closeConfirmation.getDialogPane();
+					dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 					closeConfirmation.setHeaderText("Invalid Timeline file.");
 					closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 					Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
@@ -251,7 +254,9 @@ public class NavigationController {
 		menuItem_save.setOnAction(saveTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline = new Alert(Alert.AlertType.WARNING,
-						"There is no timeline to save, please open or create a timeline before saving.");
+						"There is no timeline to save, please create a timeline before saving.");
+				DialogPane dialogPane = noTimeline.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				noTimeline.setHeaderText("No Timeline to save.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
@@ -272,7 +277,9 @@ public class NavigationController {
 		menuItem_saveAs.setOnAction(saveAsTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline1 = new Alert(Alert.AlertType.WARNING,
-						"There is no timeline to save, please open or create a timeline before saving.");
+						"There is no timeline to save, please create a timeline before saving.");
+				DialogPane dialogPane = noTimeline1.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				noTimeline1.setHeaderText("No Timeline to save.");
 				noTimeline1.initModality(Modality.APPLICATION_MODAL);
 				Stage stage1 = (Stage) noTimeline1.getDialogPane().getScene().getWindow();
@@ -287,6 +294,8 @@ public class NavigationController {
 		menuItem_close.setOnAction(closeTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert noTimeline = new Alert(Alert.AlertType.WARNING, "There is no active timeline to close.");
+				DialogPane dialogPane = noTimeline.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				noTimeline.setHeaderText("No Timeline to close.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage1 = (Stage) noTimeline.getDialogPane().getScene().getWindow();
@@ -304,6 +313,8 @@ public class NavigationController {
 		menuItem_updateTimeline.setOnAction(updateTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
 				Alert alert = new Alert(AlertType.ERROR);
+				DialogPane dialogPane = alert.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Timeline Error");
 				alert.setContentText(
@@ -430,6 +441,8 @@ public class NavigationController {
 		// an external file containing the manual for the application
 		menuItem_manual.setOnAction(openManual -> {
 			Alert alert = new Alert(AlertType.CONFIRMATION);
+			DialogPane dialogPane = alert.getDialogPane();
+			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			alert.setTitle("Application Manual");
 			alert.setHeaderText("Need some help?");
 			alert.setContentText("Unsure about how our application works? Open the manual.");
@@ -469,6 +482,8 @@ public class NavigationController {
 				if (this.timelineModel.getTimeline().getValue() != null) {
 					Alert saveConfirmation = new Alert(Alert.AlertType.CONFIRMATION,
 							"Do you want to save your work before you exit");
+          DialogPane dialogPane = closeConfirmation.getDialogPane();
+				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 					saveConfirmation.setHeaderText("Save Timeline");
 					saveConfirmation.initModality(Modality.APPLICATION_MODAL);
 					Stage stage2 = (Stage) saveConfirmation.getDialogPane().getScene().getWindow();
@@ -480,10 +495,8 @@ public class NavigationController {
 					} else {
 						this.timelineModel.saveTimeline();
 						System.exit(0);
-					}
-				} else {
-					System.exit(0);
-				}
+					} 
+				}	
 			}
 		});
 	}
