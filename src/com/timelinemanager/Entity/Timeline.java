@@ -462,7 +462,7 @@ public class Timeline extends BorderPane {
 			setEventGrid();
 		});
 
-		StackPane.setMargin(upBtn, new Insets(0, 0, 150, 0));
+		StackPane.setMargin(upBtn, new Insets(200, 0, 150, 50));
 		
 		Image downImg = new Image(getClass().getResourceAsStream("/view/img/Down.png"));
 		Button downBtn = new Button();
@@ -477,7 +477,7 @@ public class Timeline extends BorderPane {
 			setEventGrid();
 		});
 
-		StackPane.setMargin(downBtn, new Insets(0, 0, 50, 50));
+		StackPane.setMargin(downBtn, new Insets(200, 0, 50, 50));
 
 		buttonsPane.getChildren().addAll(upBtn, downBtn);
 
