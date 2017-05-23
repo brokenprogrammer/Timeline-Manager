@@ -49,7 +49,7 @@ public class StageManager {
 		rootLayout.setCenter(timelineLayout);
 		
 		Scene mainScene = new Scene(rootLayout);
-		mainStage.getIcons().add(new Image("/view/img/appicon.PNG"));
+		mainStage.getIcons().add(new Image("/view/img/appicon.png"));
 		mainScene.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 		mainStage.setOnCloseRequest(onExitCloseEverything -> System.exit(0));
 		mainStage.setScene(mainScene);
