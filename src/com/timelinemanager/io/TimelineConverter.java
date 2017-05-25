@@ -42,13 +42,16 @@ public class TimelineConverter {
 	 */
 	public static Timeline convert(String s) {
 		Timeline t = null;
-
 		String[] content = s.split("\n");
 
+		// In case the text files got auto formatted.
+		for (int i = 0; i < content.length; i++) {
+			content[i] = content[i].trim();
+		}
+		
 		String[] timelineData;
-
 		for (int x = 0; x < content.length; x++) {
-			if (content[x].equals("[Timeline]")) {
+			if (content[x].contains("[Timeline]")) {
 				timelineData = readTimeline(content, x + 1);
 				t = new Timeline(timelineData[0], timelineData[1], LocalDate.parse(timelineData[2]),
 						LocalDate.parse(timelineData[3]), LocalTime.now(), LocalTime.now().plusHours(1));

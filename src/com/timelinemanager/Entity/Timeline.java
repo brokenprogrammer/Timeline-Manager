@@ -653,7 +653,7 @@ public class Timeline extends BorderPane {
 			closeConfirmation.setHeaderText("Confirm Cancel");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 			Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+			stage.getIcons().add(new Image("/view/img/appicon.png"));
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (!ButtonType.OK.equals(closeResponse.get())) {
 				e.consume();
@@ -686,7 +686,7 @@ public class Timeline extends BorderPane {
 		stage.setScene(mainScene);
 		stage.setTitle("Select event");
 		stage.setResizable(false);
-		stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+		stage.getIcons().add(new Image("/view/img/appicon.png"));
 		stage.showAndWait();
 	}
 
@@ -727,7 +727,7 @@ public class Timeline extends BorderPane {
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 			Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+			stage.getIcons().add(new Image("/view/img/appicon.png"));
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (!ButtonType.OK.equals(closeResponse.get())) {
 				cancelEvent.consume();
@@ -758,7 +758,7 @@ public class Timeline extends BorderPane {
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 			Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+			stage.getIcons().add(new Image("/view/img/appicon.png"));
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (ButtonType.OK.equals(closeResponse.get())) {
 				eventArr.get(index).setTitle(editor.getTitle());
@@ -829,7 +829,7 @@ public class Timeline extends BorderPane {
 		stage.setScene(mainScene);
 		stage.setTitle("Event Editor");
 		stage.setResizable(false);
-		stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+		stage.getIcons().add(new Image("/view/img/appicon.png"));
 		stage.showAndWait();
 		this.setEventGrid();
 	}
