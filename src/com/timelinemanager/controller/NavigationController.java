@@ -492,11 +492,14 @@ public class NavigationController {
 					Optional<ButtonType> saveResponse = saveConfirmation.showAndWait();
 					if (ButtonType.CANCEL.equals(saveResponse.get())) {
 						exitAppEvent.consume();
+						System.exit(0);
 					} else {
 						this.timelineModel.saveTimeline();
 						System.exit(0);
 					} 
-				}	
+				} else {
+					System.exit(0);
+				}
 			}
 		});
 	}
