@@ -788,7 +788,7 @@ public class Timeline extends BorderPane {
 			Confirmation.setHeaderText("Confirm Exit");
 			Confirmation.initModality(Modality.APPLICATION_MODAL);
 			Stage stage = (Stage) Confirmation.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image("/view/img/appicon.PNG"));
+			stage.getIcons().add(new Image("/view/img/appicon.png"));
 			Optional<ButtonType> Response = Confirmation.showAndWait();
 			if (ButtonType.OK.equals(Response.get())) {
 				deleteEvent(e);
