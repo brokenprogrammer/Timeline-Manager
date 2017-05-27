@@ -274,22 +274,6 @@ public class NavigationController {
 			}
 		});
 
-		menuItem_saveAs.setOnAction(saveAsTimeline -> {
-			if (timelineModel.getTimeline().getValue() == null) {
-				Alert noTimeline1 = new Alert(Alert.AlertType.WARNING,
-						"There is no timeline to save, please create a timeline before saving.");
-				DialogPane dialogPane = noTimeline1.getDialogPane();
-				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
-				noTimeline1.setHeaderText("No Timeline to save.");
-				noTimeline1.initModality(Modality.APPLICATION_MODAL);
-				Stage stage1 = (Stage) noTimeline1.getDialogPane().getScene().getWindow();
-				stage1.getIcons().add(new Image("/view/img/appicon.png"));
-				noTimeline1.showAndWait();
-			} else {
-
-				this.timelineModel.saveTimeline();
-			}
-		});
 		// Action Event to close the active timeline
 		menuItem_close.setOnAction(closeTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {

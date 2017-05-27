@@ -201,7 +201,7 @@ public class CreateEventController {
 
 			File file = fileChooser.showOpenDialog(null);
 
-      if(file != null){
+      			if(file != null){
 			  imageURL = file.toURI().toString();
 			  Image image1 = new Image(file.toURI().toString());
 			  eventImage.setImage(image1);
@@ -211,7 +211,9 @@ public class CreateEventController {
 			  eventImage.setSmooth(true);
 			  eventImage.setCache(true);
 			  addImageLabel.setVisible(false);
-      }
+      			}else if (file == null){
+					eventImage.setImage(null);
+				}
 		});
 
 		// ActionEvent for the cancel button inside the "Create new event"
