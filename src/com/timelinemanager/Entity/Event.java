@@ -610,7 +610,8 @@ public class Event extends StackPane {
 		} else if (inf_description == null) {
 			inf_string = inf_title + "\r\n" + time_str;
 		}
-
+		
+		tooltip.setWrapText(true);
 		tooltip.setText(inf_string);
 		if (inf_picture == null)
 			;
@@ -625,6 +626,8 @@ public class Event extends StackPane {
 			imageView.setCache(true);
 			tooltip.setGraphic(imageView);
 		}
+		
+		tooltip.setMaxWidth(300);
 
 		return tooltip;
 	}
@@ -651,7 +654,10 @@ public class Event extends StackPane {
 			rectangle.getStyleClass().add("eventRectangleOver80");
 
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-			Text text = new Text(this.getTitle());
+			String title_shown = this.getTitle();
+			if (title_shown.length() > 8)
+				title_shown = title_shown.substring(0, 7)+"...";
+			Text text = new Text(title_shown);
 			text.setId("textOver80");
 
 			setToolTip();
@@ -684,7 +690,10 @@ public class Event extends StackPane {
 			Rectangle rectangle = new Rectangle(80, 20, Color.DARKCYAN);
 			rectangle.getStyleClass().add("eventRectangleUnder80");
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-			Text text = new Text(this.getTitle());
+			String title_shown = this.getTitle();
+			if (title_shown.length() > 8)
+				title_shown = title_shown.substring(0, 7)+"...";
+			Text text = new Text(title_shown);
 			text.setId("textUnder80");
 
 			setToolTip();
@@ -741,7 +750,10 @@ public class Event extends StackPane {
 			rectangle.getStyleClass().add("eventRectangleOver80WithLevel");
 			
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-			Text text = new Text(this.getTitle());
+			String title_shown = this.getTitle();
+			if (title_shown.length() > 8)
+				title_shown = title_shown.substring(0, 7)+"...";
+			Text text = new Text(title_shown);
 			text.setId("textOver80WithLevel");
 			Font font = new Font("SansSerif", 20);
 			text.setFont(font);
@@ -777,7 +789,10 @@ public class Event extends StackPane {
 			this.setPickOnBounds(false);
 
 			StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-			Text text = new Text(this.getTitle());
+			String title_shown = this.getTitle();
+			if (title_shown.length() > 8)
+				title_shown = title_shown.substring(0, 7)+"...";
+			Text text = new Text(title_shown);
 			text.setId("textUnder80WithLevel");
 			Font font = new Font("SansSerif", 20);
 			text.setFont(font);
@@ -817,7 +832,10 @@ public class Event extends StackPane {
 		rectangle.getStyleClass().add("eventRectangleNoDuration");
 		
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-		Text text = new Text(this.getTitle());
+		String title_shown = this.getTitle();
+		if (title_shown.length() > 8)
+			title_shown = title_shown.substring(0, 7)+"...";
+		Text text = new Text(title_shown);
 		text.setId("textNoDuration");
 		Font font = new Font("SansSerif", 20);
 		text.setFont(font);
@@ -854,7 +872,10 @@ public class Event extends StackPane {
 		this.setPickOnBounds(false);
 
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-		Text text = new Text(this.getTitle());
+		String title_shown = this.getTitle();
+		if (title_shown.length() > 8)
+			title_shown = title_shown.substring(0, 7)+"...";
+		Text text = new Text(title_shown);
 		text.setId("textNoDurationWithLevel");
 		Font font = new Font("SansSerif", 20);
 		text.setFont(font);
@@ -890,7 +911,10 @@ public class Event extends StackPane {
 		rectangle.getStyleClass().add("monthEventElementRect");
 
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-		Text text = new Text(this.getTitle());
+		String title_shown = this.getTitle();
+		if (title_shown.length() > 8)
+			title_shown = title_shown.substring(0, 7)+"...";
+		Text text = new Text(title_shown);
 		text.setId("monthEventElementText");
 
 		setToolTip();
@@ -943,7 +967,10 @@ public class Event extends StackPane {
 		this.setPickOnBounds(false);
 
 		StackPane.setAlignment(rectangle, Pos.BOTTOM_LEFT);
-		Text text = new Text(this.getTitle());
+		String title_shown = this.getTitle();
+		if (title_shown.length() > 8)
+			title_shown = title_shown.substring(0, 7)+"...";
+		Text text = new Text(title_shown);
 		text.setId("monthEventElementWithLevelText");
 		Font font = new Font("SansSerif", 20);
 		text.setFont(font);
