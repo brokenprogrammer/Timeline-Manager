@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
@@ -58,17 +59,36 @@ public class TimelineListingController {
 		this.timelineModel = timelineModel;
 		
 		//Set display settings for the ListView with timelines.
-		list.setCellFactory(lv -> new ListCell<Timeline>() {
-			@Override
-			public void updateItem(Timeline result, boolean empty) {
-				super.updateItem(result, empty);
-				if (empty) {
-					setText(null);
-				} else {
-					setText(result.getTitle());
-				}
-			}
-		});
+		list.setCellFactory(lv -> {
+            		ListCell<Timeline> cell = new ListCell<Timeline>() {
+            			@Override
+    				public void updateItem(Timeline result, boolean empty) {
+    					super.updateItem(result, empty);
+
+    					if (empty) {
+    						setText(null);					
+    					} else {
+    					
+    					setText(result.getTitle());
+    					}
+    				}
+            		};
+            
+            		cell.setOnMouseEntered(showTimelineDescription -> {
+   			 	if (cell.getItem() != null) {
+   					Tooltip timelineDescription = new Tooltip(cell.getItem().getDescription());
+   					timelineDescription.setMaxHeight(500);
+   					timelineDescription.setMaxWidth(500);
+   					timelineDescription.setWrapText(true);
+   					cell.setTooltip(timelineDescription);
+   				}
+   			});
+            		cell.setOnMouseExited(end -> {
+            			end.consume();
+            		});
+
+            		return cell ;
+        	});
 		
 		//Changes active timeline on click.
 		list.setOnMouseClicked(new EventHandler<MouseEvent>() {
