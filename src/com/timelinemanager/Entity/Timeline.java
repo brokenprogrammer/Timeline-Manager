@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Optional;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -56,6 +58,11 @@ public class Timeline extends BorderPane {
 	public ArrayList<Integer> bigArr = new ArrayList<Integer>();
 	public ArrayList<Integer> monthBigArr = new ArrayList<Integer>();
 	public ArrayList<Integer> yearBigArr = new ArrayList<Integer>();
+	public ArrayList<Event> copyBigArr = new ArrayList<Event>();
+	public ArrayList<Event> arrWithout = new ArrayList<Event>();
+	public ArrayList<Event> shortEvent = new ArrayList<Event>();
+	public ArrayList<Event> longEvent = new ArrayList<Event>();
+
 
 	public BoxLink timelineGrid;
 	public Slider timelineSlider = new Slider();
@@ -385,16 +392,55 @@ public class Timeline extends BorderPane {
 	 * Add event's elements to the timeline.
 	 */
 	public void setEventGrid() {
+		ArrayList<Event> tem = new ArrayList<Event>();
+
+		if (eventArr.size()>0){
+			for(int i=0;i<eventArr.size();i++){
+				tem.add(new Event(eventArr.get(i),"initial"));
+				}
+		}
+		eventArr = tem;
+		copyBigArr = new ArrayList<Event>();
+		arrWithout = new ArrayList<Event>();
+		shortEvent = new ArrayList<Event>();
+		longEvent = new ArrayList<Event>();
+		
+		for (int m = 0; m < eventArr.size(); m++) {
+			Event tempEve = new Event(eventArr.get(m));	
+			
+			if (tempEve.getEndDate() != null) {
+				copyBigArr.add(tempEve);
+			}
+			
+			if (tempEve.getEndDate() == null){
+				arrWithout.add(tempEve);
+			}
+			else if (tempEve.getMonthsLength() > 1){
+				longEvent.add(tempEve);
+
+			}
+			else if (tempEve.getMonthsLength() == 1) {
+				shortEvent.add(tempEve);
+			}
+		}
+		
+		Comparator<Event> comp = (s1, s2) -> (s1.getStart()).compareTo(s2.getStart());
+		Collections.sort(copyBigArr, comp);
+		Collections.sort(shortEvent, comp);
+		Collections.sort(longEvent, comp);
+		
 		if (dayLevel == true) {
-			eventGrid.setEventBoxLink(getStart(), span, dayLevel, eventArr);
+			
+			eventGrid.setEventBoxLink(getStart(), span, dayLevel, copyBigArr , arrWithout , shortEvent , longEvent);
 			int level1 = eventGrid.getLevel() - 5;
 			if (level1 <= 0)
 				timeline.setMinHeight(300);
 			else
 				timeline.setMinHeight(300 + level1 * 35);
+			
 			LocalDateTime temp = getStart();
 			if (this.getDaysLength() <= 14) {
-				eventGrid.setEventBoxLink(getStart(), span, dayLevel, eventArr);
+				eventGrid.setEventBoxLink(getStart(), span, dayLevel, copyBigArr , arrWithout , shortEvent , longEvent);
 				int leve2 = eventGrid.getLevel() - 5;
 				if (leve2 <= 0)
 					timeline.setMinHeight(300);
@@ -403,7 +449,7 @@ public class Timeline extends BorderPane {
 			} else {
 				timelineSlider.valueProperty().addListener(property -> {
 					int plus = (int) Math.round(timelineSlider.getValue());
-					eventGrid.setEventBoxLink(temp.plusDays(plus), span, dayLevel, eventArr);
+					eventGrid.setEventBoxLink(temp.plusDays(plus), span, dayLevel, copyBigArr , arrWithout , shortEvent , longEvent);
 					int level3 = eventGrid.getLevel() - 5;
 					if (level3 <= 0)
 						timeline.setMinHeight(300);
@@ -412,7 +458,7 @@ public class Timeline extends BorderPane {
 				});
 			}
 		} else if (dayLevel == false) {
-			eventGrid.setEventBoxLink(getStart(), span, dayLevel, eventArr);
+			eventGrid.setEventBoxLink(getStart(), span, dayLevel, copyBigArr , arrWithout , shortEvent , longEvent);
 			int level1 = eventGrid.getLevel() - 5;
 			if (level1 <= 0)
 				timeline.setMinHeight(300);
@@ -420,7 +466,7 @@ public class Timeline extends BorderPane {
 				timeline.setMinHeight(300 + level1 * 35);
 			LocalDateTime temp = getStart();
 			if (this.getMonthsLength() <= 7) {
-				eventGrid.setEventBoxLink(getStart(), span, dayLevel, eventArr);
+				eventGrid.setEventBoxLink(getStart(), span, dayLevel, copyBigArr , arrWithout , shortEvent , longEvent);
 				int level2 = eventGrid.getLevel() - 5;
 				if (level2 <= 0)
 					timeline.setMinHeight(300);
@@ -429,7 +475,7 @@ public class Timeline extends BorderPane {
 			} else {
 				timelineSlider.valueProperty().addListener(property -> {
 					int plus = (int) Math.round(timelineSlider.getValue());
-					eventGrid.setEventBoxLink(temp.plusMonths(plus), span, dayLevel, eventArr);
+					eventGrid.setEventBoxLink(temp.plusMonths(plus), span, dayLevel, copyBigArr , arrWithout , shortEvent , longEvent);
 					int level3 = eventGrid.getLevel() - 5;
 					if (level3 <= 0)
 						timeline.setMinHeight(300);
@@ -438,6 +484,7 @@ public class Timeline extends BorderPane {
 				});
 			}
 		}
+		
 	}
 
 	/**

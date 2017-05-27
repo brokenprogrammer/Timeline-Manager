@@ -2,8 +2,6 @@ package com.timelinemanager.Entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import javafx.geometry.Insets;
 import javafx.scene.control.Tooltip;
 import javafx.scene.layout.ColumnConstraints;
@@ -74,17 +72,8 @@ public class EventBoxLink extends GridPane {
 	 * @param inbigArr
 	 *            Array that holds the events
 	 */
-	public void setEventBoxLink(LocalDateTime start, int span, boolean dayLevel, ArrayList<Event> inbigArr) {
-		
-		ArrayList<Event> tem = new ArrayList<Event>();
-
-		if (inbigArr.size()>0){
-			for(int i=0;i<inbigArr.size();i++){
-				tem.add(new Event(inbigArr.get(i),"initial"));
-				}
-		}
-		inbigArr = tem;
-		
+	public void setEventBoxLink(LocalDateTime start, int span, boolean dayLevel, ArrayList<Event> copyBigArr , ArrayList<Event> arrWithout , ArrayList<Event> shortEvent, ArrayList<Event> longEvent ) {
+				
 		if (dayLevel == true) {
 			this.setMouseTransparent(false);
 			this.getChildren().clear();
@@ -94,23 +83,8 @@ public class EventBoxLink extends GridPane {
 			LocalDateTime end = temp.plusDays(span);
 			end = end.minusHours(1);
 
-			ArrayList<Event> copyBigArr = new ArrayList<Event>();
-			ArrayList<Event> arrWithout = new ArrayList<Event>();
-
-			for (int m = 0; m < inbigArr.size(); m++) {
-				Event tempEve = new Event(inbigArr.get(m));
-				
-				if (tempEve.getEndDate() == null)
-					arrWithout.add(tempEve);
-				else {
-					copyBigArr.add(tempEve);
-				}
-			}
 			LocalDateTime startEvent;
 			LocalDateTime endEvent;
-
-			Comparator<Event> comp = (s1, s2) -> (s1.getStart()).compareTo(s2.getStart());
-			Collections.sort(copyBigArr, comp);
 
 			for (int m = 0; m < copyBigArr.size(); m++) {
 				startEvent = copyBigArr.get(m).getStart();
@@ -124,10 +98,10 @@ public class EventBoxLink extends GridPane {
 				boolean f = endEvent.isAfter(end);
 
 				if (b || c && d || e) {
-					Event tempEve = copyBigArr.get(m);
+					Event tempEve = new Event (copyBigArr.get(m));
 					arr.add(tempEve);
 				} else if (a && f) {
-					Event tempEve = copyBigArr.get(m);
+					Event tempEve = new Event (copyBigArr.get(m));
 					tempEve.setStartTime(start.toLocalTime());
 					tempEve.setStartDate(start.toLocalDate());
 					tempEve.setEndTime(end.toLocalTime());
@@ -135,19 +109,19 @@ public class EventBoxLink extends GridPane {
 					arr.add(tempEve);
 					tempEve = null;
 				} else if (a && f || e || d) {
-					Event tempEve = copyBigArr.get(m);
+					Event tempEve = new Event (copyBigArr.get(m));
 					tempEve.setStartTime(start.toLocalTime());
 					tempEve.setStartDate(start.toLocalDate());
 					arr.add(tempEve);
 					tempEve = null;
 				} else if (f && a || b) {
-					Event tempEve = copyBigArr.get(m);
+					Event tempEve = new Event (copyBigArr.get(m));
 					tempEve.setEndTime(end.toLocalTime());
 					tempEve.setEndDate(end.toLocalDate());
 					arr.add(tempEve);
 					tempEve = null;
 				} else if (f && c || e) {
-					Event tempEve = copyBigArr.get(m);
+					Event tempEve = new Event (copyBigArr.get(m));
 					tempEve.setEndTime(end.toLocalTime());
 					tempEve.setEndDate(end.toLocalDate());
 					arr.add(tempEve);
@@ -173,7 +147,7 @@ public class EventBoxLink extends GridPane {
 			level = withoutLevel;
 			for (int i = 0; i < arr.size(); i++) {
 				LocalDateTime temp1 = start;
-				Event a = arr.get(i);
+				Event a = new Event (arr.get(i));
 
 				int pos = 0;
 
@@ -229,29 +203,10 @@ public class EventBoxLink extends GridPane {
 
 			LocalDateTime temp = start;
 			LocalDateTime end = temp.plusMonths(span);
-			ArrayList<Event> shortEvent = new ArrayList<Event>();
-			ArrayList<Event> longEvent = new ArrayList<Event>();
-			ArrayList<Event> withoutDura = new ArrayList<Event>();
-
-			for (int m = 0; m < inbigArr.size(); m++) {
-				Event tempEve = new Event(inbigArr.get(m));
-				if (tempEve.getEndDate() == null) {
-					withoutDura.add(tempEve);
-				} else if (tempEve.getMonthsLength() > 1) {
-					longEvent.add(tempEve);
-				} else if (tempEve.getMonthsLength() == 1) {
-					shortEvent.add(tempEve);
-				}
-
-			}
 
 			temp = start;
 			Pane pane = new Pane();
 			Tooltip tool = new Tooltip();
-			Comparator<Event> comp = (s1, s2) -> (s1.getStart()).compareTo(s2.getStart());
-			Collections.sort(shortEvent, comp);
-			Collections.sort(longEvent, comp);
-			Collections.sort(withoutDura, comp);
 
 			for (int m = 0; m < span; m++) {
 
@@ -262,9 +217,9 @@ public class EventBoxLink extends GridPane {
 				StringBuilder sb = new StringBuilder();
 				tool = new Tooltip();
 
-				for (int i = 0; i < withoutDura.size(); i++) {
-					if (withoutDura.get(i).getStartDate().getMonth().getValue() == temp.getMonth().getValue()) {
-						sb.append(withoutDura.get(i).getTitle() + ".\n");
+				for (int i = 0; i < arrWithout.size(); i++) {
+					if (arrWithout.get(i).getStartDate().getMonth().getValue() == temp.getMonth().getValue()) {
+						sb.append(arrWithout.get(i).getTitle() + ".\n");
 					}
 				}
 				temp = temp.plusMonths(1);
@@ -319,31 +274,28 @@ public class EventBoxLink extends GridPane {
 				boolean f = endEvent.isAfter(end);
 
 				if (b || c && d || e) {
-					Event tempEve = longEvent.get(m);
+					Event tempEve = new Event (longEvent.get(m));
 					arr.add(tempEve);
 				} else if (a && f) {
-					Event tempEve = longEvent.get(m);
-					tempEve.setStartTime(start.toLocalTime());
-					tempEve.setStartDate(start.toLocalDate());
-					tempEve.setEndTime(end.toLocalTime());
+					Event tempEve = new Event (longEvent.get(m));
+					LocalDateTime temp1 = start.withDayOfMonth(1);
+					tempEve.setStartDate(temp1.toLocalDate());
 					tempEve.setEndDate(end.toLocalDate());
 					arr.add(tempEve);
 					tempEve = null;
 				} else if (a && f || e || d) {
-					Event tempEve = longEvent.get(m);
-					tempEve.setStartTime(start.toLocalTime());
-					tempEve.setStartDate(start.toLocalDate());
+					Event tempEve = new Event (longEvent.get(m));
+					LocalDateTime temp1 = start.withDayOfMonth(1);
+					tempEve.setStartDate(temp1.toLocalDate());
 					arr.add(tempEve);
 					tempEve = null;
 				} else if (f && a || b) {
-					Event tempEve = longEvent.get(m);
-					tempEve.setEndTime(end.toLocalTime());
+					Event tempEve = new Event (longEvent.get(m));
 					tempEve.setEndDate(end.toLocalDate());
 					arr.add(tempEve);
 					tempEve = null;
 				} else if (f && c || e) {
-					Event tempEve = longEvent.get(m);
-					tempEve.setEndTime(end.toLocalTime());
+					Event tempEve = new Event (longEvent.get(m));
 					tempEve.setEndDate(end.toLocalDate());
 					arr.add(tempEve);
 					tempEve = null;
