@@ -21,7 +21,6 @@
                   <MenuItem fx:id="menuItem_open" mnemonicParsing="false" text="Open" />
                   <SeparatorMenuItem />
                   <MenuItem fx:id="menuItem_save" mnemonicParsing="false" text="Save" />
-                  <MenuItem fx:id="menuItem_saveAs" mnemonicParsing="false" text="Save as" />
                   <MenuItem fx:id="menuItem_close" mnemonicParsing="false" text="Close" />
                   <SeparatorMenuItem />
                   <MenuItem fx:id="menuItem_exit" mnemonicParsing="false" text="Exit" />
