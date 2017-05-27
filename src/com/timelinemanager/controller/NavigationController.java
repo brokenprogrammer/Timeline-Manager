@@ -56,8 +56,6 @@ public class NavigationController {
 	@FXML
 	private MenuItem menuItem_save;
 	@FXML
-	private MenuItem menuItem_saveAs;
-	@FXML
 	private MenuItem menuItem_close;
 	@FXML
 	private MenuItem menuItem_exit;
@@ -171,7 +169,7 @@ public class NavigationController {
 					closeConfirmation.setHeaderText("Invalid Timeline file.");
 					closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 					Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
-					stage.getIcons().add(new Image("/view/img/appicon.png"));
+					stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 					Optional<ButtonType> result = closeConfirmation.showAndWait();
 					if (result.get() == ButtonType.OK) {
 					}
@@ -197,7 +195,7 @@ public class NavigationController {
 
 				Scene mainScene = new Scene(root);
 				Stage stage = new Stage();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				stage.setHeight(500);
 				stage.setWidth(620);
 				stage.setScene(mainScene);
@@ -237,7 +235,7 @@ public class NavigationController {
 				eventEndTime.setLayoutY(240);
 
 				Stage stage = new Stage();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				stage.setHeight(500);
 				stage.setWidth(620);
 				stage.setScene(mainScene);
@@ -260,7 +258,7 @@ public class NavigationController {
 				noTimeline.setHeaderText("No Timeline to save.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				noTimeline.showAndWait();
 			} else {
 				this.timelineModel.saveTimeline();
@@ -269,27 +267,11 @@ public class NavigationController {
 				alert.setHeaderText(null);
 				alert.setContentText("Your timeline is saved now");
 				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				alert.showAndWait();
 			}
 		});
 
-		menuItem_saveAs.setOnAction(saveAsTimeline -> {
-			if (timelineModel.getTimeline().getValue() == null) {
-				Alert noTimeline1 = new Alert(Alert.AlertType.WARNING,
-						"There is no timeline to save, please create a timeline before saving.");
-				DialogPane dialogPane = noTimeline1.getDialogPane();
-				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
-				noTimeline1.setHeaderText("No Timeline to save.");
-				noTimeline1.initModality(Modality.APPLICATION_MODAL);
-				Stage stage1 = (Stage) noTimeline1.getDialogPane().getScene().getWindow();
-				stage1.getIcons().add(new Image("/view/img/appicon.png"));
-				noTimeline1.showAndWait();
-			} else {
-
-				this.timelineModel.saveTimeline();
-			}
-		});
 		// Action Event to close the active timeline
 		menuItem_close.setOnAction(closeTimeline -> {
 			if (timelineModel.getTimeline().getValue() == null) {
@@ -299,7 +281,7 @@ public class NavigationController {
 				noTimeline.setHeaderText("No Timeline to close.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage1 = (Stage) noTimeline.getDialogPane().getScene().getWindow();
-				stage1.getIcons().add(new Image("/view/img/appicon.png"));
+				stage1.getIcons().add(new Image("/view/img/appicon.PNG"));
 				noTimeline.showAndWait();
 			} else {
 				timelineModel.setTimeline(null);
@@ -320,7 +302,7 @@ public class NavigationController {
 				alert.setContentText(
 						"There is no currently active timeline. Please open or create a timeline before updating!");
 				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				alert.showAndWait();
 			} else {
 				try {
@@ -337,7 +319,7 @@ public class NavigationController {
 
 					Scene mainScene = new Scene(root);
 					Stage stage = new Stage();
-					stage.getIcons().add(new Image("/view/img/appicon.png"));
+					stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 					stage.setHeight(500);
 					stage.setWidth(620);
 					stage.setScene(mainScene);
@@ -360,7 +342,7 @@ public class NavigationController {
 				noTimeline.setHeaderText("No Timeline to close.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				noTimeline.showAndWait();
 			} else {
 				timelineModel.setTimeline(null);
@@ -376,7 +358,7 @@ public class NavigationController {
 				closeConfirmation.setHeaderText("Confirm removal");
 				closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 				Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				Optional<ButtonType> result = closeConfirmation.showAndWait();
 				if (result.get() == ButtonType.OK) {
 					timelineModel.getLoadedTimelines().remove(timelineModel.getTimeline().getValue());
@@ -387,7 +369,7 @@ public class NavigationController {
 				noTimeline.setHeaderText("No Timeline to remove.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				noTimeline.showAndWait();
 			}
 		});
@@ -401,7 +383,7 @@ public class NavigationController {
 				noTimeline.setHeaderText("No Timeline.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				noTimeline.showAndWait();
 			}
 		});
@@ -415,7 +397,7 @@ public class NavigationController {
 				noTimeline.setHeaderText("No Timeline.");
 				noTimeline.initModality(Modality.APPLICATION_MODAL);
 				Stage stage = (Stage) noTimeline.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
+				stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 				noTimeline.showAndWait();
 			}
 		});
@@ -432,7 +414,7 @@ public class NavigationController {
 					+ "\n\t\tMironov Georgiana" + "\n\t\tArgyriou Dimitrios"
 					+ "\n\nAll resources used in the making of this application are used under a Creative Commons license. Futhermore, the application itself is under the MIT License. ");
 			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image("/view/img/appicon.png"));
+			stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 			alert.showAndWait();
 		});
 
@@ -450,7 +432,7 @@ public class NavigationController {
 			ButtonType manual = new ButtonType("Open");
 			ButtonType cancel = new ButtonType("Cancel", ButtonData.CANCEL_CLOSE);
 			Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image("/view/img/appicon.png"));
+			stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 			alert.getButtonTypes().setAll(manual, cancel);
 
 			Optional<ButtonType> result = alert.showAndWait();
@@ -473,7 +455,7 @@ public class NavigationController {
 			closeConfirmation.setContentText("Don't forget to save!");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
 			Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image("/view/img/appicon.png"));
+			stage.getIcons().add(new Image("/view/img/appicon.PNG"));
 			
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (ButtonType.CANCEL.equals(closeResponse.get())) {
@@ -487,19 +469,16 @@ public class NavigationController {
 					saveConfirmation.setHeaderText("Save Timeline");
 					saveConfirmation.initModality(Modality.APPLICATION_MODAL);
 					Stage stage2 = (Stage) saveConfirmation.getDialogPane().getScene().getWindow();
-					stage2.getIcons().add(new Image("/view/img/appicon.png"));
+					stage2.getIcons().add(new Image("/view/img/appicon.PNG"));
 					
 					Optional<ButtonType> saveResponse = saveConfirmation.showAndWait();
 					if (ButtonType.CANCEL.equals(saveResponse.get())) {
 						exitAppEvent.consume();
-						System.exit(0);
 					} else {
 						this.timelineModel.saveTimeline();
 						System.exit(0);
 					} 
-				} else {
-					System.exit(0);
-				}
+				}	
 			}
 		});
 	}

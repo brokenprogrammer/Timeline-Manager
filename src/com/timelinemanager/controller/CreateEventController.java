@@ -26,7 +26,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
-import javafx.stage.Stage;
 import jfxtras.scene.control.LocalTimePicker;
 
 /**
@@ -62,7 +61,7 @@ public class CreateEventController {
 
 	private LocalTimePicker eventStartTime;
 	private LocalTimePicker eventEndTime;
-	
+
 	private String imageURL;
 
 	// private static Event newEvent = new Event();
@@ -75,7 +74,7 @@ public class CreateEventController {
 		// window
 		// Alert dialogs for error inputs
 		createEventButton.setOnMouseClicked(createEvent -> {
-			
+
 			LocalDate startEvent = datePicker_eventStartDate.getValue();
 			LocalDate endEvent = datePicker_eventEndDate.getValue();
 
@@ -88,10 +87,8 @@ public class CreateEventController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("The required fields are empty, please fill them to create an event!");
-				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
-				
+
 			} else if (eventTitle.getText().length() == 0) {
 				Alert alert = new Alert(AlertType.ERROR);
 				DialogPane dialogPane = alert.getDialogPane();
@@ -99,10 +96,8 @@ public class CreateEventController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Title is missing, please enter a title to create an event!");
-				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
-				
+
 			} else if (startEvent == null || startEvent == null && endEvent != null) {
 				Alert alert = new Alert(AlertType.ERROR);
 				DialogPane dialogPane = alert.getDialogPane();
@@ -110,10 +105,8 @@ public class CreateEventController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("Date is missing, please enter a start and end date to create an event!");
-				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
-				
+
 			} else if (eventTitle.getText().length() > 50) {
 				Alert alert = new Alert(AlertType.ERROR);
 				DialogPane dialogPane = alert.getDialogPane();
@@ -121,10 +114,8 @@ public class CreateEventController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Max 50 characters only!");
-				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
-				
+
 			} else if (eventDescription.getText().length() > 500) {
 				Alert alert = new Alert(AlertType.ERROR);
 				DialogPane dialogPane = alert.getDialogPane();
@@ -132,10 +123,8 @@ public class CreateEventController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Max 500 characters only!");
-				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
-				
+
 			} else if (endEvent != null && (startEvent.isAfter(endEvent))) {
 				Alert alert = new Alert(AlertType.ERROR);
 				DialogPane dialogPane = alert.getDialogPane();
@@ -143,10 +132,8 @@ public class CreateEventController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("Please type date in the correct date format!");
-				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
-				
+
 			} else if (startEvent.isBefore(this.timelineModel.getTimeline().getValue().getStartDate())) {
 				Alert alert = new Alert(AlertType.ERROR);
 				DialogPane dialogPane = alert.getDialogPane();
@@ -154,19 +141,16 @@ public class CreateEventController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("The date is outside the timeline range! Please check start date.");
-				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
-				
-			} else if ((endEvent != null) && this.timelineModel.getTimeline().getValue().getEndDate().isBefore(endEvent)) {
+
+			} else if ((endEvent != null)
+					&& this.timelineModel.getTimeline().getValue().getEndDate().isBefore(endEvent)) {
 				Alert alert = new Alert(AlertType.ERROR);
 				DialogPane dialogPane = alert.getDialogPane();
 				dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("The date is outside the timeline range! Please check end date.");
-				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 			} else {
 				// Populate event object with data
@@ -177,11 +161,11 @@ public class CreateEventController {
 				newEvent.setEndTime(eventEndTime.getLocalTime());
 				newEvent.setStartDate(datePicker_eventStartDate.getValue());
 				newEvent.setEndDate(datePicker_eventEndDate.getValue());
-				
+
 				if (this.imageURL != null) {
 					newEvent.setPic(imageURL);
 				}
-				
+
 				this.timelineModel.getTimeline().getValue().addEvent(newEvent);
 				((Node) (createEvent.getSource())).getScene().getWindow().hide();
 			}
@@ -196,22 +180,25 @@ public class CreateEventController {
 
 			// Set extension filter
 			FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-			FileChooser.ExtensionFilter extFilterpng = new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
-			fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterpng);
+			FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+			fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
 			File file = fileChooser.showOpenDialog(null);
 
-      if(file != null){
-			  imageURL = file.toURI().toString();
-			  Image image1 = new Image(file.toURI().toString());
-			  eventImage.setImage(image1);
-			  eventImage.setPreserveRatio(true);
-			  eventImage.setFitWidth(189.0);
-			  eventImage.setFitHeight(128.0);
-			  eventImage.setSmooth(true);
-			  eventImage.setCache(true);
-			  addImageLabel.setVisible(false);
-      }
+			if (file != null) {
+				imageURL = file.toURI().toString();
+				Image image1 = new Image(file.toURI().toString());
+				eventImage.setImage(image1);
+				eventImage.setPreserveRatio(true);
+				eventImage.setFitWidth(189.0);
+				eventImage.setFitHeight(128.0);
+				eventImage.setSmooth(true);
+				eventImage.setCache(true);
+				addImageLabel.setVisible(true);
+			} else if (file == null){
+					eventImage.setImage(null);
+				}
+			
 		});
 
 		// ActionEvent for the cancel button inside the "Create new event"
@@ -226,8 +213,6 @@ public class CreateEventController {
 			cancelCreateEvent = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
-			Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
-			stage.getIcons().add(new Image("/view/img/appicon.png"));
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (!ButtonType.OK.equals(closeResponse.get())) {
 				cancelEvent.consume();
