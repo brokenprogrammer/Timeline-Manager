@@ -694,7 +694,12 @@
 	-fx-border-color: #0a9bf5;
 	-fx-text-fill: white;
 	-fx-border-color: #0a9bf5;
-	-fx-border-radius:10;
+	-fx-border-radius:50%;
+	-fx-background-radius: 25;
+	-fx-max-width: 35;
+	-fx-min-width: 35;
+	-fx-max-height: 35;
+	-fx-min-height: 35;
 }
 /*=====================hover state============================*/
 #upButton:hover{
@@ -708,10 +713,15 @@
 	-fx-effect: innershadow(gaussian, #204d74, 10, 0, 0, 3);	
 }
 #downButton{
-	-fx-border-radius:10;
+	-fx-border-radius:50%;
 	-fx-border-color: #0a9bf5;
 	-fx-text-fill: white;
 	-fx-border-color: #0a9bf5;
+	-fx-background-radius: 25;
+	-fx-max-width: 35;
+	-fx-min-width: 35;
+	-fx-max-height: 35;
+	-fx-min-height: 35;
 }
 /*=====================hover state============================*/
 #downButton:hover{
