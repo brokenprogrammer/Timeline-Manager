@@ -18,8 +18,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * 
@@ -70,6 +72,8 @@ public class CreateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("The required fields are empty, please fill them all to create a Timeline!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 
 			} else if (timelineTitle.getText().length() == 0) {
@@ -79,6 +83,8 @@ public class CreateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Title is missing, please enter a title to create a Timeline!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 				
 			} else if (start == null || end == null) {
@@ -88,6 +94,8 @@ public class CreateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("Date is missing, please enter a start and end date to create a Timeline!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 				
 			} else if (timelineTitle.getText().length() > 50) {
@@ -97,6 +105,8 @@ public class CreateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Max 50 characters only!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 				
 			} else if (timelineDescription.getText().length() > 500) {
@@ -106,6 +116,8 @@ public class CreateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Max 500 characters only!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 				
 			} else if (start.isAfter(end)) {
@@ -115,6 +127,8 @@ public class CreateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("Please type date in the correct date format!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 			} else {
 			// Populate timeline object with data
@@ -140,6 +154,8 @@ public class CreateTimelineController {
 			cancelCreateTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("/view/img/appicon.png"));
 
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (!ButtonType.OK.equals(closeResponse.get())) {

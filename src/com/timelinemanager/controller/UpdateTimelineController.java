@@ -18,9 +18,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * 
@@ -71,6 +73,8 @@ public class UpdateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("The required fields are empty, please fill them to create a Timeline!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 				
 			} else if (updateTimelineTitle.getText().length() == 0) {
@@ -80,6 +84,8 @@ public class UpdateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Title is missing, please enter a title to create a Timeline!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 				
 			} else if (start == null || end == null) {
@@ -89,6 +95,8 @@ public class UpdateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("Date is missing, please enter a start and end date to create a Timeline!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 				
 			} else if (updateTimelineTitle.getText().length() > 50) {
@@ -98,6 +106,8 @@ public class UpdateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Max 50 characters only!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 				
 			} else if (updateTimelineDescription.getText().length() > 500) {
@@ -107,6 +117,8 @@ public class UpdateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Input Error");
 				alert.setContentText("Max 500 characters only!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 				
 			} else if (start.isAfter(end)) {
@@ -116,6 +128,8 @@ public class UpdateTimelineController {
 				alert.setTitle("Error Dialog");
 				alert.setHeaderText("Date Error");
 				alert.setContentText("Please type date in the correct date format!");
+				Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+				stage.getIcons().add(new Image("/view/img/appicon.png"));
 				alert.showAndWait();
 				
 			} else {
@@ -134,6 +148,8 @@ public class UpdateTimelineController {
 						alert.setTitle("Error Dialog");
 						alert.setHeaderText("Date Error");
 						alert.setContentText("All the events start dates are not within the timelines timespan!");
+						Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+						stage.getIcons().add(new Image("/view/img/appicon.png"));
 						alert.showAndWait();
 					} else if (e.getEndDate().isBefore(t.getStartDate()) || e.getEndDate().isAfter(t.getEndDate())) {
 						eventsChecked = false;
@@ -144,6 +160,8 @@ public class UpdateTimelineController {
 						alert.setTitle("Error Dialog");
 						alert.setHeaderText("Date Error");
 						alert.setContentText("All the events end dates are not within the timelines timespan!");
+						Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+						stage.getIcons().add(new Image("/view/img/appicon.png"));
 						alert.showAndWait();
 					}
 				}
@@ -176,6 +194,8 @@ public class UpdateTimelineController {
 			updateCancelEditTimeline = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("/view/img/appicon.png"));
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (!ButtonType.OK.equals(closeResponse.get())) {
 				cancelEvent.consume();

@@ -35,12 +35,12 @@ public class TimelineListingController {
 
 	@FXML
 	public void initialize() {
-		timelineListing_anchorpane.setPrefSize(160, 480);
-		timelineListing_anchorpane.setMinSize(160, 480);
+		timelineListing_anchorpane.setPrefSize(160, 478);
+		timelineListing_anchorpane.setMinSize(160, 478);
 		timelineListing_anchorpane.getChildren().add(list);
 		list.setId("timelineManagerTimelineListingList");
-		list.setPrefSize(160, 500);
-		list.setMinSize(160, 500);
+		list.setPrefSize(160, 478);
+		list.setMinSize(160, 478);
 	}
 
 	/**

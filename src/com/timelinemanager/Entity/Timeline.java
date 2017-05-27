@@ -462,7 +462,7 @@ public class Timeline extends BorderPane {
 			setEventGrid();
 		});
 
-		StackPane.setMargin(upBtn, new Insets(0, 0, 150, 0));
+		StackPane.setMargin(upBtn, new Insets(200, 0, 150, 50));
 		
 		Image downImg = new Image(getClass().getResourceAsStream("/view/img/Down.png"));
 		Button downBtn = new Button();
@@ -477,7 +477,7 @@ public class Timeline extends BorderPane {
 			setEventGrid();
 		});
 
-		StackPane.setMargin(downBtn, new Insets(0, 0, 50, 50));
+		StackPane.setMargin(downBtn, new Insets(200, 0, 50, 50));
 
 		buttonsPane.getChildren().addAll(upBtn, downBtn);
 
@@ -652,6 +652,8 @@ public class Timeline extends BorderPane {
 					ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Cancel");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("/view/img/appicon.png"));
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (!ButtonType.OK.equals(closeResponse.get())) {
 				e.consume();
@@ -684,6 +686,7 @@ public class Timeline extends BorderPane {
 		stage.setScene(mainScene);
 		stage.setTitle("Select event");
 		stage.setResizable(false);
+		stage.getIcons().add(new Image("/view/img/appicon.png"));
 		stage.showAndWait();
 	}
 
@@ -723,6 +726,8 @@ public class Timeline extends BorderPane {
 			cancel = (Button) closeConfirmation.getDialogPane().lookupButton(ButtonType.OK);
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("/view/img/appicon.png"));
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (!ButtonType.OK.equals(closeResponse.get())) {
 				cancelEvent.consume();
@@ -752,6 +757,8 @@ public class Timeline extends BorderPane {
 			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			closeConfirmation.setHeaderText("Confirm Exit");
 			closeConfirmation.initModality(Modality.APPLICATION_MODAL);
+			Stage stage = (Stage) closeConfirmation.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("/view/img/appicon.png"));
 			Optional<ButtonType> closeResponse = closeConfirmation.showAndWait();
 			if (ButtonType.OK.equals(closeResponse.get())) {
 				eventArr.get(index).setTitle(editor.getTitle());
@@ -776,10 +783,12 @@ public class Timeline extends BorderPane {
 		// target event.
 		delete.setOnAction(deleteEvent -> {
 			Alert Confirmation = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this event?");
-      DialogPane dialogPane = Confirmation.getDialogPane();
+      			DialogPane dialogPane = Confirmation.getDialogPane();
 			dialogPane.getStylesheets().add(getClass().getResource("/view/style.css").toString());
 			Confirmation.setHeaderText("Confirm Exit");
 			Confirmation.initModality(Modality.APPLICATION_MODAL);
+			Stage stage = (Stage) Confirmation.getDialogPane().getScene().getWindow();
+			stage.getIcons().add(new Image("/view/img/appicon.png"));
 			Optional<ButtonType> Response = Confirmation.showAndWait();
 			if (ButtonType.OK.equals(Response.get())) {
 				deleteEvent(e);
@@ -820,6 +829,7 @@ public class Timeline extends BorderPane {
 		stage.setScene(mainScene);
 		stage.setTitle("Event Editor");
 		stage.setResizable(false);
+		stage.getIcons().add(new Image("/view/img/appicon.png"));
 		stage.showAndWait();
 		this.setEventGrid();
 	}
